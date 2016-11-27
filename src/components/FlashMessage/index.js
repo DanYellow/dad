@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import './FlashMessage.scss';
 
@@ -42,3 +42,8 @@ export default class FlashMessage extends Component {
     );
   }
 }
+
+FlashMessage.propTypes = {
+  message: PropTypes.string,
+  type: PropTypes.string,
+};

@@ -22,14 +22,14 @@ $alert-blue-color: #b9e1e5;
 
   transition: opacity .5s linear;
 
+  font-family: $opensans-regular;
+
   p {
 
   }
 
   &.closed {
     opacity: 0;
-    // animation: closing .6s linear forwards;
-    // animation-iteration-count: 1;
   }
 
   &.error {
@@ -49,9 +49,4 @@ $alert-blue-color: #b9e1e5;
     color: $alert-green-border;
     background-color: $alert-green-color;
   }
-}
-
-@keyframes closing {
-  0%   { display: block; opacity: 1; }
-  100% { display: none; opacity: 0; }
 }
