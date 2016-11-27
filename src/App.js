@@ -9,9 +9,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <FlashMessage message="Hello" type="error" />
-        <FlashMessage message="Hello" type="info" />
-        <FlashMessage message="Hello" type="success" />
+        <FlashMessage message="Une erreur est survenue" type="error" />
+        <FlashMessage message="Ceci est une information" type="info" />
+        <FlashMessage message="Quelque chose s'est bien passé" type="success" />
       </div>
     );
   }
