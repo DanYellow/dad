@@ -1,0 +1,57 @@
+@import '../../styles/variables';
+
+$alert-green-border: #1f3e06;
+$alert-green-color: #c7e5b9;
+
+$alert-red-border: #b70011;
+$alert-red-color: #e4b8b9;
+
+$alert-blue-border: #829ea1;
+$alert-blue-color: #b9e1e5;
+
+
+.flash-message {
+  border: 1px solid #fff;
+  width: auto;
+  padding: 16px 14px;
+  font-size: 16px;
+  display: flex;
+  border-radius: 3px;
+  justify-content: space-between;
+  margin-bottom: 24px;
+
+  transition: opacity .5s linear;
+
+  p {
+
+  }
+
+  &.closed {
+    opacity: 0;
+    // animation: closing .6s linear forwards;
+    // animation-iteration-count: 1;
+  }
+
+  &.error {
+    border-color: $alert-red-border;
+    color: $alert-red-border;
+    background-color: $alert-red-color;
+  }
+
+  &.info {
+    border-color: $alert-blue-border;
+    color: $alert-blue-border;
+    background-color: $alert-blue-color;
+  }
+
+  &.success {
+    border-color: $alert-green-border;
+    color: $alert-green-border;
+    background-color: $alert-green-color;
+  }
+}
+
+@keyframes closing {
+  0%   { display: block; opacity: 1; }
+  100% { display: none; opacity: 0; }
+}
