@@ -22,10 +22,8 @@ $alert-blue-color: #b9e1e5;
 
   transition: opacity .5s linear;
 
-  font-family: $opensans-regular;
-
   p {
-
+    font-family: $opensans-regular;
   }
 
   &.closed {
