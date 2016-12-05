@@ -23,7 +23,7 @@ export default class ClassifiedAdvertisement extends Component {
             <p className='date'>{ 'Posté le ' + created_at }</p>
           </article>
           { price > 0 && <h3 className='price'>{ new Intl.NumberFormat().format(price) + ' €'}</h3>}
-          { price == 0 && <h3 className='price'>{ ' Gratuit '}</h3>}
+          { price === 0 && <h3 className='price'>{ ' Gratuit '}</h3>}
         </Link>
       </li>
     );
