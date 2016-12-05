@@ -1,0 +1,20 @@
+{
+    "status_code": 200,
+    "success": true,
+    "data": {
+        "list": [
+            {
+                "id": 1,
+                "name": "Jeux vidéo",
+                "slug_name": "jeux-vid-o",
+                "nb_items": 4
+            },
+            {
+                "id": 4,
+                "name": "Vêtements",
+                "slug_name": "v-tements",
+                "nb_items": 0
+            }
+        ]
+    }
+}
