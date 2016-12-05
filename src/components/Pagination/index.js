@@ -13,8 +13,8 @@ export default class Pagination extends Component {
     let items = []
     for (var i = 1; i < datas.total_pages + 1; i++) {
       items.push(
-        <li key={uuid.v1()}>
-          <Link to={'/' + i} activeClassName="active" className="number-item">
+        <li key={ uuid.v1() }>
+          <Link to={ '/' + i } activeClassName="active" className="number-item">
             {i}
           </Link>
         </li>

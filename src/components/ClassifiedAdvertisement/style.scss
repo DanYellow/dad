@@ -1,0 +1,22 @@
+@import '../../styles/variables';
+
+.classified_advertisement {
+  padding: 40px 0;
+  border-bottom: 1px solid $primary-red;
+  display: flex;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  article {
+    padding-left: 35px;
+
+    h3 {
+      font-family: $opensans-bold;
+      font-size: 22px;
+      color: $primary-red;
+      margin-bottom: 20px;
+    }
+  }
+}

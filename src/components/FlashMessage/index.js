@@ -3,9 +3,6 @@ import classNames from 'classnames';
 
 import './style.scss';
 
-// import APIManager from '../../utils/APIManager';
-
-
 export default class FlashMessage extends Component {
   constructor(props) {
     super(props);
