@@ -3,7 +3,15 @@
 .classified_advertisement {
   padding: 40px 0;
   border-bottom: 1px solid $primary-red;
-  display: flex;
+  color: $text-color;
+
+  a {
+    display: flex;
+    color: $text-color;
+    &:visited, &:hover, &:active {
+      color: $text-color;
+    }
+  }
 
   &:last-child {
     border-bottom: none;
@@ -11,12 +19,38 @@
 
   article {
     padding-left: 35px;
+    display: flex;
+    flex-direction: column;
 
     h3 {
       font-family: $opensans-bold;
-      font-size: 22px;
+      font-size: 20px;
       color: $primary-red;
       margin-bottom: 20px;
     }
+
+    .category {
+      padding: 6px;
+      background-color: $primary-red;
+      color: $white;
+      font-family: $opensans-semibold;
+      display: inline-block;
+      border-radius: 3px;
+      margin-bottom: 18px;
+      font-size: 12px;
+    }
+
+    p {
+      font-size: 12px;
+      margin-top: auto;
+    }
+  }
+
+  .price {
+    font-family: $opensans-bold;
+    color: $primary-red;
+    font-size: 28px;
+    margin-left: auto;
   }
 }
+

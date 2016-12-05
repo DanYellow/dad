@@ -22,7 +22,6 @@ export default class ClassifiedAdvertisementsContainer extends Component {
   }
 }
 
-// ClassifiedAdvertisementsContainer.propTypes = {
-//   message: PropTypes.string,
-//   type: PropTypes.string,
-// };
+ClassifiedAdvertisementsContainer.propTypes = {
+  env: React.PropTypes.oneOf(['front', 'back'])
+};

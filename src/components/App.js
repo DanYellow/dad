@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.scss';
 
-import FlashMessage from './components/FlashMessage/index.js'
+import FlashMessage from './FlashMessage/index.js'
 
-import ClassifiedAdvertisementsContainer from './components/ClassifiedAdvertisementsContainer'
+import ClassifiedAdvertisementsContainer from './ClassifiedAdvertisementsContainer'
 
 class App extends Component {
   render() {
