@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
+import moment from 'moment';
+
 import './style.scss';
 
 export default class ClassifiedAdvertisement extends Component {

@@ -1,6 +1,8 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
+
 import FlashMessage from '../../src/components/FlashMessage';
+import ClassifiedAdvertisement from '../../src/components/ClassifiedAdvertisement';
 
 
 storiesOf('FlashMessage', module)
@@ -12,4 +14,30 @@ storiesOf('FlashMessage', module)
   ))
   .add('Success', () => (
     <FlashMessage message="Something wonderful happened" type="success" />
+  ));
+
+let classifiedAdvertisementDatas = {
+    "id": 48,
+    "title": "Knack 2",
+    "description": "Le jeu vient juste d'être annoncé, mais je le vend déjà",
+    "price": "50.00",
+    "created_at": "2016-12-05 00:31:43",
+    "last_update": "2016-12-05 00:31:43",
+    "category": {
+        "id": 1,
+        "name": "Jeux vidéo",
+        "slug_name": "jeux-vid-o",
+        "nb_items": 4
+    },
+    "is_mine": false,
+    "seller": {
+        "id": 1,
+        "pseudo": "djeanlou",
+        "location": null
+    }
+}
+
+storiesOf('ClassifiedAdvertisement', module)
+  .add('not connected / is not mine', () => (
+    <ClassifiedAdvertisement { ...classifiedAdvertisementDatas } />
   ));

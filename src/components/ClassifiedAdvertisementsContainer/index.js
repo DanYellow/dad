@@ -10,6 +10,9 @@ import ClassifiedAdvertisementsList from '../ClassifiedAdvertisementsList'
 export default class ClassifiedAdvertisementsContainer extends Component {
 
   render() {
+    // if (process.env.NODE_ENV === 'development') {
+    //   alert('regger');
+    // }
     let { pagination } = ClassfiedAdvertisements;
     let list = ClassfiedAdvertisements.data.list;
     
