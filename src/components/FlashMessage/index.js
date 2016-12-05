@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 
 import './style.scss';
 
-import APIManager from '../../utils/APIManager'
+// import APIManager from '../../utils/APIManager';
 
 
 export default class FlashMessage extends Component {
@@ -17,17 +16,7 @@ export default class FlashMessage extends Component {
   }
 
   componentDidMount() {
-    this.DOMRef = ReactDOM.findDOMNode(this);
-    // console.log(this.refs.flashmessage)
-    APIManager.getClassifiedAdvertisements(undefined, undefined, this.hello, this.hello2)
-  }
-
-  hello() {
-    alert('fezfzefez');
-  }
-
-  hello2(error) {
-    console.log(error)
+    // APIManager.getClassifiedAdvertisements(undefined, undefined, this.hello, this.hello2)
   }
 
   /**
@@ -37,7 +26,7 @@ export default class FlashMessage extends Component {
   remove() {
     this.setState({closed: !this.state.closed});
     setTimeout(() => {
-      this.DOMRef.parentNode.removeChild(this.DOMRef);
+      this.refs.flashmessage.parentNode.removeChild(this.DOMRef);
     }, 750);
   }
 

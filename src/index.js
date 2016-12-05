@@ -8,7 +8,7 @@ import './index.scss';
 
 ReactDOM.render(
   <Router history={hashHistory}>
-    <Route path="/" component={App}></Route>
+    <Route path="/:id" component={App}></Route>
   </Router>,
   document.getElementById('root')
 );
