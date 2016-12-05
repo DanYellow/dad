@@ -20,7 +20,7 @@ export default class APIManager {
       case 1005:
         message = 'Token invalide';
         break;
-      default
+      default:
         message = '';
         break;
     }
@@ -77,7 +77,7 @@ export default class APIManager {
    * @return {[type]}                 [description]
    */
   static updateClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
-    APIManager.axios.post('/classified_advertisement/'. bodyParams.id, {
+    APIManager.axios.post(`/classified_advertisement/${bodyParams.id}`, {
       data: {
         title: bodyParams.title,
         description: bodyParams.description,
@@ -100,7 +100,7 @@ export default class APIManager {
    * @return null
    */
   static deleteClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
-    APIManager.axios.delete('/classified_advertisement/'. bodyParams.id)
+    APIManager.axios.delete(`/classified_advertisement/${bodyParams.id}`)
     .then(function (response) {
       successCallback(response);
     })
@@ -130,5 +130,5 @@ export default class APIManager {
 APIManager.axios = axios.create({
   baseURL: 'http:localhost:3000/api',
   timeout: 1000,
-  headers: { 'X-TOKEN': window.sessionStorage('session_token') }
+  headers: { 'X-TOKEN': window.sessionStorage.getItem('session_token') }
 });

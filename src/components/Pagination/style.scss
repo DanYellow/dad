@@ -1,0 +1,25 @@
+@import '../../styles/variables';
+
+
+.pagination {
+  display: flex;
+  margin: 34px auto 0;
+
+  .number-items {
+    display: flex;
+    .number-item {
+      padding: 13px;
+      margin-left: 7px;
+      font-family: $opensans-semibold;
+      color: $text-color;
+
+      &.active {
+        background-color: $white;
+        color: $primary-red;
+        border: 1px solid $primary-red;
+        border-radius: 13px;
+      } 
+    }
+  }
+  
+}
