@@ -37,7 +37,14 @@ export default class APIManager {
    * @return null
    */
   static getClassifiedAdvertisements(category = 'all', page = 1, query = null, successCallback, errorCallback) {
-    APIManager.axios.get(`/classified_advertisements?p=${page}&q=${query}&cat=${category}`)
+
+    APIManager.axios.get('/classified_advertisements', {
+      params: {
+        p: page,
+        q: query,
+        cat: category
+      }
+    })
     .then(function (response) {
       successCallback(response);
     })
@@ -127,8 +134,10 @@ export default class APIManager {
   // }
 }
 
+APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://localhost:9000/api'
+
 APIManager.axios = axios.create({
-  baseURL: 'http:localhost:3000/api',
+  baseURL: APIManager.baseURL,
   timeout: 1000,
   headers: { 'X-TOKEN': window.sessionStorage.getItem('session_token') }
 });
