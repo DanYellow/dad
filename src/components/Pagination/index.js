@@ -14,7 +14,7 @@ export default class Pagination extends Component {
     for (var i = 1; i < datas.total_pages + 1; i++) {
       items.push(
         <li key={ uuid.v1() }>
-          <Link to={{ pathname: 'classified_advertisements', query: { p: i, q: undefined } }} activeClassName="active" className="number-item">
+          <Link to={ 'classified_advertisements/' + i } activeClassName="active" className="number-item">
             {i}
           </Link>
         </li>
@@ -27,13 +27,13 @@ export default class Pagination extends Component {
     let pagination = this.props.pagination;
 
     return (
-        <div className='pagination'>
-          <Link to={ '/' + pagination.prev } activeClassName="active" className="number-item">prev</Link>
-          <ul className='number-items'>
-            { this._getListNumbers(pagination) }
-          </ul>
-          <Link to={ '/' + pagination.next } activeClassName="active" className="number-item">next</Link>
-        </div>      
+      <div className='pagination'>
+        <Link to={ 'classified_advertisements/' + pagination.prev } className="number-item">prev</Link>
+        <ul className='number-items'>
+          { this._getListNumbers(pagination) }
+        </ul>
+        <Link to={ 'classified_advertisements/' + pagination.next } className="number-item">next</Link>
+      </div>
     );
   }
 }

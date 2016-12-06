@@ -46,7 +46,7 @@ export default class FlashMessage extends Component {
     let { type, message } = this.props;
 
     return (
-      <div className={ classNames('flash-message',
+      <div  id={type} className={ classNames('flash-message',
                                   type,
                                   { 'closed': this.state.closed }) }
            ref={(ref) => this.flashmessage = ref}>

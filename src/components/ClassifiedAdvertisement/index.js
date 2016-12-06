@@ -10,13 +10,14 @@ export default class ClassifiedAdvertisement extends Component {
     let { id, title, price, created_at, category } = this.props;
     let { location } = this.props.seller;
 
-    let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD.MM.YYYY')
+    let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD.MM.YYYY');
+    let altImg = title + ' image';
 
     return (
       <li className='classified_advertisement'>
         <Link to={ '/' + id }>
           <figure>
-            <img src="https://placekitten.com/g/300/300" width="130" alt={title + ' image'} />
+            <img src="https://placekitten.com/g/300/300" width="130" alt={ altImg } />
           </figure>
           <article>
             <h3>{ title }</h3>
