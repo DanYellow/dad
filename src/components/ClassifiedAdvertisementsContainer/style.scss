@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+
+.bordered-title {
+  font-family: $opensans-semibold;
+  color: $text-color;
+  font-size: 30px;
+  padding-left: 12px;
+  border-left: 5px solid $primary-red;
+  margin-bottom: 20px;
+}
