@@ -14,7 +14,7 @@ export default class Pagination extends Component {
     for (var i = 1; i < datas.total_pages + 1; i++) {
       items.push(
         <li key={ uuid.v1() }>
-          <Link to={ '/' + i } activeClassName="active" className="number-item">
+          <Link to={{ pathname: 'classified_advertisements', query: { p: i, q: undefined } }} activeClassName="active" className="number-item">
             {i}
           </Link>
         </li>
@@ -37,16 +37,6 @@ export default class Pagination extends Component {
     );
   }
 }
-
-// "pagination": {
-//         "current": 1,
-//         "first": 1,
-//         "last": 3,
-//         "prev": 1,
-//         "next": 2,
-//         "total_pages": 3,
-//         "total_items": 13
-//     }
 
 Pagination.propTypes = {
   pagination: PropTypes.object.isRequired
