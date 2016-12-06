@@ -37,6 +37,7 @@ export default class APIManager {
    * @return null
    */
   static getClassifiedAdvertisements(category = 'all', page = 1, query = null, successCallback, errorCallback) {
+    console.log("zeffzefzefze");
 
     APIManager.axios.get('/classified_advertisements', {
       params: {

@@ -13,6 +13,7 @@ ReactDOM.render(
     <Route path="/" component={App}>
       <IndexRedirect to="classified_advertisements/1" />
       <Route path="classified_advertisements/:id(/:query)(/:category)" component={(props) => (<ClassifiedAdvertisementsContainer env='front' {...props} />)} />
+      <Route path="classified_advertisement/:id" component={(props) => (<ClassifiedAdvertisementsContainer env='front' {...props} />)} />
     </Route>
   </Router>,
   document.getElementById('root')

@@ -7,6 +7,7 @@ import ClassfiedAdvertisements from './../../fixtures/classified_advertisements.
 import Pagination from '../Pagination';
 import ClassifiedAdvertisementsList from '../ClassifiedAdvertisementsList';
 import FlashMessage from '../FlashMessage';
+import Loader from '../Loader';
 
 import './style.scss';
 
@@ -21,18 +22,14 @@ export default class ClassifiedAdvertisementsContainer extends Component {
   }
 
   componentDidMount() {
-    // let isUserConnected = this.props.env == 'front' ?
-    // if (this.props.env == 'front') {
-      
-    // } else {
-    //   APIManager.getClassifiedAdvertisements(undefined, undefined, this.hello, this.hello2)
-    // }
+    console.log("componentDidMount")
+
     APIManager.getClassifiedAdvertisements(undefined, undefined, undefined, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
     this.setState({ APIDatas: ClassfiedAdvertisements });
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("fooooo")
+    console.log(nextProps);
   }
 
 
@@ -61,9 +58,6 @@ export default class ClassifiedAdvertisementsContainer extends Component {
   }
 
   render() {
-    console.log(this.state.APIDatas);
-    
-    
     return (
       <div>
         { this.state.failAPIQuery && <FlashMessage message="Une erreur est survenue" type="error" autodelete={true} /> }
@@ -71,7 +65,8 @@ export default class ClassifiedAdvertisementsContainer extends Component {
         { this.props.env === 'front' && <h2 id="title" className='bordered-title'>Les dernières annonces</h2> }
         { this.props.env === 'back' && <h2 id="title" className='bordered-title'>Mes annonces</h2> }
         
-        { Object.keys(this.state.APIDatas).length > 0 && this._renderResults()}
+        { Object.keys(this.state.APIDatas).length > 0 && this._renderResults() }
+        { Object.keys(this.state.APIDatas).length === 0 && <Loader /> }
       </div>
     );
   }
