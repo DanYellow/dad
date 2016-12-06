@@ -3,6 +3,7 @@ import { storiesOf, action } from '@kadira/storybook';
 
 import FlashMessage from '../../src/components/FlashMessage';
 import ClassifiedAdvertisement from '../../src/components/ClassifiedAdvertisement';
+import Pagination from '../../src/components/Pagination';
 
 
 storiesOf('FlashMessage', module)
@@ -40,4 +41,17 @@ let classifiedAdvertisementDatas = {
 storiesOf('ClassifiedAdvertisement', module)
   .add('not connected / is not mine', () => (
     <ClassifiedAdvertisement { ...classifiedAdvertisementDatas } />
+  ));
+
+storiesOf('Pagination', module)
+  .add('pagination', () => (
+    <Pagination pagination={ {
+        "current": 2,
+        "first": 1,
+        "last": 3,
+        "prev": 1,
+        "next": 3,
+        "total_pages": 3,
+        "total_items": 13
+    } }/>
   ));

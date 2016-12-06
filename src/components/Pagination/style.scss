@@ -17,6 +17,10 @@
       margin-left: 7px;
       font-family: $opensans-semibold;
       color: $text-color;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      line-height: 20px;
 
       &.active {
         background-color: $white;

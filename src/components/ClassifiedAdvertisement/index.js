@@ -10,17 +10,19 @@ export default class ClassifiedAdvertisement extends Component {
     let { id, title, price, created_at, category } = this.props;
     let { location } = this.props.seller;
 
+    let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD.MM.YYYY')
+
     return (
       <li className='classified_advertisement'>
         <Link to={ '/' + id }>
           <figure>
-            <img src="https://placekitten.com/g/300/300" width="220" alt={title + ' image'} />
+            <img src="https://placekitten.com/g/300/300" width="130" alt={title + ' image'} />
           </figure>
           <article>
             <h3>{ title }</h3>
             { category && <Category {...category} /> }
             <p>{ location }</p>
-            <p className='date'>{ 'Posté le ' + created_at }</p>
+            <p className='date'>{ 'Posté le ' + createdAt }</p>
           </article>
           { price > 0 && <h3 className='price'>{ new Intl.NumberFormat("fr-FR", {style: 'currency', currency: 'EUR'}).format(price) }</h3>}
           { price === 0 && <h3 className='price'>{ 'Gratuit' }</h3>}

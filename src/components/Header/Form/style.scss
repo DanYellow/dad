@@ -1,0 +1,36 @@
+@import '../../../styles/variables';
+
+
+.form {
+  input[type='text'], input[type='search'] {
+    border: none;
+    border-bottom: 2px solid $primary-red;
+    background: none;
+    font-family: $opensans-regular;
+  }
+
+  .main-input {
+    display: flex;
+    margin-bottom: 38px;
+
+    button {
+      background: $primary-red;
+      color: $white;
+      padding: 18px;
+      border-radius: 3px;
+      border: 2px solid $primary-red;
+    }
+
+    input[type='text'], input[type='search'] {
+      font-size: 35px;
+      color: $primary-red;
+      width: 100%;
+      padding-left: 14px;
+
+      :placeholder-shown {
+        border-color: silver;
+      }
+    }
+
+  }
+}

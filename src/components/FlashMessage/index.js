@@ -19,7 +19,7 @@ export default class FlashMessage extends Component {
    * @return null
    */
   remove(e, delay = 750) {
-    let { flashmessage } = this.refs;
+    let flashmessage = this.flashmessage;
     
     // We check if the action is trigged by an user
     if (!e.isTrusted) {
@@ -49,9 +49,9 @@ export default class FlashMessage extends Component {
       <div className={ classNames('flash-message',
                                   type,
                                   { 'closed': this.state.closed }) }
-           ref="flashmessage">
+           ref={(ref) => this.flashmessage = ref}>
         <p>{ message || "Pas de message ?!" }</p>
-        <button title="Fermer message" onClick={ (e) => this.remove(e) }></button>
+        <button title="Fermer message" onClick={ (e) => this.remove(e) }>X</button>
       </div>
     );
   }

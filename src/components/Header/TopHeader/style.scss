@@ -1,0 +1,40 @@
+@import '../../../styles/variables';
+
+.navigation {
+  border-bottom: 1px solid $primary-red;
+  padding: 26px 0 16px 0;
+  margin-bottom: 15px;
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    li {
+      &:after {
+        content: '•';
+        padding: 0 5px;
+      }
+      &:last-child {
+        &:after {
+          content: '';
+          padding: 0;
+        }
+      }
+      a {
+        color: $primary-red;
+        text-decoration: underline;
+        font-family: $opensans-regular;
+        font-size: 14px;
+        &:visited {
+          color: $primary-red;
+        }
+        &:hover, &:active {
+          color: $second-red;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
