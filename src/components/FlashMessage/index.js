@@ -12,20 +12,34 @@ export default class FlashMessage extends Component {
     }
   }
 
-  componentDidMount() {
-    // APIManager.getClassifiedAdvertisements(undefined, undefined, this.hello, this.hello2)
-  }
-
   /**
    * Remove flash message
+   * @param  {Object} e     Event
+   * @param  {Number} delay Delay of before remove flash message
    * @return null
    */
-  remove() {
-    this.setState({closed: !this.state.closed});
+  remove(e, delay = 750) {
     let { flashmessage } = this.refs;
+    
+    // We check if the action is trigged by an user
+    if (!e.isTrusted) {
+      delay = e;
+      setTimeout(() => {
+        this.setState({closed: !this.state.closed});
+      }, delay - 550);
+    } else {
+      this.setState({closed: !this.state.closed});
+    }
+
     setTimeout(() => {
       flashmessage.parentNode.removeChild(flashmessage);
-    }, 750);
+    }, delay);
+  }
+
+  componentDidMount() {
+    if (this.props.autodelete) {
+      this.remove(3000);
+    }
   }
 
   render() {
@@ -37,7 +51,7 @@ export default class FlashMessage extends Component {
                                   { 'closed': this.state.closed }) }
            ref="flashmessage">
         <p>{ message || "Pas de message ?!" }</p>
-        <button title="Fermer message" onClick={ () => this.remove() }></button>
+        <button title="Fermer message" onClick={ (e) => this.remove(e) }></button>
       </div>
     );
   }

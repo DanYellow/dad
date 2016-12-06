@@ -6,8 +6,16 @@ import ClassfiedAdvertisements from './../../fixtures/classified_advertisements.
 
 import Pagination from '../Pagination'
 import ClassifiedAdvertisementsList from '../ClassifiedAdvertisementsList'
+import FlashMessage from '../FlashMessage'
 
 export default class ClassifiedAdvertisementsContainer extends Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      failAPIQuery: false
+    }
+  }
 
   componentDidMount() {
     // let isUserConnected = this.props.env == 'front' ?
@@ -16,15 +24,17 @@ export default class ClassifiedAdvertisementsContainer extends Component {
     // } else {
     //   APIManager.getClassifiedAdvertisements(undefined, undefined, this.hello, this.hello2)
     // }
-    APIManager.getClassifiedAdvertisements(undefined, undefined, this._getAdvertisementsSuccess, this._getAdvertisementsFail);
+    APIManager.getClassifiedAdvertisements(undefined, undefined, undefined, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
   }
 
   _getAdvertisementsSuccess(response) {
+    this.setState({failAPIQuery: false});
     console.log(response);
   }
 
   _getAdvertisementsFail(response) {
-
+    this.setState({failAPIQuery: true});
+    // alert("fail !")
   }
 
   render() {
@@ -36,6 +46,7 @@ export default class ClassifiedAdvertisementsContainer extends Component {
     
     return (
       <div>
+        { this.state.failAPIQuery && <FlashMessage message="Une erreur est survenue" type="error" autodelete={true} /> }
         <ClassifiedAdvertisementsList list={ list } />
         <Pagination pagination={ pagination }/>
       </div>
