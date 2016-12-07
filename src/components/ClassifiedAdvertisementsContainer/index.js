@@ -19,39 +19,47 @@ class ClassifiedAdvertisementsContainer extends Component {
 
     this.state = {
       failAPIQuery: false,
-      APIDatas: {},
-      firstLoad: true
+      APIDatas: {}
     }
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   // console.log(this.props.params.id === nextProps.params.id && !this.state.firstLoad, this.props.params.id, nextProps.params.id);
-  //   // return !Object.is(this.state.APIDatas, nextState.APIDatas);
-  //   return (this.props.params.id === nextProps.params.id && !this.state.firstLoad);
-  // }
-
   componentDidMount() {
-    console.log("componentDidMount")
-
     APIManager.getClassifiedAdvertisements(undefined, undefined, undefined, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
-    this.setState({ APIDatas: ClassfiedAdvertisements, firstLoad: false });
+    
+    if (process.env.NODE_ENV) {
+      this.setState({ APIDatas: ClassfiedAdvertisements });
+    }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    console.log("fvfzffzfze")
-    console.log(nextProps);
+  componentDidUpdate(prevProps) {
+    let oldId = prevProps.params.id;
+    let currentId = this.props.params.id;
+
+    let oldQuery = prevProps.params.query;
+    let currentQuery = this.props.params.query;
+
+    let oldCategory = prevProps.params.category;
+    let currentCategory = this.props.params.category;
+    
+    if (currentId !== oldId || currentQuery !== oldQuery || oldCategory !== currentCategory) {
+      APIManager.getClassifiedAdvertisements(currentId, currentQuery, currentCategory, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
+    };
   }
 
   _getAdvertisementsSuccess(response) {
     this.setState({failAPIQuery: false});
-
-    // document.getElementById('title').scrollIntoView();
+    this._scrollToId('title');
   }
 
   _getAdvertisementsFail(response) {
     this.setState({failAPIQuery: true});
+    this._scrollToId('error');
+  }
 
-    // document.getElementById('error').scrollIntoView();
+  _scrollToId(id) {
+    let DOMElement = document.getElementById(id);
+    if (!DOMElement) { return; }
+    DOMElement.scrollIntoView();
   }
 
   _renderResults() {

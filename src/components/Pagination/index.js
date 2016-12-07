@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 
 import uuid from 'node-uuid';
 
@@ -7,14 +7,21 @@ import uuid from 'node-uuid';
 
 import './style.scss';
 
-export default class Pagination extends Component {
+class Pagination extends Component {
 
   _getListNumbers (datas) {
-    let items = []
+    let items = [];
+    let url;
+    let optionalParams;
+
+    optionalParams = [this.props.params.query, this.props.params.category].filter(Boolean);
+    optionalParams = optionalParams.join('/');
+
     for (var i = 1; i < datas.total_pages + 1; i++) {
+      url = `classified_advertisements/${i}/${optionalParams}`
       items.push(
         <li key={ uuid.v1() }>
-          <Link to={ 'classified_advertisements/' + i } activeClassName="active" className="number-item">
+          <Link to={ url } activeClassName="active" className="number-item">
             {i}
           </Link>
         </li>
@@ -41,3 +48,5 @@ export default class Pagination extends Component {
 Pagination.propTypes = {
   pagination: PropTypes.object.isRequired
 };
+
+export default withRouter(Pagination, { withRef: false });

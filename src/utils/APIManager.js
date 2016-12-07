@@ -36,7 +36,7 @@ export default class APIManager {
    * @param  {Function} errorCallback   Callback function fail to call when API call failed
    * @return null
    */
-  static getClassifiedAdvertisements(category = 'all', page = 1, query = null, successCallback, errorCallback) {
+  static getClassifiedAdvertisements(page = 1, query = null, category = 'all', successCallback, errorCallback) {
     APIManager.axios.get('/classified_advertisements', {
       params: {
         p: page,
