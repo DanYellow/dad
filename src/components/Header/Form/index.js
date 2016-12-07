@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
-import './style.scss';
+import { withRouter } from 'react-router';
 
+
+import './style.scss';
 
 class Form extends Component {
   _onSubmit(e) {
     e.preventDefault();
-    
-    console.log(this);
+
+    let { router, params } = this.props;
+    let inputValue = this.searchInput.value;
+    let url = `/classified_advertisements/${params.id}/${inputValue}`
+
+    if (params.category) {
+      url += `/${params.category}`
+    }
+
+    router.push(url);
   }
 
   render() {
@@ -15,7 +25,8 @@ class Form extends Component {
       <fieldset className='main-input'>
         <input 
         ref={(ref) => this.searchInput = ref}
-        type='search'
+        type='text'
+        maxLength='40'
         placeholder='Vous recherchez ?' />
         <button type='submit' className='reset'>X</button>
         </fieldset>
@@ -24,4 +35,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default withRouter(Form, { withRef: false });

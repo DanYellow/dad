@@ -11,7 +11,7 @@ class Header extends Component {
     return (
       <header>
         <TopHeader />
-        <figure className='logo'><img src={logo} /></figure>
+        <figure className='logo'><img src={logo} alt='logo site' /></figure>
         <Form />
       </header>
     );

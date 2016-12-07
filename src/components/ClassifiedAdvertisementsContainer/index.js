@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { withRouter } from 'react-router';
 
 import APIManager from '../../utils/APIManager';
 
@@ -9,40 +10,48 @@ import ClassifiedAdvertisementsList from '../ClassifiedAdvertisementsList';
 import FlashMessage from '../FlashMessage';
 import Loader from '../Loader';
 
+
 import './style.scss';
 
-export default class ClassifiedAdvertisementsContainer extends Component {
+class ClassifiedAdvertisementsContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       failAPIQuery: false,
-      APIDatas: {}
+      APIDatas: {},
+      firstLoad: true
     }
   }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   // console.log(this.props.params.id === nextProps.params.id && !this.state.firstLoad, this.props.params.id, nextProps.params.id);
+  //   // return !Object.is(this.state.APIDatas, nextState.APIDatas);
+  //   return (this.props.params.id === nextProps.params.id && !this.state.firstLoad);
+  // }
 
   componentDidMount() {
     console.log("componentDidMount")
 
     APIManager.getClassifiedAdvertisements(undefined, undefined, undefined, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
-    this.setState({ APIDatas: ClassfiedAdvertisements });
+    this.setState({ APIDatas: ClassfiedAdvertisements, firstLoad: false });
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillUpdate(nextProps, nextState) {
+    console.log("fvfzffzfze")
     console.log(nextProps);
   }
-
 
   _getAdvertisementsSuccess(response) {
     this.setState({failAPIQuery: false});
 
-    document.getElementById('title').scrollIntoView();
+    // document.getElementById('title').scrollIntoView();
   }
 
   _getAdvertisementsFail(response) {
     this.setState({failAPIQuery: true});
 
-    document.getElementById('error').scrollIntoView();
+    // document.getElementById('error').scrollIntoView();
   }
 
   _renderResults() {
@@ -73,5 +82,8 @@ export default class ClassifiedAdvertisementsContainer extends Component {
 }
 
 ClassifiedAdvertisementsContainer.propTypes = {
-  env: React.PropTypes.oneOf(['front', 'back'])
+  env: PropTypes.oneOf(['front', 'back'])
 };
+
+export default withRouter(ClassifiedAdvertisementsContainer, { withRef: false });
+
