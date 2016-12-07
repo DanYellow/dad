@@ -80,7 +80,7 @@ class ClassifiedAdvertisementsContainer extends Component {
       <div className="App">
         { this.state.failAPIQuery && <FlashMessage message="Une erreur est survenue" type="error" autodelete={true} /> }
 
-        { this.props.env === 'front' && <h2 id="title" className='bordered-title'>Les dernières annonces</h2> }
+        { this.props.env === 'public' && <h2 id="title" className='bordered-title'>Les dernières annonces</h2> }
         { this.props.env === 'back' && <h2 id="title" className='bordered-title'>Mes annonces</h2> }
         
         { Object.keys(this.state.APIDatas).length > 0 && this._renderResults() }
@@ -91,7 +91,7 @@ class ClassifiedAdvertisementsContainer extends Component {
 }
 
 ClassifiedAdvertisementsContainer.propTypes = {
-  env: PropTypes.oneOf(['front', 'back'])
+  env: PropTypes.oneOf(['public', 'back'])
 };
 
 export default withRouter(ClassifiedAdvertisementsContainer, { withRef: false });

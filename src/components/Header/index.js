@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import './style.scss';
 
 import TopHeader from './TopHeader';
@@ -19,5 +19,9 @@ class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  env: PropTypes.oneOf(['public', 'login', 'back'])
+};
 
 export default Header;
