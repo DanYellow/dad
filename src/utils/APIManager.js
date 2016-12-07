@@ -37,7 +37,7 @@ export default class APIManager {
    * @return null
    */
   static getClassifiedAdvertisements(page = 1, query = null, category = 'all', successCallback, errorCallback) {
-    APIManager.axios.get('/classified_advertisements', {
+    APIManager.axiosConfig.get('/classified_advertisements', {
       params: {
         p: page,
         q: query,
@@ -45,7 +45,7 @@ export default class APIManager {
       }
     })
     .then(function (response) {
-      successCallback(response);
+      successCallback(response.data);
     })
     .catch(function (error) {
       errorCallback(error);
@@ -54,21 +54,22 @@ export default class APIManager {
 
   /**
    * Create a classified advertisement
-   * @param  {Object} bodyParams      [description]
+   * @param  {Object} queryStringParams      [description]
    * @param  {Function} successCallback [description]
    * @param  {Function} errorCallback   [description]
    * @return null
    */
-  static createClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
+  static createClassifiedAdvertisement(queryStringParams, successCallback, errorCallback) {
     APIManager.axios.post('/classified_advertisement', {
       data: {
-        title: bodyParams.title,
-        description: bodyParams.description,
-        price: bodyParams.price,
+        title: queryStringParams.title,
+        description: queryStringParams.description,
+        price: queryStringParams.price,
       }
     })
     .then(function (response) {
-      successCallback(response);
+      console.log('response', response)
+      successCallback(response.data);
     })
     .catch(function (error) {
       errorCallback(error);
@@ -135,8 +136,14 @@ export default class APIManager {
 
 APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://localhost:9000/api'
 
-APIManager.axios = axios.create({
+APIManager.axiosConfig = axios.create({
   baseURL: APIManager.baseURL,
   timeout: 1000,
-  headers: { 'X-TOKEN': window.sessionStorage.getItem('session_token') }
+  withCredentials: false,
+  headers: { 
+    // 'X-TOKEN': window.sessionStorage.getItem('session_token'),
+  }
 });
+
+window.APIManager = APIManager;
+window.axios = axios;

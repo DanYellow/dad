@@ -9,13 +9,12 @@
 .header {
   border-bottom: 1px solid $primary-red;
   position: relative;
+  padding: 0 10px;
 
   .app {
-    max-width: 1100px;
+    max-width: $website-width;
     min-width: 800px;
     margin: 0 auto;
     position: relative;
-
-    
   }
 }

@@ -7,6 +7,15 @@
   justify-content: center;
   align-items: center;
 
+  .pagination-arrow {
+    font-size: 30px;
+    color: $primary-red;
+    &.disabled {
+      opacity: .35;
+      pointer-events: none;
+    }
+  }
+
   .number-items {
     display: flex;
     margin: 0 53px;
@@ -21,9 +30,9 @@
       height: 20px;
       text-align: center;
       line-height: 20px;
-
+  
       &.active {
-        background-color: $white;
+        background-color: #ffffff;
         color: $primary-red;
         border: 1px solid $primary-red;
       } 

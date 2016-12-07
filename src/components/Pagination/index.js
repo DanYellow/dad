@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router';
 
 import uuid from 'node-uuid';
 
-// import classNames from 'classnames';
+import classNames from 'classnames';
 
 import './style.scss';
 
@@ -35,11 +35,15 @@ class Pagination extends Component {
 
     return (
       <div className='pagination'>
-        <Link to={ 'classified_advertisements/' + pagination.prev } className="number-item">prev</Link>
+        <Link to={ 'classified_advertisements/' + pagination.prev } 
+              className={ classNames('icon-arrow pagination-arrow',
+                                  { 'disabled': !pagination.prev }) }/>
         <ul className='number-items'>
           { this._getListNumbers(pagination) }
         </ul>
-        <Link to={ 'classified_advertisements/' + pagination.next } className="number-item">next</Link>
+        <Link to={ 'classified_advertisements/' + pagination.next } 
+              className={ classNames('icon-arrow-right icon-arrow pagination-arrow',
+                                  { 'disabled': !pagination.next }) }/>
       </div>
     );
   }

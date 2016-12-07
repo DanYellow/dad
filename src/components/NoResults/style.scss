@@ -1,0 +1,20 @@
+@import '../../styles/variables';
+
+.no-results {
+  color: $text-color-second;
+  font-family: $opensans-regular;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  flex-direction: column;
+
+  h1 {
+    font-size: 56px;
+    margin-bottom: 26px;
+  }
+
+  h3 {
+    font-size: 35px;
+    font-family: $opensans-light;
+  }
+}

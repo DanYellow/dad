@@ -9,6 +9,7 @@ import Pagination from '../Pagination';
 import ClassifiedAdvertisementsList from '../ClassifiedAdvertisementsList';
 import FlashMessage from '../FlashMessage';
 import Loader from '../Loader';
+import NoResults from '../NoResults';
 
 
 import './style.scss';
@@ -19,12 +20,13 @@ class ClassifiedAdvertisementsContainer extends Component {
 
     this.state = {
       failAPIQuery: false,
-      APIDatas: {}
+      APIDatas: {},
+      isLoading: false
     }
   }
 
   componentDidMount() {
-    APIManager.getClassifiedAdvertisements(undefined, undefined, undefined, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
+    APIManager.getClassifiedAdvertisements(this.props.params.id, this.props.params.query, this.props.params.category, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
     
     if (process.env.NODE_ENV) {
       this.setState({ APIDatas: ClassfiedAdvertisements });
@@ -42,18 +44,18 @@ class ClassifiedAdvertisementsContainer extends Component {
     let currentCategory = this.props.params.category;
     
     if (currentId !== oldId || currentQuery !== oldQuery || oldCategory !== currentCategory) {
+      this.setState({ isLoading: true });
       APIManager.getClassifiedAdvertisements(currentId, currentQuery, currentCategory, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
     };
   }
 
   _getAdvertisementsSuccess(response) {
-    this.setState({failAPIQuery: false});
+    this.setState({ failAPIQuery: false, APIDatas:response, isLoading: false });
     this._scrollToId('title');
   }
 
   _getAdvertisementsFail(error) {
-    console.log(error)
-    this.setState({failAPIQuery: true});
+    this.setState({ failAPIQuery: true, isLoading: false });
     this._scrollToId('error');
   }
 
@@ -64,13 +66,29 @@ class ClassifiedAdvertisementsContainer extends Component {
   }
 
   _renderResults() {
+    if (this.state.APIDatas.data.list.length > 0) {
+      return this._renderClassifiedAdvertisements();
+    } else {
+      return <NoResults />;
+    }
+  }
+
+  _renderClassifiedAdvertisements() {
     let { pagination } = this.state.APIDatas;
     let { list } = this.state.APIDatas.data;
 
     return (
       <div>
+        { (this.props.env === 'public' && !this.props.params.query) && <h2 id='title' className='bordered-title'>Les dernières annonces</h2> }
+        { (this.props.env === 'public' && this.props.params.query) && <h2 id='title' className='bordered-title'>{ pagination.total_items } résultat(s)</h2> }
+
+
+        { this.props.env === 'back' && <h2 id='title' className='bordered-title'>Mes annonces</h2> }
+
         <ClassifiedAdvertisementsList list={ list } />
-        <Pagination pagination={ pagination } />
+
+
+        { (pagination.prev || pagination.next) && <Pagination pagination={ pagination } /> }
       </div>
     );
   }
@@ -78,13 +96,10 @@ class ClassifiedAdvertisementsContainer extends Component {
   render() {
     return (
       <div className="App">
-        { this.state.failAPIQuery && <FlashMessage message="Une erreur est survenue" type="error" autodelete={true} /> }
-
-        { this.props.env === 'public' && <h2 id="title" className='bordered-title'>Les dernières annonces</h2> }
-        { this.props.env === 'back' && <h2 id="title" className='bordered-title'>Mes annonces</h2> }
+        { this.state.failAPIQuery && <FlashMessage message='Une erreur est survenue' type='error' autodelete={true} /> }
         
         { Object.keys(this.state.APIDatas).length > 0 && this._renderResults() }
-        { Object.keys(this.state.APIDatas).length === 0 && <Loader /> }
+        { Object.keys(this.state.APIDatas).length === 0 || this.state.isLoading && <Loader /> }
       </div>
     );
   }
