@@ -6,7 +6,7 @@ import Header from './Header'
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
         <Header />
         {/*<FlashMessage message="Une erreur est survenue" type="error" />
         <FlashMessage message="Ceci est une information" type="info" />

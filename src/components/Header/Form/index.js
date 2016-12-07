@@ -36,15 +36,17 @@ class Form extends Component {
   render() {
     return (
       <form onSubmit={ (e) => this._onSubmit(e) } className='form'>
-      <fieldset className='main-input'>
-        <input 
-        ref={(ref) => this.searchInput = ref}
-        type='text'
-        maxLength='40'
-        value={ this.state.inputValue }
-        onChange={ (e) => this._inputValueChange(e) }
-        placeholder='Vous recherchez ?' />
-        <button type='submit' className='reset'>X</button>
+      <fieldset>
+        <div className='main-input'>
+          <input 
+          ref={(ref) => this.searchInput = ref}
+          type='text'
+          maxLength='40'
+          value={ this.state.inputValue }
+          onChange={ (e) => this._inputValueChange(e) }
+          placeholder='Vous recherchez ?' />
+          <button type='submit' className='reset'>X</button>
+        </div>
         </fieldset>
       </form>
     );

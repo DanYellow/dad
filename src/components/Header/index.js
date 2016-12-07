@@ -9,10 +9,12 @@ import logo from '../../images/logo.jpg';
 class Header extends Component {
   render() {
     return (
-      <header>
-        <TopHeader />
-        <figure className='logo'><img src={logo} alt='logo site' /></figure>
-        <Form />
+      <header className='header'>
+        <div className='app'>
+          <TopHeader />
+          <figure className='logo'><img src={logo} alt='logo site' /></figure>
+          <Form />
+        </div>
       </header>
     );
   }

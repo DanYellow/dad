@@ -51,7 +51,8 @@ class ClassifiedAdvertisementsContainer extends Component {
     this._scrollToId('title');
   }
 
-  _getAdvertisementsFail(response) {
+  _getAdvertisementsFail(error) {
+    console.log(error)
     this.setState({failAPIQuery: true});
     this._scrollToId('error');
   }
@@ -76,7 +77,7 @@ class ClassifiedAdvertisementsContainer extends Component {
 
   render() {
     return (
-      <div>
+      <div className="App">
         { this.state.failAPIQuery && <FlashMessage message="Une erreur est survenue" type="error" autodelete={true} /> }
 
         { this.props.env === 'front' && <h2 id="title" className='bordered-title'>Les dernières annonces</h2> }
