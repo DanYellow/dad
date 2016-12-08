@@ -18,6 +18,7 @@ $alert-blue-color: #b9e1e5;
   display: flex;
   border-radius: 3px;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 24px;
 
   transition: opacity .5s linear;
@@ -28,6 +29,11 @@ $alert-blue-color: #b9e1e5;
 
   &.closed {
     opacity: 0;
+  }
+
+  .icon-close {
+    font-size: 25px;
+    color: inherit;
   }
 
   &.error {

@@ -51,7 +51,7 @@ export default class FlashMessage extends Component {
                                   { 'closed': this.state.closed }) }
            ref={(ref) => this.flashmessage = ref}>
         <p>{ message || 'Pas de message ?!' }</p>
-        <button title='Fermer message' className='reset' onClick={ (e) => this.remove(e) }>X</button>
+        <button title='Fermer message' className='reset icon-close' onClick={ (e) => this.remove(e) }></button>
       </div>
     );
   }

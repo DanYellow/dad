@@ -13,8 +13,6 @@ class Form extends Component {
     }
   }
 
-  // componentDid
-
   _onSubmit(e) {
     e.preventDefault();
 
@@ -45,7 +43,9 @@ class Form extends Component {
           value={ this.state.inputValue }
           onChange={ (e) => this._inputValueChange(e) }
           placeholder='Vous recherchez ?' />
-          <button type='submit' className='reset'>X</button>
+          <button type='submit' className='reset'>
+          <span className='icon-magnifier' />
+          </button>
         </div>
         </fieldset>
       </form>
