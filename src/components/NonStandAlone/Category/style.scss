@@ -1,0 +1,12 @@
+@import '../../../styles/variables';
+
+.category {
+  padding: 6px;
+  background-color: $primary-red;
+  color: $white;
+  font-family: $opensans-semibold;
+  display: inline-block;
+  border-radius: 3px;
+  margin-bottom: 18px;
+  font-size: 12px;
+}

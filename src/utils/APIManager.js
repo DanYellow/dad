@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 import Utils from './Utils'
 
 export default class APIManager {
@@ -30,18 +28,8 @@ export default class APIManager {
   }
 
   /**
-   * Retrieve classified advertisements for a given category
-   * @param  {String} [category=all]      Classified advertisements category
-   * @param  {Number} [page=1]            Page of classified advertisements to retrieve contents
-   * @param  {String} [query=null]        User research
-   * @param  {Function} successCallback Callback function success to call when API call succeed
-   * @param  {Function} errorCallback   Callback function fail to call when API call failed
-   * @return null
-   */
-  
-  /**
    * Retrieve classified advertisements for a given params (page, category, query/search)
-   * @param  {Object} params          queryString params
+   * @param  {Object} [params={p: 1, q: null, cat: null}]          queryString params
    * @param  {[type]} successCallback Callback function success to call when API call succeed
    * @param  {[type]} errorCallback   Callback function fail to call when API call failed
    * @return null
@@ -128,18 +116,20 @@ export default class APIManager {
 
   /**
    * Delete a classified advertisement
-   * @param  {Object} bodyParams      [description]
-   * @param  {Function} successCallback [description]
-   * @param  {Function} errorCallback   [description]
+   * @param  {Number} id              Id of the classified advertisement to delete
+   * @param  {Function} successCallback callback function success to call when API call succeed
+   * @param  {Function} errorCallback   callback function fail to call when API call failed
    * @return null
    */
-  static deleteClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
-    APIManager.axios.delete(`/classified_advertisement/${bodyParams.id}`)
-    .then(function (response) {
-      successCallback(response);
-    })
-    .catch(function (error) {
-      errorCallback(error);
+  static deleteClassifiedAdvertisement(id, successCallback, errorCallback) {
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement?id=${id}`, APIManager.fetchConfig);
+
+    fetch(request, {method: 'DELETE'}).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      successCallback(data);
+    }).catch(function() {
+      errorCallback("Booo");
     });
   }
 }

@@ -29,9 +29,9 @@ class ClassifiedAdvertisementsContainer extends Component {
     const paramsURL = {p: this.props.params.page, q: this.props.params.query, cat: this.props.params.category}
     APIManager.getClassifiedAdvertisements(paramsURL, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
     
-    if (process.env.NODE_ENV) {
-      this.setState({ APIDatas: ClassfiedAdvertisements });
-    }
+    // if (process.env.NODE_ENV) {
+    //   this.setState({ APIDatas: ClassfiedAdvertisements });
+    // }
   }
 
   componentDidUpdate(prevProps) {
@@ -45,8 +45,8 @@ class ClassifiedAdvertisementsContainer extends Component {
     let currentCategory = this.props.params.category;
     
     if (currentId !== oldId || currentQuery !== oldQuery || oldCategory !== currentCategory) {
-      const paramsURL = {p: currentId, q: currentQuery, cat: currentCategory}
       this.setState({ isLoading: true });
+      const paramsURL = {p: currentId, q: currentQuery, cat: currentCategory}
       APIManager.getClassifiedAdvertisements(paramsURL, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
     };
   }
@@ -99,7 +99,7 @@ class ClassifiedAdvertisementsContainer extends Component {
         { this.props.children }
         { this.state.failAPIQuery && <FlashMessage message='Une erreur est survenue' type='error' autodelete={true} /> }
         
-        { Object.keys(this.state.APIDatas).length > 0 && this._renderResults() }
+        { (Object.keys(this.state.APIDatas).length > 0 && !this.state.isLoading) && this._renderResults() }
         { (Object.keys(this.state.APIDatas).length === 0 || this.state.isLoading) && <Loader /> }
       </div>
     );

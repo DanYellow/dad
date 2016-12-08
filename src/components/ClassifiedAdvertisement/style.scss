@@ -1,0 +1,105 @@
+@import '../../styles/variables';
+
+.ClassifiedAdvertisement {
+  border: 1px solid $primary-red;
+  background-color: $white;
+  padding: 42px;
+
+  > header {
+    margin-bottom: 38px;
+
+    h2 {
+      font-size: 30px;
+      font-family: $opensans-bold;
+      color: $text-color;
+      margin-bottom: 10px;
+    }
+
+    .date {
+      font-size: 12px;
+      margin-top: auto;
+      font-family: $opensans-regular;
+    }
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      padding-left: 30px;
+
+      header {
+        h3 {
+          font-family: $opensans-bold;
+          color: $primary-red;
+          font-size: 20px;
+          margin-bottom: 20px;
+        }
+        p {
+          font-size: 14px;
+          color: $text-color;
+          font-family: $opensans-regular;
+        }
+      }
+    }
+  }
+}
+
+
+.SellerInfos {
+  margin-top: auto;
+
+  .wrapper {
+    display: inline-block;
+    padding: 16px;
+    background-color: $dark-white;
+    border: 1px solid $primary-red;
+  }
+
+  ul {
+    display: flex;
+    // flex-direction: 
+  }
+
+  li {
+    border-right: 1px solid $primary-red;
+    padding-right: 25px;
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+
+    h5 {
+      font-size: 18px;
+      color: $text-color;
+      margin-bottom: 20px;
+    }
+    .price {
+      font-size: 30px;
+      color: $primary-red;
+      font-family: $opensans-semibold;
+    }
+
+    &:nth-child(n+2) {
+      padding: 0 25px;
+    }
+
+    &:last-child {
+      padding-right: 0;
+      border: none;
+    }
+  }
+
+
+  .seller {
+    h3 {
+      font-family: $opensans-semibold;
+      font-size: 16px;
+      color: $text-color;
+    }
+  }
+}

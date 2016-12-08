@@ -18,7 +18,8 @@ class Form extends Component {
 
     let { router, params } = this.props;
     let inputValue = this.searchInput.value;
-    let url = `/classified_advertisements/${params.id}/${inputValue}`
+    // We set 1 per default because or else we will asking to the API the n page for the query
+    let url = `/classified_advertisements/1/${inputValue}`
 
     if (params.category) {
       url += `/${params.category}`
