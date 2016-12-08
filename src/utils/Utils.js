@@ -15,6 +15,6 @@ export default class Utils {
     };
     queryString += queryParamsArray.join('&');
 
-    console.log(queryString);
+    return queryString;
   } 
 }

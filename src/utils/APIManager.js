@@ -38,46 +38,69 @@ export default class APIManager {
    * @param  {Function} errorCallback   Callback function fail to call when API call failed
    * @return null
    */
+  
+  /**
+   * Retrieve classified advertisements for a given params (page, category, query/search)
+   * @param  {Object} params          queryString params
+   * @param  {[type]} successCallback Callback function success to call when API call succeed
+   * @param  {[type]} errorCallback   Callback function fail to call when API call failed
+   * @return null
+   */
   static getClassifiedAdvertisements(params={p: 1, q: null, cat: null}, successCallback, errorCallback) {
+    let request = new Request(`${APIManager.baseURL}/classified_advertisements${Utils.objectToQueryString(params)}`, APIManager.fetchConfig);
+    console.log(errorCallback)
+    fetch(request, {method: 'GET'}).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      console.log(data, "trtrtr");
+      successCallback(data);
+    }).catch(function() {
+      errorCallback("Booo");
+    });
+  }
 
-    Utils.objectToQueryString(params);
-    // APIManager.axiosConfig.get('/classified_advertisements', {
-    //   params: {
-    //     p: page,
-    //     q: query,
-    //     cat: category
+
+  /**
+   * Retrieve one classified advertisement for a given id
+   * @param  {Number} id              Id of the classified advertisement
+   * @param  {Function} successCallback callback function success to call when API call succeed
+   * @param  {Function} errorCallback   callback function fail to call when API call failed
+   * @return null
+   */
+  static getClassifiedAdvertisement(id, successCallback, errorCallback) {
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement?id=${id}`, APIManager.fetchConfig);
+
+    fetch(request, {method: 'GET'}).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      successCallback(data);
+    }).catch(function() {
+      errorCallback("Booo");
+    });
+  }
+
+  /**
+   * Create a classified advertisement
+   * @param  {Object} params      [description]
+   * @param  {Function} successCallback [description]
+   * @param  {Function} errorCallback   [description]
+   * @return null
+   */
+  static createClassifiedAdvertisement(params, successCallback, errorCallback) {
+    // APIManager.axios.post('/classified_advertisement', {
+    //   data: {
+    //     title: queryStringParams.title,
+    //     description: queryStringParams.description,
+    //     price: queryStringParams.price,
     //   }
     // })
     // .then(function (response) {
+    //   console.log('response', response)
     //   successCallback(response.data);
     // })
     // .catch(function (error) {
     //   errorCallback(error);
     // });
-  }
-
-  /**
-   * Create a classified advertisement
-   * @param  {Object} queryStringParams      [description]
-   * @param  {Function} successCallback [description]
-   * @param  {Function} errorCallback   [description]
-   * @return null
-   */
-  static createClassifiedAdvertisement(queryStringParams, successCallback, errorCallback) {
-    APIManager.axios.post('/classified_advertisement', {
-      data: {
-        title: queryStringParams.title,
-        description: queryStringParams.description,
-        price: queryStringParams.price,
-      }
-    })
-    .then(function (response) {
-      console.log('response', response)
-      successCallback(response.data);
-    })
-    .catch(function (error) {
-      errorCallback(error);
-    });
   }
 
   /**
@@ -119,35 +142,14 @@ export default class APIManager {
       errorCallback(error);
     });
   }
-
-  /**
-   * Retrieve one classified advertisement for a given id
-   * @param  {Number} id              Id of the classified advertisement
-   * @param  {Function} successCallback callback function success to call when API call succeed
-   * @param  {Function} errorCallback   callback function fail to call when API call failed
-   * @return null
-   */
-  // static getClassifiedAdvertisement(id, successCallback, errorCallback) {
-  //   APIManager.axios.get(`/classified_advertisement?id=${id}`)
-  //   .then(function (response) {
-  //     successCallback(response);
-  //   })
-  //   .catch(function (error) {
-  //     errorCallback(error);
-  //   });
-  // }
 }
 
 APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://localhost:9000/api'
 
-APIManager.axiosConfig = axios.create({
-  baseURL: APIManager.baseURL,
-  timeout: 1000,
-  withCredentials: false,
-  headers: { 
-    // 'X-TOKEN': window.sessionStorage.getItem('session_token'),
-  }
-});
+APIManager.header = new Headers();
 
-window.APIManager = APIManager;
-window.axios = axios;
+APIManager.fetchConfig = { 
+  headers: APIManager.header,
+  mode: 'cors',
+  cache: 'default'
+};

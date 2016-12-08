@@ -35,18 +35,19 @@ class ClassifiedAdvertisementsContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    let oldId = prevProps.params.id;
-    let currentId = this.props.params.id;
+    let oldId = prevProps.params.page;
+    let currentId = this.props.params.page;
 
     let oldQuery = prevProps.params.query;
     let currentQuery = this.props.params.query;
 
     let oldCategory = prevProps.params.category;
     let currentCategory = this.props.params.category;
-    console.log('this', this.props);
+    
     if (currentId !== oldId || currentQuery !== oldQuery || oldCategory !== currentCategory) {
+      const paramsURL = {p: currentId, q: currentQuery, cat: currentCategory}
       this.setState({ isLoading: true });
-      APIManager.getClassifiedAdvertisements(currentId, currentQuery, currentCategory, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
+      APIManager.getClassifiedAdvertisements(paramsURL, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
     };
   }
 
@@ -109,5 +110,4 @@ ClassifiedAdvertisementsContainer.propTypes = {
   env: PropTypes.oneOf(['public', 'back'])
 };
 
-export default withRouter(ClassifiedAdvertisementsContainer, { withRef: false });
-
+export default withRouter(ClassifiedAdvertisementsContainer);
