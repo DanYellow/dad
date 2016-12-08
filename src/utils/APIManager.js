@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import Utils from './Utils'
+
 export default class APIManager {
 
   static getMessageForStatusCode(statusCode) {
@@ -36,20 +38,22 @@ export default class APIManager {
    * @param  {Function} errorCallback   Callback function fail to call when API call failed
    * @return null
    */
-  static getClassifiedAdvertisements(page = 1, query = null, category = 'all', successCallback, errorCallback) {
-    APIManager.axiosConfig.get('/classified_advertisements', {
-      params: {
-        p: page,
-        q: query,
-        cat: category
-      }
-    })
-    .then(function (response) {
-      successCallback(response.data);
-    })
-    .catch(function (error) {
-      errorCallback(error);
-    });
+  static getClassifiedAdvertisements(params={p: 1, q: null, cat: null}, successCallback, errorCallback) {
+
+    Utils.objectToQueryString(params);
+    // APIManager.axiosConfig.get('/classified_advertisements', {
+    //   params: {
+    //     p: page,
+    //     q: query,
+    //     cat: category
+    //   }
+    // })
+    // .then(function (response) {
+    //   successCallback(response.data);
+    // })
+    // .catch(function (error) {
+    //   errorCallback(error);
+    // });
   }
 
   /**

@@ -13,7 +13,7 @@ ReactDOM.render(
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRedirect to="classified_advertisements/1" />
-      <Route path="classified_advertisements/:id(/:query)(/:category)" component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
+      <Route path="classified_advertisements/:page(/:query)(/:category)" component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
       <Route path="classified_advertisement/:id" component={(props) => (<NotFoundPage />)} />
       
       <Route path="login" component={NotFoundPage} />

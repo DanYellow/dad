@@ -26,7 +26,8 @@ class ClassifiedAdvertisementsContainer extends Component {
   }
 
   componentDidMount() {
-    APIManager.getClassifiedAdvertisements(this.props.params.id, this.props.params.query, this.props.params.category, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
+    const paramsURL = {p: this.props.params.page, q: this.props.params.query, cat: this.props.params.category}
+    APIManager.getClassifiedAdvertisements(paramsURL, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
     
     if (process.env.NODE_ENV) {
       this.setState({ APIDatas: ClassfiedAdvertisements });
