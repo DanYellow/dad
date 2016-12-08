@@ -16,6 +16,8 @@ ReactDOM.render(
       <Route path="classified_advertisements/:id(/:query)(/:category)" component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
       <Route path="classified_advertisement/:id" component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
       
+      <Route path="login" component={NotFoundPage} />
+      
 
       <Route path='*' component={NotFoundPage}/>
     </Route>
