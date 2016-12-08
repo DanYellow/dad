@@ -1,20 +1,30 @@
 @import '../../styles/variables';
 
 .classified_advertisement {
-  padding: 40px 0;
-  border-bottom: 1px solid $primary-red;
+  padding: 0 46px;
   color: $text-color;
 
+  transition: background-color 200ms linear;
+
+  &:hover {
+    background-color: rgba(234, 235, 236, .8);
+  }
+
   a {
+    border-bottom: 1px solid $primary-red;
+    padding: 40px 0;
     display: flex;
     color: $text-color;
+
     &:visited, &:hover, &:active {
       color: $text-color;
     }
   }
 
   &:last-child {
-    border-bottom: none;
+    a {
+      border-bottom: none;
+    }
   }
 
   article {

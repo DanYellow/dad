@@ -42,7 +42,7 @@ class ClassifiedAdvertisementsContainer extends Component {
 
     let oldCategory = prevProps.params.category;
     let currentCategory = this.props.params.category;
-    
+    console.log('this', this.props);
     if (currentId !== oldId || currentQuery !== oldQuery || oldCategory !== currentCategory) {
       this.setState({ isLoading: true });
       APIManager.getClassifiedAdvertisements(currentId, currentQuery, currentCategory, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
@@ -77,8 +77,6 @@ class ClassifiedAdvertisementsContainer extends Component {
     let { pagination } = this.state.APIDatas;
     let { list } = this.state.APIDatas.data;
 
-    // let paginationComponent = (pagination.prev || pagination.next) ? 
-
     return (
       <div>
         { (this.props.env === 'public' && !this.props.params.query) && <h2 id='title' className='bordered-title'>Les dernières annonces</h2> }
@@ -96,6 +94,7 @@ class ClassifiedAdvertisementsContainer extends Component {
   render() {
     return (
       <div className="App">
+        { this.props.children }
         { this.state.failAPIQuery && <FlashMessage message='Une erreur est survenue' type='error' autodelete={true} /> }
         
         { Object.keys(this.state.APIDatas).length > 0 && this._renderResults() }

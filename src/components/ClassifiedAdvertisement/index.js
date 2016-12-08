@@ -15,7 +15,7 @@ export default class ClassifiedAdvertisement extends Component {
 
     return (
       <li className='classified_advertisement'>
-        <Link to={ '/' + id }>
+        <Link to={ '/classified_advertisement/' + id }>
           <figure>
             <img src="https://placekitten.com/g/300/300" width="130" alt={ altImg } />
           </figure>
