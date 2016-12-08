@@ -77,16 +77,16 @@ class ClassifiedAdvertisementsContainer extends Component {
     let { pagination } = this.state.APIDatas;
     let { list } = this.state.APIDatas.data;
 
+    // let paginationComponent = (pagination.prev || pagination.next) ? 
+
     return (
       <div>
         { (this.props.env === 'public' && !this.props.params.query) && <h2 id='title' className='bordered-title'>Les dernières annonces</h2> }
         { (this.props.env === 'public' && this.props.params.query) && <h2 id='title' className='bordered-title'>{ pagination.total_items } résultat(s)</h2> }
 
-
         { this.props.env === 'back' && <h2 id='title' className='bordered-title'>Mes annonces</h2> }
 
         <ClassifiedAdvertisementsList list={ list } />
-
 
         { (pagination.prev || pagination.next) && <Pagination pagination={ pagination } /> }
       </div>
@@ -99,7 +99,7 @@ class ClassifiedAdvertisementsContainer extends Component {
         { this.state.failAPIQuery && <FlashMessage message='Une erreur est survenue' type='error' autodelete={true} /> }
         
         { Object.keys(this.state.APIDatas).length > 0 && this._renderResults() }
-        { Object.keys(this.state.APIDatas).length === 0 || this.state.isLoading && <Loader /> }
+        { (Object.keys(this.state.APIDatas).length === 0 || this.state.isLoading) && <Loader /> }
       </div>
     );
   }
