@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router';
 
 import moment from 'moment';
 
-import APIManager from '../../utils/APIManager';
-
-import Category from '../NonStandAlone/Category';
+import Category from '../StandAlones/Category';
 
 import './style.scss';
 

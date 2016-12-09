@@ -7,6 +7,7 @@ import App from './components/App';
 import ClassifiedAdvertisementsContainer from './components/ClassifiedAdvertisementsContainer';
 import ClassifiedAdvertisementContainer from './components/ClassifiedAdvertisementContainer';
 import NotFoundPage from './components/NotFoundPage';
+import SignInSignUpContainer from './components/SignInSignUpContainer';
 
 import './index.scss';
 
@@ -17,7 +18,8 @@ ReactDOM.render(
       <Route path="classified_advertisements/:page(/:query)(/:category)" component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
       <Route path="classified_advertisement/:id" component={(props) => (<ClassifiedAdvertisementContainer />)} />
       
-      <Route path="login" component={NotFoundPage} />
+      <Route path="signin" component={(props) => (<SignInSignUpContainer type='signin' />)} />
+      <Route path="signup" component={(props) => (<SignInSignUpContainer type='signup' />)} />
       
       <Route path='*' component={NotFoundPage}/>
     </Route>

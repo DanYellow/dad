@@ -15,12 +15,17 @@
         content: '•';
         padding: 0 5px;
       }
-      &:last-child {
+      &:last-child, &:first-child {
         &:after {
           content: '';
           padding: 0;
         }
       }
+
+      &.home {
+        margin-right: auto;
+      }
+
       a {
         color: $primary-red;
         text-decoration: underline;

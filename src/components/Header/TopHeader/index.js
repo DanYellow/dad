@@ -8,11 +8,15 @@ class TopHeader extends Component {
   _renderLoggedContent() {
     return (
       <ul>
+          <li className='home'>
+            <Link to={ '/'}>Accueil</Link>
+          </li>
+
           <li>
-            <Link to={ '/login'} className="number-item">Se connecter</Link>
+            <Link to={ '/signin'}>Se connecter</Link>
           </li>
           <li>
-            <Link to={ '/'} className="number-item">Publier une annonce</Link>
+            <Link to={ '/'}>Publier une annonce</Link>
           </li>
       </ul>
     )

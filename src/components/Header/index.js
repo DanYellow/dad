@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
+
 import './style.scss';
 
 import TopHeader from './TopHeader';
@@ -12,7 +14,9 @@ class Header extends Component {
       <header className='header'>
         <div className='app'>
           <TopHeader />
-          <figure className='logo'><img src={logo} alt='logo site' /></figure>
+          <Link to={'/'}>
+            <figure className='logo'><img src={logo} alt='logo site' /></figure>
+          </Link>
           <Form />
         </div>
       </header>

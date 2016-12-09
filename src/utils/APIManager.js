@@ -27,6 +27,16 @@ export default class APIManager {
     return message;
   }
 
+  // slant
+  /*** 
+   *       ________                _ _____          __   ___       __                __  _                                __      
+   *      / ____/ /___ ___________(_) __(_)__  ____/ /  /   | ____/ /   _____  _____/ /_(_)_______  ____ ___  ___  ____  / /______
+   *     / /   / / __ `/ ___/ ___/ / /_/ / _ \/ __  /  / /| |/ __  / | / / _ \/ ___/ __/ / ___/ _ \/ __ `__ \/ _ \/ __ \/ __/ ___/
+   *    / /___/ / /_/ (__  |__  ) / __/ /  __/ /_/ /  / ___ / /_/ /| |/ /  __/ /  / /_/ (__  )  __/ / / / / /  __/ / / / /_(__  ) 
+   *    \____/_/\__,_/____/____/_/_/ /_/\___/\__,_/  /_/  |_\__,_/ |___/\___/_/   \__/_/____/\___/_/ /_/ /_/\___/_/ /_/\__/____/  
+   *                                                                                                                              
+   */
+
   /**
    * Retrieve classified advertisements for a given params (page, category, query/search)
    * @param  {Object} [params={p: 1, q: null, cat: null}]          queryString params
@@ -36,11 +46,9 @@ export default class APIManager {
    */
   static getClassifiedAdvertisements(params={p: 1, q: null, cat: null}, successCallback, errorCallback) {
     let request = new Request(`${APIManager.baseURL}/classified_advertisements${Utils.objectToQueryString(params)}`, APIManager.fetchConfig);
-    console.log(errorCallback)
     fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();
     }).then(function(data) {
-      console.log(data, "trtrtr");
       successCallback(data);
     }).catch(function() {
       errorCallback("Booo");
@@ -132,11 +140,33 @@ export default class APIManager {
       errorCallback("Booo");
     });
   }
+
+
+  /***
+   *       _____ _             ____         _______ _             __  __    
+   *      / ___/(_)___ _____  /  _/___    _/_/ ___/(_)___ _____  / / / /___ 
+   *      \__ \/ / __ `/ __ \ / // __ \ _/_/ \__ \/ / __ `/ __ \/ / / / __ \
+   *     ___/ / / /_/ / / / // // / / //_/  ___/ / / /_/ / / / / /_/ / /_/ /
+   *    /____/_/\__, /_/ /_/___/_/ /_/_/   /____/_/\__, /_/ /_/\____/ .___/ 
+   *           /____/                             /____/           /_/      
+   */
+  static signIn(formDatas, successCallback, errorCallback) {
+    let request = new Request(`${APIManager.baseURL}/api/get_token`, APIManager.fetchConfig);
+
+    fetch(request, {method: 'POST'}).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      successCallback(data);
+    }).catch(function() {
+      errorCallback("Booo");
+    });
+  }
 }
 
 APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://localhost:9000/api'
 
 APIManager.header = new Headers();
+APIManager.header.append('X-TOKEN', window.sessionStorage.getItem('token'));
 
 APIManager.fetchConfig = { 
   headers: APIManager.header,

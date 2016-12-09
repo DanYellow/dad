@@ -29,3 +29,13 @@ button.reset {
 .icon-arrow-right {
   transform: rotate(180deg);
 }
+
+.App {
+  max-width: $website-width;
+  min-width: 800px;
+  padding: 0px 10px;
+  margin: 0 auto;
+
+  border-top: 4px solid $primary-red;
+  padding-top: 84px; 
+}
