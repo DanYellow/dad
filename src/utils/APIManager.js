@@ -45,7 +45,8 @@ export default class APIManager {
    * @return null
    */
   static getClassifiedAdvertisements(params={p: 1, q: null, cat: null}, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisements${Utils.objectToQueryString(params)}`, APIManager.fetchConfig);
+
+    let request = new Request(`${APIManager.baseURL}/classified_advertisements/${params.p}${Utils.objectToQueryString(params)}`, APIManager.fetchConfig);
     fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();
     }).then(function(data) {
@@ -64,7 +65,7 @@ export default class APIManager {
    * @return null
    */
   static getClassifiedAdvertisement(id, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement?id=${id}`, APIManager.fetchConfig);
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${id}`, APIManager.fetchConfig);
 
     fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();
@@ -107,18 +108,14 @@ export default class APIManager {
    * @return {[type]}                 [description]
    */
   static updateClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
-    APIManager.axios.post(`/classified_advertisement/${bodyParams.id}`, {
-      data: {
-        title: bodyParams.title,
-        description: bodyParams.description,
-        price: bodyParams.price,
-      }
-    })
-    .then(function (response) {
-      successCallback(response);
-    })
-    .catch(function (error) {
-      errorCallback(error);
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${bodyParams.id}`, APIManager.fetchConfig);
+
+    fetch(request, {method: 'POST'}).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      successCallback(data);
+    }).catch(function() {
+      errorCallback("Booo");
     });
   }
 

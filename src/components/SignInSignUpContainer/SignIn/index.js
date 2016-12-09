@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 
 import APIManager from '../../../utils/APIManager';
+import Utils from '../../../utils/Utils';
 
 import Loader from '../../Loader';
+import FormButton from '../../StandAlones/FormButton';
 
 import './style.scss';
 
@@ -20,7 +22,10 @@ class SignIn extends Component {
   _onSubmit(e) {
     e.preventDefault();
 
+    var myForm = document.getElementById('form');
     
+    
+    console.log(Utils.getFormDataObj(myForm));
   }
 
   _inputValueChange(e) {
@@ -31,10 +36,10 @@ class SignIn extends Component {
   render() {
     return (
       <div className='SignIn'>
-        <h2 id='title' className='bordered-title'>Les dernières annonces</h2>
-        <form onSubmit={ (e) => this._onSubmit(e) } className='form'>
-        <fieldset>
-          <label>Pseudonyme</label>
+        <h2 id='title' className='bordered-title'>Se connecter</h2>
+        <form onSubmit={ (e) => this._onSubmit(e) } className='form sign' id='form'>
+        <div className='fieldset'>
+          <label>Pseudonyme / Adresse mail</label>
           <input 
           ref={(ref) => this.usernameInput = ref}
           type='text'
@@ -42,9 +47,9 @@ class SignIn extends Component {
           maxLength='40'
           value={ this.state.usernameInputValue }
           onChange={ (e) => this._inputValueChange(e) }
-          placeholder='Vous recherchez ?' />
-        </fieldset>
-        <fieldset>
+          placeholder='Pseudonyme / Adresse mail' />
+        </div>
+        <div className='fieldset'>
           <label>Mot de passe</label>
           <input 
           ref={(ref) => this.passwordInput = ref}
@@ -53,8 +58,11 @@ class SignIn extends Component {
           maxLength='40'
           value={ this.state.passwordInputValue }
           onChange={ (e) => this._inputValueChange(e) }
-          placeholder='Vous recherchez ?' />
-        </fieldset>
+          placeholder='Mot de passe' />
+        </div>
+        <div className='buttons-container fieldset'>
+          <FormButton design='validation' text='Se connecter' type='submit' />
+        </div>
         </form>
       </div>
     );
