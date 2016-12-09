@@ -33,6 +33,7 @@ class SignIn extends Component {
     this.setState({ [stateKey]: e.target.value });
   }
 
+
   render() {
     return (
       <div className='SignIn'>
@@ -48,6 +49,9 @@ class SignIn extends Component {
           value={ this.state.usernameInputValue }
           onChange={ (e) => this._inputValueChange(e) }
           placeholder='Pseudonyme / Adresse mail' />
+          <div className='error'>
+            <p>Veuillez spécifier un élement</p>
+          </div>
         </div>
         <div className='fieldset'>
           <label>Mot de passe</label>

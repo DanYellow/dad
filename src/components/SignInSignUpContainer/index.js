@@ -3,7 +3,8 @@ import { withRouter } from 'react-router';
 
 
 
-import SignIn from './SignIn';
+// import SignIn from './SignIn';
+import SignIn from './SignInForm';
 
 
 
@@ -14,10 +15,15 @@ class SignInSignUpContainer extends Component {
     super(props);
   }
 
+  _handleSubmit (values) {
+    // Do something with the form values
+    console.log(values);
+  }
+
   render() {
     return (
       <div className="App">
-        <SignIn />
+        <SignIn onSubmit={this._handleSubmit}/>
       </div>
     );
   }

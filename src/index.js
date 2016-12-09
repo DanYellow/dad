@@ -3,6 +3,17 @@ import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, IndexRedirect } from 'react-router'
 
 
+import { Provider } from 'react-redux'
+import { createStore, combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
+
+const reducers = {
+  form: formReducer
+}
+const reducer = combineReducers(reducers)
+const store = createStore(reducer)
+
+
 import App from './components/App';
 import ClassifiedAdvertisementsContainer from './components/ClassifiedAdvertisementsContainer';
 import ClassifiedAdvertisementContainer from './components/ClassifiedAdvertisementContainer';
@@ -12,6 +23,7 @@ import SignInSignUpContainer from './components/SignInSignUpContainer';
 import './index.scss';
 
 ReactDOM.render(
+  <Provider store={store}>
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <IndexRedirect to="classified_advertisements/1" />
@@ -23,6 +35,7 @@ ReactDOM.render(
       
       <Route path='*' component={NotFoundPage}/>
     </Route>
-  </Router>,
+  </Router>
+  </Provider>,
   document.getElementById('root')
 );
