@@ -25,7 +25,6 @@ class SignIn extends Component {
 
   _inputValueChange(e) {
     const stateKey = e.target.getAttribute('name') + 'InputValue';
-    console.log({ [stateKey]: e.target.value })
     this.setState({ [stateKey]: e.target.value });
   }
 
