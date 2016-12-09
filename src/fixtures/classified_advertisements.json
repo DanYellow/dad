@@ -101,12 +101,12 @@
         ]
     },
     "pagination": {
-        "current": 2,
+        "current": 6,
         "first": 1,
         "last": 3,
         "prev": 1,
         "next": 3,
-        "total_pages": 3,
+        "total_pages": 25,
         "total_items": 13
     }
 }

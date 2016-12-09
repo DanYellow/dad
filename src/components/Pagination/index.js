@@ -15,18 +15,39 @@ class Pagination extends Component {
     let url;
     let optionalParams;
 
+    let currentPage = datas.current;
+    
+    let maxElement = 4 + currentPage;
+    let minElement = currentPage - 2;
+
+    let displayedEllipsis = false;
+
     optionalParams = [this.props.params.query, this.props.params.category].filter(Boolean);
     optionalParams = optionalParams.join('/');
-
+    
     for (var i = 1; i < datas.total_pages + 1; i++) {
-      url = `classified_advertisements/${i}/${optionalParams}`
-      items.push(
-        <li key={ uuid.v1() }>
+      let element;
+      url = `classified_advertisements/${i}/${optionalParams}`;
+      if (i > maxElement && !displayedEllipsis) {
+        displayedEllipsis = true;
+        element = (<li>
+          <span className="number-item ellipsis">
+          [...]
+          </span>
+        </li>)
+      } 
+
+      console.log((i < maxElement && i >= minElement), i)
+      if ((i < maxElement && i >= minElement) || i === datas.total_pages || i === 1) {
+
+        element = (<li key={ uuid.v1() }>
           <Link to={ url } activeClassName="active" className="number-item">
             {i}
           </Link>
-        </li>
-      );
+        </li>)
+      }
+
+      items.push(element);
     };
     return items;
   }
