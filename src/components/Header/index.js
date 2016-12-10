@@ -4,27 +4,40 @@ import { Link } from 'react-router';
 import './style.scss';
 
 import TopHeader from './TopHeader';
-import Form from './Form';
+import SearchBar from './Form';
 
 import logo from '../../images/logo.jpg';
 
 class Header extends Component {
 
-  _renderPublic() {
+  _renderPublicView() {
     return (
-      <Form />
+      <SearchBar />
     )
   }
 
-  _renderLogin() {
+  _renderLoginView() {
     return (
-      null
+      <nav className='navigation-header'>
+        <ul>
+          <li>
+            <Link to='/signin' activeClassName='active'>
+              <span>Connexion</span>
+            </Link>
+          </li>
+          <li>
+            <Link to='/signup' activeClassName='active'>
+              <span>Inscription</span>
+            </Link>
+          </li>
+        </ul>
+      </nav>
     )
   }
 
-  _renderBack() {
+  _renderBackView() {
     return (
-      <Form />
+      <SearchBar />
     )
   }
 
@@ -36,9 +49,9 @@ class Header extends Component {
           <Link to={'/'}>
             <figure className='logo'><img src={logo} alt='logo site' /></figure>
           </Link>
-          { this.props.env === 'public' && this._renderPublic() }
-          { this.props.env === 'login' && this._renderLogin() }
-          { this.props.env === 'back' && this._renderBack() }
+          { this.props.env === 'public' && this._renderPublicView() }
+          { this.props.env === 'login' && this._renderLoginView() }
+          { this.props.env === 'back' && this._renderBackView() }
         </div>
       </header>
     );

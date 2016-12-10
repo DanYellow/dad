@@ -7,7 +7,7 @@
   position: relative;
 
   &.buttons-container {
-    margin-top: 12px;
+    padding-top: 12px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -18,12 +18,16 @@
     color: $text-color;
     margin-bottom: 5px;
   }
-  input[type="text"], input[type="password"] {
+  input[type="text"], input[type="password"], textarea {
     padding: 15px 8px;
     background-color: $white;
     border: 1px solid $text-color;
     border-radius: 3px;
-    font-size: 20px;
+    font-size: 16px;
+  }
+
+  textarea {
+    resize: vertical;
   }
 
   .error {
@@ -55,6 +59,10 @@
       padding: 5px 0 0 9px;
     }
   }
-
 }
 
+.PopinForm {
+  padding: 42px 25px 74px;
+  border: 1px solid $primary-red;
+  background-color: $white;
+}

@@ -1,9 +1,9 @@
-@import '../../styles/variables';
+@import '../../../styles/variables';
 
 .ClassifiedAdvertisement {
   border: 1px solid $primary-red;
   background-color: $white;
-  padding: 42px;
+  padding: 42px 42px 30px;
 
   > header {
     margin-bottom: 38px;
@@ -26,6 +26,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 30px;
     .content {
       display: flex;
       flex-direction: column;
@@ -48,6 +49,30 @@
       }
     }
   }
+
+  .toolbar {
+    ul {
+      display: flex;
+      justify-content: center;
+      li {
+        
+        &:after {
+          content: '•';
+          padding: 0 7px;
+          color: $text-color;
+        }
+        &:last-child {
+          &:after {
+            content: '';
+          }
+        }
+      }
+      a {
+        color: $primary-red;
+        font-size: 1rem;
+      }
+    }
+  }
 }
 
 
@@ -63,7 +88,6 @@
 
   ul {
     display: flex;
-    // flex-direction: 
   }
 
   li {

@@ -2,7 +2,7 @@
 
 
 $validation-color: #69b302;
-$cancel-color: #69b302;
+$cancel-color: #b70011;
 
 button.form-button {
   border-radius: 5px;
@@ -20,4 +20,14 @@ button.form-button {
       background-color: rgba($validation-color, .25);
     }
   }
+
+  &.cancel {
+    border-color: $cancel-color;
+    color: $cancel-color;
+
+    &:hover {
+      background-color: rgba($cancel-color, .25);
+    }
+  }
+
 }

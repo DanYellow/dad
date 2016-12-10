@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .logo {
-  margin-bottom: 34px;
+  margin-bottom: 50px;
   display: flex;
   justify-content: center;
 }
@@ -16,5 +16,38 @@
     min-width: 800px;
     margin: 0 auto;
     position: relative;
+  }
+
+  .navigation-header {
+    ul {
+      display: flex;
+      font-family: $opensans-bold;
+      font-size: 22px;
+      a {
+        padding: 0 0 10px 0;
+        color: $primary-red;
+        text-align: center;
+
+        span {
+          padding: 0 80px 10px;
+          display: block;
+          position: relative;
+
+        }
+
+        &.active {
+          color: $text-color;
+
+          span {
+            &:after {
+              content: '';
+              position: absolute;
+              border-bottom: 5px solid $text-color;
+              left: -10px; right: 0; bottom: -5px;
+            }
+          }
+        }
+      }
+    }
   }
 }

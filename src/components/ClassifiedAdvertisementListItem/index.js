@@ -10,7 +10,7 @@ export default class ClassifiedAdvertisementListItem extends Component {
     let { id, title, price, created_at, category } = this.props;
     let { location } = this.props.seller;
 
-    let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD.MM.YYYY');
+    let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
     let altImg = title + ' image';
 
     return (

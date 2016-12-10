@@ -1,20 +1,7 @@
-const errorMessage = {
+const ErrorMessages = {
   'required': 'Veuillez spécifier cette entrée',
+  'password_confirmation': 'Le mot de passe ne correspond pas',
+  'email_incorrect': 'Votre adresse mail est incorrecte. Vous devez être '
 }
 
-
-const validate = values => {
-  const errors = {}
-
-  if (!values.username) {
-    errors.username = errorMessage.required;
-  }
-
-  if (!values.password) {
-    errors.password = errorMessage.required;
-  }
-
-  return errors;
-}
-
-export default validate;
+export default ErrorMessages;

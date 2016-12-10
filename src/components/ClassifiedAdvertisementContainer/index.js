@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 
 import APIManager from '../../utils/APIManager';
 
-import ClassifiedAdvertisement from '../ClassifiedAdvertisement';
+import ClassifiedAdvertisement from './ClassifiedAdvertisement';
 
 import Loader from '../Loader';
 import NoResults from '../NoResults';
@@ -41,14 +41,16 @@ class ClassifiedAdvertisementContainer extends Component {
   }
 
   _renderClassifiedAdvertisement() {
-    return <ClassifiedAdvertisement {...this.state.APIDatas.data.resource} />
+    return <ClassifiedAdvertisement {...this.state.APIDatas.data.resource } />
   }
 
   render() {
     return (
-      <div className="ClassifiedAdvertisementContainer">
+      <div className="App">
         { !this.state.isLoading && this._renderResults() }
         { this.state.isLoading && <Loader /> }
+        
+        { (this.props.children && !this.state.isLoading) && React.cloneElement(this.props.children, { resource: this.state.APIDatas.data.resource }) }
       </div>
     );
   }

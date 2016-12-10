@@ -1,21 +1,32 @@
 import React, { Component } from 'react';
+import { withRouter, Link } from 'react-router';
 
 import moment from 'moment';
 
-import Category from '../StandAlones/Category';
+import Category from '../../StandAlones/Category';
 
 import './style.scss';
 
-export default class ClassifiedAdvertisement extends Component {
-  constructor(props) {
-    super(props);
+class ClassifiedAdvertisement extends Component {
+
+  _renderFooter() {
+    return (
+      <footer className='toolbar'>
+        <ul>
+          <li>
+            <Link to={ this.props.location.pathname + '/edit' }>Éditer votre annonce</Link>
+          </li>
+          <li>
+            <Link to={ this.props.location.pathname + '/delete' }>Supprimer votre annonce</Link>
+          </li>
+        </ul>
+      </footer>
+    )
   }
 
   render() {
-    let { id, title, price, created_at, category, description } = this.props;
-
+    let { id, title, price, created_at, category, description, is_mine, router } = this.props;
     let productInfos = { seller: this.props.seller, price }
-
 
     let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
     let altImg = title + ' image';
@@ -37,10 +48,11 @@ export default class ClassifiedAdvertisement extends Component {
               <p>{ description }</p>
             </header>
             <ProductInfos {...productInfos} />
-            <div></div>
-
           </article>
         </section>
+        { is_mine && this._renderFooter() }
+
+        { this.props.children }
       </div>
     );
   }
@@ -72,3 +84,4 @@ const ProductInfos = function (props) {
   );
 };
 
+export default withRouter(ClassifiedAdvertisement);

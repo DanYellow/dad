@@ -20,6 +20,25 @@ export default class APIManager {
       case 1005:
         message = 'Token invalide';
         break;
+      case 1006:
+        message = 'Token invalide';
+        break;
+      case 1007:
+        message = 'Cette entrée existe déjà';
+        break;
+      case 1008:
+        message = 'Le formulaire est imcomplet';
+        break;
+      case 1009:
+        message = 'Cet utilisateur n\'existe pas';
+        break;
+      case 1010:
+        message = 'Votre compte a été crée, vous allez recevoir un mail de confirmation.';
+        break;
+      case 1011:
+        message = 'Vous êtes connecté. Vous allez être redirigé vers l\' accueil';
+        break;
+        
       default:
         message = '';
         break;
@@ -153,7 +172,23 @@ export default class APIManager {
     fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
       return response.json();
     }).then(function(data) {
-      if (data.status_code > 210) {
+      if (data.status_code > 210 || !data.success) {
+        errorCallback(data);
+      } else {
+        successCallback(data);
+      }
+    }).catch(function() {
+      errorCallback("Booo");
+    });
+  }
+
+  static signUp(bodyParams, successCallback, errorCallback) {
+    let request = new Request(`${APIManager.baseURL}/sign_up`, APIManager.fetchConfig);
+
+    fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      if (data.status_code > 210 || !data.success) {
         errorCallback(data);
       } else {
         successCallback(data);
@@ -167,7 +202,7 @@ export default class APIManager {
 APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://localhost:9000/api'
 
 APIManager.header = new Headers();
-APIManager.header.append('X-TOKEN', window.sessionStorage.getItem('token'));
+APIManager.header.append('X-TOKEN', window.localStorage.getItem('token'));
 
 APIManager.fetchConfig = { 
   headers: APIManager.header,

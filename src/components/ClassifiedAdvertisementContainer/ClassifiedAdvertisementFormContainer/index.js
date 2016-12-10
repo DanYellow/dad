@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 
-import APIManager from '../../utils/APIManager';
+import APIManager from '../../../utils/APIManager';
 
 
-import Loader from '../Loader';
+import Loader from '../../Loader';
 
-import SignIn from './SignInForm';
-import SignUp from './SignUpForm';
+import FlashMessage from '../../FlashMessage';
 
-import FlashMessage from '../FlashMessage';
-
+import ClassifiedAdvertisementForm from './ClassifiedAdvertisementForm';
 
 
-import './style.scss';
 
-class SignInSignUpContainer extends Component {
+// import './style.scss';
+
+class ClassifiedAdvertisementFormContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -29,26 +28,16 @@ class SignInSignUpContainer extends Component {
 
   _handleSubmit = (values) => {
     this.setState({ isLoading: true, hasErrors: false });
-
-    if (this.props.router.routes[1].path === 'signin') {
-      APIManager.signIn(values, this._signInSuccess.bind(this), this._apiCallFail.bind(this));
-    } else if (this.props.router.routes[1].path === 'signup') {
-      APIManager.signUp(values, this._signUpSuccess.bind(this), this._apiCallFail.bind(this));
-    }
+    APIManager.updateClassifiedAdvertisement(values, this._signInSuccess.bind(this), this._apiCallFail.bind(this));
   }
 
-  _signInSuccess(response) {
+  _updateSuccess(response) {
     this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
-    this._redirectUser('/classified_advertisements/1');
+    this._redirectUser('/classified_advertisements');
 
-    window.localStorage.setItem('token', response.data.resource.token);
   }
 
-  _signUpSuccess(response) {
-    this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
-  }
-
-  _apiCallFail(response) {
+  _updateFail(response) {
     this.setState({ hasErrors: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
   }
 
@@ -66,16 +55,15 @@ class SignInSignUpContainer extends Component {
 
   render() {
     return (
-      <div className='App'>
+      <div className='PopinContainer'>
         { this.state.hasErrors && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='error' onClick={ this._handleClick } /> }
         { this.state.isSuccess && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='success' onClick={ this._handleClick } /> }
 
-        { this.props.router.routes[1].path === 'signin' && <SignIn onSubmit={ this._handleSubmit }/> }
-        { this.props.router.routes[1].path === 'signup' && <SignUp onSubmit={ this._handleSubmit }/> }
         { this.state.isLoading && <Loader /> }
+        <ClassifiedAdvertisementForm onSubmit={ this._handleSubmit } initialValues={ this.props.resource }/>
       </div>
     );
   }
 }
 
-export default withRouter(SignInSignUpContainer);
+export default withRouter(ClassifiedAdvertisementFormContainer);

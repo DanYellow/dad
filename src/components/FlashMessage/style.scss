@@ -21,9 +21,19 @@
     opacity: 0;
   }
 
+  &.must-be-removed {
+    display: none;
+  }
+
   .icon-close {
     font-size: 25px;
     color: inherit;
+  }
+
+  button {
+    &:focus, &:hover {
+      color: white;
+    }
   }
 
   &.error {

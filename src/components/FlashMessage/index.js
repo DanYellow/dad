@@ -8,7 +8,8 @@ export default class FlashMessage extends Component {
     super(props);
     
     this.state = {
-      closed: false
+      closed: false,
+      mustBeRemoved: false
     }
   }
 
@@ -18,9 +19,7 @@ export default class FlashMessage extends Component {
    * @param  {Number} delay Delay of before remove flash message
    * @return null
    */
-  remove(e, delay = 750) {
-    let flashmessage = this.flashmessage;
-    
+  _remove(e, delay = 750) {    
     // We check if the action is trigged by an user
     if (!e.isTrusted) {
       delay = e;
@@ -32,7 +31,8 @@ export default class FlashMessage extends Component {
     }
 
     setTimeout(() => {
-      flashmessage.parentNode.removeChild(flashmessage);
+      this.setState({mustBeRemoved: !this.state.mustBeRemoved});
+      this.props.onClick();
     }, delay);
   }
 
@@ -48,10 +48,11 @@ export default class FlashMessage extends Component {
     return (
       <div id={type} className={ classNames('flash-message',
                                   type,
-                                  { 'closed': this.state.closed }) }
+                                  { 'closed': this.state.closed, 
+                                    'must-be-removed': this.state.mustBeRemoved }) }
            ref={(ref) => this.flashmessage = ref}>
         <p>{ message || 'Pas de message ?!' }</p>
-        <button title='Fermer message' className='reset icon-close' onClick={ (e) => this.remove(e) }></button>
+        <button title='Fermer message' className='reset icon-close' onClick={ (e) => this._remove(e) }></button>
       </div>
     );
   }

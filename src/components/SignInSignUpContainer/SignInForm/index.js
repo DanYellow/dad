@@ -3,9 +3,24 @@ import { Field, reduxForm } from 'redux-form';
 
 import FormButton from '../../_Form/FormButton';
 import InputLitteral from '../../_Form/InputLitteral';
-import ValidationRules from '../../_Form/validation.js';
+import ErrorMessages from '../../_Form/validation.js';
 
 import './style.scss';
+
+const validate = values => {
+  const errors = {}
+
+  if (!values.username) {
+    errors.username = ErrorMessages.required;
+  }
+
+  if (!values.password) {
+    errors.password = ErrorMessages.required;
+  }
+
+  return errors;
+}
+
 
 class SignInForm extends Component {
   render() {
@@ -28,7 +43,7 @@ class SignInForm extends Component {
 
 SignInForm = reduxForm({
   form: 'contact',
-  validate: ValidationRules
+  validate
 })(SignInForm);
 
 export default SignInForm;
