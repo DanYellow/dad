@@ -25,10 +25,10 @@ import './index.scss';
 ReactDOM.render(
   <Provider store={store}>
   <Router history={hashHistory}>
-    <Route path="/" component={App}>
-      <IndexRedirect to="classified_advertisements/1" />
-      <Route path="classified_advertisements/:page(/:query)(/:category)" component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
-      <Route path="classified_advertisement/:id" component={(props) => (<ClassifiedAdvertisementContainer />)} />
+    <Route path='/' component={App}>
+      <IndexRedirect to='classified_advertisements/1' />
+      <Route path='classified_advertisements/:page(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
+      <Route path='classified_advertisement/:id' component={(props) => (<ClassifiedAdvertisementContainer />)} />
       
       <Route path="signin" component={(props) => (<SignInSignUpContainer type='signin' />)} />
       <Route path="signup" component={(props) => (<SignInSignUpContainer type='signup' />)} />

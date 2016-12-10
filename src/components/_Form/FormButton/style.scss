@@ -4,11 +4,12 @@
 $validation-color: #69b302;
 $cancel-color: #69b302;
 
-.form-button {
-  border-radius: 3px;
+button.form-button {
+  border-radius: 5px;
   border: 2px solid transparent;
-  padding: 23px;
+  padding: 15px 23px;
   font-size: 20px;
+  flex: .5;
   font-family: $opensans-semibold;
 
   &.validation {

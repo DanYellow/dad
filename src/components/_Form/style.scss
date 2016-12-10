@@ -1,8 +1,6 @@
-@import '../../../styles/variables';
+@import '../../styles/variables';
 
-.form.sign {
-
-  .fieldset {
+.fieldset {
     display: flex;
     flex-direction: column;
     margin-bottom: 25px;
@@ -56,8 +54,5 @@
     }
     p {
       padding: 5px 0 0 9px;
-
     }
-  }
 }
-

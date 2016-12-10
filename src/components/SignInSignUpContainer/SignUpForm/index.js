@@ -7,15 +7,17 @@ import ValidationRules from '../../_Form/validation.js';
 
 import './style.scss';
 
-class SignInForm extends Component {
+class SignUpForm extends Component {
   render() {
     const { handleSubmit } = this.props;
     return (
       <div className='SignIn'>
         <h2 className='bordered-title'>Se connecter</h2>
-        <form onSubmit={ handleSubmit } className='form'>
-          <Field name='username' type='text' component={InputLitteral} label='Pseudonyme / Adresse mail' maxLength="2" />
-          <Field name='password' type='password' component={InputLitteral} label='Mot de passe'/>
+        <form onSubmit={ handleSubmit } className='form' novalidate>
+          <Field name='username' type='text' component={InputLitteral} label='Pseudonyme' />
+          <Field name='email' type='text' component={InputLitteral} label='Adresse mail'/>
+          <Field name='password' type='text' component={InputLitteral} label='Mot de passe'/>
+          <Field name='password_confirmation' type='text' component={InputLitteral} label='Confirmer mot de passe'/>
 
           <div className='buttons-container fieldset'>
             <FormButton design='validation' text='Se connecter' type='submit' />
@@ -26,9 +28,9 @@ class SignInForm extends Component {
   }
 }
 
-SignInForm = reduxForm({
+SignUpForm = reduxForm({
   form: 'contact',
   validate: ValidationRules
-})(SignInForm);
+})(SignUpForm);
 
-export default SignInForm;
+export default SignUpForm;

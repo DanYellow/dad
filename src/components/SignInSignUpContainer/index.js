@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 
 // import SignIn from './SignIn';
 import SignIn from './SignInForm';
+import SignUp from './SignInForm';
 
 
 
@@ -22,8 +23,11 @@ class SignInSignUpContainer extends Component {
 
   render() {
     return (
-      <div className="App">
-        <SignIn onSubmit={this._handleSubmit}/>
+      <div className='App'>
+
+        { this.props.router.routes[1].path === 'signin' && <SignIn onSubmit={this._handleSubmit}/> }
+        { this.props.router.routes[1].path === 'signup' && <SignUp onSubmit={this._handleSubmit}/> }
+        
       </div>
     );
   }
