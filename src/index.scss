@@ -39,11 +39,17 @@ a {
   padding-top: 70px; 
 }
 
-.PopinContainer {
+.PopinOverlay {
   position: fixed;
   top: 0; right: 0;
   left: 0; bottom: 0;
   background-color: rgba($text-color, .65);
   z-index: 9900;
   padding: 0 138px;
+}
+
+.PopinForm {
+  padding: 42px 25px 74px;
+  border: 1px solid $primary-red;
+  background-color: $white;
 }
