@@ -30,18 +30,18 @@ class Pagination extends Component {
       url = `classified_advertisements/${i}/${optionalParams}`;
       if (i > maxElement && !displayedEllipsis) {
         displayedEllipsis = true;
-        element = (<li>
-          <span className="number-item ellipsis">
+        element = (<li key={ uuid.v1() }>
+          <span className='number-item ellipsis'>
           [...]
           </span>
         </li>)
       } 
 
-      console.log((i < maxElement && i >= minElement), i)
+      // console.log((i < maxElement && i >= minElement), i)
       if ((i < maxElement && i >= minElement) || i === datas.total_pages || i === 1) {
 
         element = (<li key={ uuid.v1() }>
-          <Link to={ url } activeClassName="active" className="number-item">
+          <Link to={ url }  key={ uuid.v1() } activeClassName='active' className='number-item'>
             {i}
           </Link>
         </li>)

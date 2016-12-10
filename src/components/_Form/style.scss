@@ -1,30 +1,29 @@
 @import '../../styles/variables';
 
 .fieldset {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 25px;
+  position: relative;
+
+  &.buttons-container {
+    margin-top: 12px;
     display: flex;
-    flex-direction: column;
-    margin-bottom: 25px;
-    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-    &.buttons-container {
-      margin-top: 12px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-
-    label {
-      font-size: 16px;
-      color: $text-color;
-      margin-bottom: 5px;
-    }
-    input[type="text"], input[type="password"] {
-      padding: 15px 8px;
-      background-color: $white;
-      border: 1px solid $text-color;
-      border-radius: 3px;
-      font-size: 20px;
-    }
+  label {
+    font-size: 16px;
+    color: $text-color;
+    margin-bottom: 5px;
+  }
+  input[type="text"], input[type="password"] {
+    padding: 15px 8px;
+    background-color: $white;
+    border: 1px solid $text-color;
+    border-radius: 3px;
+    font-size: 20px;
   }
 
   .error {
@@ -55,4 +54,7 @@
     p {
       padding: 5px 0 0 9px;
     }
+  }
+
 }
+

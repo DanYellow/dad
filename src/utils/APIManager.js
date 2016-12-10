@@ -110,7 +110,7 @@ export default class APIManager {
   static updateClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
     let request = new Request(`${APIManager.baseURL}/classified_advertisement/${bodyParams.id}`, APIManager.fetchConfig);
 
-    fetch(request, {method: 'POST'}).then(function(response) {
+    fetch(request, {method: 'POST', body: bodyParams}).then(function(response) {
       return response.json();
     }).then(function(data) {
       successCallback(data);
@@ -147,13 +147,17 @@ export default class APIManager {
    *    /____/_/\__, /_/ /_/___/_/ /_/_/   /____/_/\__, /_/ /_/\____/ .___/ 
    *           /____/                             /____/           /_/      
    */
-  static signIn(formDatas, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/api/get_token`, APIManager.fetchConfig);
+  static signIn(bodyParams, successCallback, errorCallback) {
+    let request = new Request(`${APIManager.baseURL}/get_token`, APIManager.fetchConfig);
 
-    fetch(request, {method: 'POST'}).then(function(response) {
+    fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
       return response.json();
     }).then(function(data) {
-      successCallback(data);
+      if (data.status_code > 210) {
+        errorCallback(data);
+      } else {
+        successCallback(data);
+      }
     }).catch(function() {
       errorCallback("Booo");
     });

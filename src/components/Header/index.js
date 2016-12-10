@@ -9,6 +9,25 @@ import Form from './Form';
 import logo from '../../images/logo.jpg';
 
 class Header extends Component {
+
+  _renderPublic() {
+    return (
+      <Form />
+    )
+  }
+
+  _renderLogin() {
+    return (
+      null
+    )
+  }
+
+  _renderBack() {
+    return (
+      <Form />
+    )
+  }
+
   render() {
     return (
       <header className='header'>
@@ -17,7 +36,9 @@ class Header extends Component {
           <Link to={'/'}>
             <figure className='logo'><img src={logo} alt='logo site' /></figure>
           </Link>
-          <Form />
+          { this.props.env === 'public' && this._renderPublic() }
+          { this.props.env === 'login' && this._renderLogin() }
+          { this.props.env === 'back' && this._renderBack() }
         </div>
       </header>
     );
