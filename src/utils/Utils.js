@@ -5,7 +5,6 @@ export default class Utils {
    * @return {String}        URL params string
    */
   static objectToQueryString(object) {
-    
     let queryParamsArray = [];
     for (var i = Object.keys(object).length - 1; i >= 0; i--) {
       const value = object[Object.keys(object)[i]];
@@ -24,17 +23,13 @@ export default class Utils {
     return queryString;
   }
 
-  static getFormDataObj(form) {
-    let formData = new FormData();
+  static mapCategoriesToSelectOptions (categories) {
+    let options = [];
+    categories.forEach(function(category) {
+      // options.push({ value: category.name, label: category.name });
+      options.push({ value: category.id, label: category.name });
+    });
 
-    let obj = {};
-    for(let i = 0 ; i < form.elements.length ; i++){
-      let input = form.elements.item(i);
-      if (!input.name) { continue; }
-      obj[input.name] = input.value;
-      formData.append(input.name, input.value);
-    }
-
-    return { formData: formData, formObject: obj };
+    return options;
   }
 }

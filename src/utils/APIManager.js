@@ -1,7 +1,6 @@
 import Utils from './Utils'
 
 export default class APIManager {
-
   static getMessageForStatusCode(statusCode) {
     let message = '';
     switch (statusCode) {
@@ -36,7 +35,7 @@ export default class APIManager {
         message = 'Votre compte a été crée, vous allez recevoir un mail de confirmation.';
         break;
       case 1011:
-        message = 'Vous êtes connecté. Vous allez être redirigé vers l\' accueil';
+        message = 'Vous êtes connecté(e). Vous allez être redirigé vers l\'accueil';
         break;
         
       default:
@@ -73,8 +72,8 @@ export default class APIManager {
       } else {
         successCallback(data);
       }
-    }).catch(function() {
-      errorCallback("Booo");
+    }).catch(function(data) {
+      errorCallback(data);
     });
   }
 
@@ -98,7 +97,7 @@ export default class APIManager {
         successCallback(data);
       }
     }).catch(function(data) {
-      errorCallback("Booo");
+      errorCallback(data);
     });
   }
 
@@ -120,19 +119,22 @@ export default class APIManager {
       } else {
         successCallback(data);
       }
-    }).catch(function() {
-      errorCallback("Booo");
+    }).catch(function(data) {
+      errorCallback(data);
     });
   }
 
   /**
    * Update a classified advertisement
-   * @param  {[type]} bodyParams      [description]
-   * @param  {[type]} successCallback [description]
-   * @param  {[type]} errorCallback   [description]
+   * @param  {Object} bodyParams      [description]
+   * @param  {Function} successCallback [description]
+   * @param  {Function} errorCallback   [description]
    * @return {[type]}                 [description]
    */
   static updateClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
+    console.log(bodyParams)
+    bodyParams.category = bodyParams.category.id
+
     let request = new Request(`${APIManager.baseURL}/classified_advertisement/${bodyParams.id}`, APIManager.fetchConfig);
 
     fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
@@ -143,8 +145,8 @@ export default class APIManager {
       } else {
         successCallback(data);
       }
-    }).catch(function() {
-      errorCallback("Booo");
+    }).catch(function(data) {
+      errorCallback(data);
     });
   }
 
@@ -166,8 +168,8 @@ export default class APIManager {
       } else {
         successCallback(data);
       }
-    }).catch(function() {
-      errorCallback("Booo");
+    }).catch(function(data) {
+      errorCallback(data);
     });
   }
 
@@ -191,8 +193,8 @@ export default class APIManager {
       } else {
         successCallback(data);
       }
-    }).catch(function() {
-      errorCallback("Booo");
+    }).catch(function(data) {
+      errorCallback(data);
     });
   }
 
@@ -207,10 +209,35 @@ export default class APIManager {
       } else {
         successCallback(data);
       }
-    }).catch(function() {
-      errorCallback("Booo");
+    }).catch(function(data) {
+      errorCallback(data);
     });
-  } // https://github.com/JedWatson/react-select
+  }
+
+  /***
+   *       ______      __                        _          
+   *      / ____/___ _/ /____  ____ _____  _____(_)__  _____
+   *     / /   / __ `/ __/ _ \/ __ `/ __ \/ ___/ / _ \/ ___/
+   *    / /___/ /_/ / /_/  __/ /_/ / /_/ / /  / /  __(__  ) 
+   *    \____/\__,_/\__/\___/\__, /\____/_/  /_/\___/____/  
+   *                        /____/                          
+   */
+  
+  /**
+   * Gets all categories for classified advertisements
+   * @return {Promise - Object} Results from API
+   */
+  static getCategories() {
+    let request = new Request(`${APIManager.baseURL}/categories`, APIManager.fetchConfig);
+
+    return fetch(request, {method: 'GET'}).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      return { options: Utils.mapCategoriesToSelectOptions(data.data.list) };
+    }).catch(function(data) {
+      return { options: [] };
+    });
+  }
 }
 
 APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://localhost:9000/api';
