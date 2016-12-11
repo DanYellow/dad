@@ -1,50 +1,43 @@
 import React from 'react';
-import uuid from 'node-uuid';
 import Select from 'react-select';
+import uuid from 'node-uuid';
 
-import APIManager from '../../../utils/APIManager'
+import APIManager from '../../../utils/APIManager';
 
 import './style.scss';
 import 'react-select/dist/react-select.css';
 
 
+// https://github.com/JedWatson/react-select/issues/1129#issuecomment-241950075
 
+const CustomSelect = (props) => {
+  const { children, input, label } = props;
+  const id = uuid.v1();
 
-class CustomSelect extends React.Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = { value:  this.props.input.value.id  };
+  function handleInputChange({ value }) {
+    props.input.onChange(value)
   }
 
-  onChange(value) {
-    console.log(value)
-    this.setState({ value });
+  const getOptions = (input) => {
+    return APIManager.getCategories();
   }
 
-  render() {
-    const id = uuid.v1();
-
-    let { input, label, meta: { touched, error } } = this.props;
-
-    const getOptions = (input) => {
-      return APIManager.getCategories();
-    }
-
-    return (
-      <div className='fieldset'>
-        <label htmlFor={ id }>{ label }</label>
-        <Select.Async
-          name={ input.name }
-          value={ this.state.value }
-          loadOptions={ getOptions }
-          onChange={ this.onChange.bind(this) }
-        />
-
-        { touched && (error && <div className='error'><p>{ error }</p></div>) }
-      </div>
-    );
-  }
+  return (
+    <label className={props.className}>
+      <label htmlFor={ id }>{ label }</label>
+      <Select.Async
+        clearable={ false }
+        searchable={ false }
+        loadOptions={ getOptions }
+        placeholder={'Sélectionnez...'}
+        noResultsText={ 'Aucun résultat trouvé' }
+        id={ id }
+        {...input}
+        onBlurResetsInput={false}
+        onCloseResetsInput={false}
+        onChange={handleInputChange}
+      />
+    </label>
+  )
 }
-
 export default CustomSelect;

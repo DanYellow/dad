@@ -132,9 +132,6 @@ export default class APIManager {
    * @return {[type]}                 [description]
    */
   static updateClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
-    console.log(bodyParams)
-    bodyParams.category = bodyParams.category.id
-
     let request = new Request(`${APIManager.baseURL}/classified_advertisement/${bodyParams.id}`, APIManager.fetchConfig);
 
     fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {

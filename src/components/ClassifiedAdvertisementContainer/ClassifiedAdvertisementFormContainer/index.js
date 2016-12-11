@@ -29,12 +29,11 @@ class ClassifiedAdvertisementFormContainer extends Component {
   }
 
   _handleSubmit = (values) => {
-    console.log(values)
-    // if (this.props.router.routes[2].path === 'edit') {
-    //   APIManager.updateClassifiedAdvertisement(values, this._updateSuccess.bind(this), this._apiFail.bind(this));
-    // } else {
-    //   APIManager.deleteClassifiedAdvertisement(values.id, this._deleteSuccess.bind(this), this._apiFail.bind(this));
-    // }
+    if (this.props.router.routes[2].path === 'edit') {
+      APIManager.updateClassifiedAdvertisement(values, this._updateSuccess.bind(this), this._apiFail.bind(this));
+    } else {
+      APIManager.deleteClassifiedAdvertisement(values.id, this._deleteSuccess.bind(this), this._apiFail.bind(this));
+    }
   }
 
   _updateSuccess(response) {

@@ -45,12 +45,21 @@ class ClassifiedAdvertisementContainer extends Component {
   }
 
   render() {
+    let formDatas = {}
+
+    console.log("foo", (this.props.children && !this.state.isLoading))
+    if (this.props.children && !this.state.isLoading) {
+      formDatas = this.state.APIDatas.data.resource;
+      formDatas.category = formDatas.category.id;
+    }
+
+
     return (
       <div className="App">
         { !this.state.isLoading && this._renderResults() }
         { this.state.isLoading && <Loader /> }
         
-        { (this.props.children && !this.state.isLoading) && React.cloneElement(this.props.children, { resource: this.state.APIDatas.data.resource }) }
+        { (this.props.children && !this.state.isLoading) && React.cloneElement(this.props.children, { resource: formDatas }) }
       </div>
     );
   }

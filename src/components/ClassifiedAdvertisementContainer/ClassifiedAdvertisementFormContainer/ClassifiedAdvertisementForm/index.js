@@ -53,7 +53,7 @@ class ClassifiedAdvertisementForm extends Component {
               
               <Field name='category' component={props =>
                 <Select {...props} />
-              } label='Catégorie' value={ initialValues.category.id } />
+              } label='Catégorie' value={ initialValues.category }/>
 
               <div className='buttons-container fieldset'>
                 <FormButton design='validation' text='Mettre à jour' type='submit' />
