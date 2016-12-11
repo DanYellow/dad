@@ -69,7 +69,11 @@ export default class APIManager {
     fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();
     }).then(function(data) {
-      successCallback(data);
+      if (data.status_code > 210 || !data.success) {
+        errorCallback(data);
+      } else {
+        successCallback(data);
+      }
     }).catch(function() {
       errorCallback("Booo");
     });
@@ -89,7 +93,11 @@ export default class APIManager {
     fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();
     }).then(function(data) {
-      successCallback(data);
+      if (data.status_code > 210 || !data.success) {
+        errorCallback(data);
+      } else {
+        successCallback(data);
+      }
     }).catch(function() {
       errorCallback("Booo");
     });
@@ -102,21 +110,20 @@ export default class APIManager {
    * @param  {Function} errorCallback   [description]
    * @return null
    */
-  static createClassifiedAdvertisement(params, successCallback, errorCallback) {
-    // APIManager.axios.post('/classified_advertisement', {
-    //   data: {
-    //     title: queryStringParams.title,
-    //     description: queryStringParams.description,
-    //     price: queryStringParams.price,
-    //   }
-    // })
-    // .then(function (response) {
-    //   console.log('response', response)
-    //   successCallback(response.data);
-    // })
-    // .catch(function (error) {
-    //   errorCallback(error);
-    // });
+  static createClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${bodyParams.id}`, APIManager.fetchConfig);
+
+    fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      if (data.status_code > 210 || !data.success) {
+        errorCallback(data);
+      } else {
+        successCallback(data);
+      }
+    }).catch(function() {
+      errorCallback("Booo");
+    });
   }
 
   /**
@@ -129,10 +136,14 @@ export default class APIManager {
   static updateClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
     let request = new Request(`${APIManager.baseURL}/classified_advertisement/${bodyParams.id}`, APIManager.fetchConfig);
 
-    fetch(request, {method: 'POST', body: bodyParams}).then(function(response) {
+    fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
       return response.json();
     }).then(function(data) {
-      successCallback(data);
+      if (data.status_code > 210 || !data.success) {
+        errorCallback(data);
+      } else {
+        successCallback(data);
+      }
     }).catch(function() {
       errorCallback("Booo");
     });
@@ -148,10 +159,14 @@ export default class APIManager {
   static deleteClassifiedAdvertisement(id, successCallback, errorCallback) {
     let request = new Request(`${APIManager.baseURL}/classified_advertisement?id=${id}`, APIManager.fetchConfig);
 
-    fetch(request, {method: 'DELETE'}).then(function(response) {
+    fetch(request, { method: 'DELETE' }).then(function(response) {
       return response.json();
     }).then(function(data) {
-      successCallback(data);
+      if (data.status_code > 210 || !data.success) {
+        errorCallback(data);
+      } else {
+        successCallback(data);
+      }
     }).catch(function() {
       errorCallback("Booo");
     });

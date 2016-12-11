@@ -60,3 +60,18 @@
     }
   }
 }
+
+legend.legend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & > * {
+    margin-bottom: 0;
+  }
+  margin-bottom: 20px;
+  
+  .icon-close {
+    font-size: 25px;
+    color: $primary-red;
+  }
+}

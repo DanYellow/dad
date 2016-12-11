@@ -5,8 +5,6 @@ import FormButton from '../../../_Form/FormButton';
 import InputLitteral from '../../../_Form/InputLitteral';
 import TextArea from '../../../_Form/TextArea';
 import ErrorMessages from '../../../_Form/validation.js';
-import FlashMessage from '../../../FlashMessage';
-
 
 import './style.scss';
 
@@ -28,14 +26,18 @@ const validate = values => {
 
 class ClassifiedAdvertisementForm extends Component {
   render() {
-    const { handleSubmit, initialValues } = this.props;
+    const { handleSubmit, initialValues, onClick } = this.props;
+    console.log(this.props, onClick);
     return (
       <div>
-        <h2 className='bordered-title'>Mettre à jour l'annonce</h2>
+        <legend className='legend'>
+          <h2 className='bordered-title'>Mettre à jour l'annonce</h2>
+          <button title='Fermer popin' className='reset icon-close' onClick={ onClick }></button>
+        </legend>
         {/* this.props.flashMessage && <FlashMessage message={ this.props.flashMessage.message } type={this.props.flashMessage.type} /> */}
 
         <form onSubmit={ handleSubmit } className='form'>
-          {  initialValues.id && <input type='hidden' value={ initialValues.id} name='id' /> }
+          {  initialValues.id && <input type='hidden' value={ initialValues.id } name='id' /> }
           <section className='wrapper'>
             <figure>
               <img src="https://placekitten.com/g/300/300" width="250" alt={ 'altImg' } />
@@ -45,8 +47,8 @@ class ClassifiedAdvertisementForm extends Component {
             </figure>
             <div className='content'>
               <Field name='title' type='text' component={InputLitteral} label='Titre' value={  initialValues.title } />
-              <Field name='description' component={TextArea} label='Description' type='text' placeholder='' value={  initialValues.description } />
-              <Field name='price' type='text' component={InputLitteral} label='Prix (entre 0 et 9999 euros)' placeholder='Prix' value={ initialValues.price } />
+              <Field name='description' component={TextArea} label='Description' type='text' placeholder='' value={ initialValues.description } />
+              <Field name='price' type='text' component={InputLitteral} label='Prix (entre 0 et 9 999 euros)' placeholder='Prix' value={ initialValues.price } />
 
               <div className='buttons-container fieldset'>
                 <FormButton design='validation' text='Mettre à jour' type='submit' />

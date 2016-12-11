@@ -46,10 +46,23 @@ a {
   background-color: rgba($text-color, .65);
   z-index: 9900;
   padding: 0 138px;
+
+  transition: opacity 500ms;
+  transition-delay: 1s;
+
+  &.closed {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 .PopinForm {
   padding: 42px 25px 74px;
   border: 1px solid $primary-red;
   background-color: $white;
+  transition: transform 500ms;
+
+  &.closed {
+    transform: translate(0, -1000px);
+  }
 }

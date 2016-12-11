@@ -25,7 +25,7 @@ class ClassifiedAdvertisement extends Component {
   }
 
   render() {
-    let { id, title, price, created_at, category, description, is_mine, router } = this.props;
+    let { title, price, created_at, category, description, is_mine } = this.props;
     let productInfos = { seller: this.props.seller, price }
 
     let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
