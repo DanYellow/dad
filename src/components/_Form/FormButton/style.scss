@@ -19,6 +19,10 @@ button.form-button {
     &:hover {
       background-color: rgba($validation-color, .25);
     }
+
+    &:focus {
+      background-color: rgba(darken($validation-color, 10%), .25);
+    }
   }
 
   &.cancel {
@@ -27,6 +31,10 @@ button.form-button {
 
     &:hover {
       background-color: rgba($cancel-color, .25);
+    }
+
+    &:focus {
+      background-color: rgba(darken($cancel-color, 10%), .25);
     }
   }
 

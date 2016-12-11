@@ -28,8 +28,8 @@ class ClassifiedAdvertisementContainer extends Component {
     this.setState({ APIDatas:response, isLoading: false });
   }
 
-  _getAdvertisementFail(error) {
-    this.setState({ isLoading: false });
+  _getAdvertisementFail(response) {
+    this.setState({ APIDatas:response, isLoading: false });
   }
 
   _renderResults() {

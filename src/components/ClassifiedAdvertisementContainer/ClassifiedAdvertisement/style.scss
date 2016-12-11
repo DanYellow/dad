@@ -42,9 +42,10 @@
           margin-bottom: 20px;
         }
         p {
-          font-size: 14px;
+          font-size: 16px;
           color: $text-color;
           font-family: $opensans-regular;
+          white-space: pre-wrap;
         }
       }
     }

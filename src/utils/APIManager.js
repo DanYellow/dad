@@ -64,7 +64,6 @@ export default class APIManager {
    * @return null
    */
   static getClassifiedAdvertisements(params={p: 1, q: null, cat: null}, successCallback, errorCallback) {
-
     let request = new Request(`${APIManager.baseURL}/classified_advertisements/${params.p}${Utils.objectToQueryString(params)}`, APIManager.fetchConfig);
     fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();
@@ -157,7 +156,7 @@ export default class APIManager {
    * @return null
    */
   static deleteClassifiedAdvertisement(id, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement?id=${id}`, APIManager.fetchConfig);
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${id}`, APIManager.fetchConfig);
 
     fetch(request, { method: 'DELETE' }).then(function(response) {
       return response.json();
@@ -211,7 +210,7 @@ export default class APIManager {
     }).catch(function() {
       errorCallback("Booo");
     });
-  }
+  } // https://github.com/JedWatson/react-select
 }
 
 APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://localhost:9000/api'

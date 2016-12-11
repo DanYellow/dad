@@ -8,13 +8,15 @@ export default class Utils {
     
     let queryParamsArray = [];
     for (var i = Object.keys(object).length - 1; i >= 0; i--) {
-      let value = object[Object.keys(object)[i]];
-      let key = Object.keys(object)[i];
+      const value = object[Object.keys(object)[i]];
+      const key = Object.keys(object)[i];
+
       if (!value) { continue; };
+
       queryParamsArray.push(`${key}=${value}`)
     };
 
-    if (queryParamsArray.length > 0) { return ''; }
+    if (queryParamsArray.length <= 0) { return ''; }
 
     let queryString = '?';
     queryString += queryParamsArray.join('&');

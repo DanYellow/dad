@@ -60,7 +60,13 @@ class ClassifiedAdvertisement extends Component {
 
 
 const ProductInfos = function (props) {
-  let price = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(props.price);
+  let price = props.price;
+  if (price === 0) {
+    price = 'Gratuit';
+  } else {
+    price = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(price);
+  }
+  
   let { seller } = props;
 
   return (

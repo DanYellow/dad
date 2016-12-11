@@ -11,6 +11,7 @@ import Loader from '../../Loader';
 import FlashMessage from '../../FlashMessage';
 
 import ClassifiedAdvertisementForm from './ClassifiedAdvertisementForm';
+import ClassifiedAdvertisementFormDelete from './ClassifiedAdvertisementFormDelete';
 
 
 
@@ -31,7 +32,12 @@ class ClassifiedAdvertisementFormContainer extends Component {
 
   _handleSubmit = (values) => {
     this.setState({ isLoading: true, hasErrors: false });
-    APIManager.updateClassifiedAdvertisement(values, this._updateSuccess.bind(this), this._updateFail.bind(this));
+
+    if (this.props.router.routes[2].path === 'edit') {
+      APIManager.updateClassifiedAdvertisement(values, this._updateSuccess.bind(this), this._apiFail.bind(this));
+    } else {
+      APIManager.deleteClassifiedAdvertisement(values.id, this._deleteSuccess.bind(this), this._apiFail.bind(this));
+    }
   }
 
   _updateSuccess(response) {
@@ -39,7 +45,12 @@ class ClassifiedAdvertisementFormContainer extends Component {
     this._redirectUser(`/classified_advertisement/${this.props.params.id}`);
   }
 
-  _updateFail(response) {
+  _deleteSuccess(response) {
+    this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
+    this._redirectUser('/classified_advertisements/1');
+  }           
+
+  _apiFail(response) {
     this.setState({ hasErrors: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
   }
 
@@ -66,15 +77,19 @@ class ClassifiedAdvertisementFormContainer extends Component {
   render() {
     return (
       <div className={ classNames('PopinOverlay',
+                                  { 'small': this.props.router.routes[2].path === 'delete' },
                                   { 'closed': this.state.closePopin }) }>
         <div className={ classNames('PopinForm',
                                   { 'closed': this.state.closePopin }) }>
+          <div className='PopinFormWrapper'>
           { this.state.hasErrors && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='error' onClick={ this._handleClick } /> }
           { this.state.isSuccess && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='success' onClick={ this._handleClick } /> }
 
           { this.state.isLoading && <Loader /> }
-          { this.props.resource.is_mine && <ClassifiedAdvertisementForm onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
+          { (this.props.resource.is_mine && this.props.router.routes[2].path === 'edit') && <ClassifiedAdvertisementForm onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
+          { (this.props.resource.is_mine && this.props.router.routes[2].path === 'delete') && <ClassifiedAdvertisementFormDelete onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
           
+          </div>
         </div>
       </div>
     );

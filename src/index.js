@@ -35,6 +35,7 @@ ReactDOM.render(
       
       <Route path='classified_advertisement/:id' component={(props) => (<ClassifiedAdvertisementContainer {...props} />)}>
         <Route path='edit' component={ClassifiedAdvertisementFormContainer} />
+        <Route path='delete' component={ClassifiedAdvertisementFormContainer} />
       </Route>
 
 
