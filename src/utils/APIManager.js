@@ -213,10 +213,13 @@ export default class APIManager {
   } // https://github.com/JedWatson/react-select
 }
 
-APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://localhost:9000/api'
+APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://localhost:9000/api';
+APIManager.getUserToken = function() {
+  return window.localStorage.getItem('token');
+}
 
 APIManager.header = new Headers();
-APIManager.header.append('X-TOKEN', window.localStorage.getItem('token'));
+APIManager.header.append('X-TOKEN', APIManager.getUserToken());
 
 APIManager.fetchConfig = { 
   headers: APIManager.header,
