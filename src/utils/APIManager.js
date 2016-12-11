@@ -97,7 +97,7 @@ export default class APIManager {
       } else {
         successCallback(data);
       }
-    }).catch(function() {
+    }).catch(function(data) {
       errorCallback("Booo");
     });
   }

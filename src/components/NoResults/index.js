@@ -9,7 +9,7 @@ var NoResults = function (props) {
   return (
     <div className='no-results'>
       <h1>{ asciiShurgs }</h1>
-      <h3>{ message }</h3>
+      <p>{ message }</p>
     </div>
   );
 };

@@ -9,13 +9,11 @@ import APIManager from '../../../utils/APIManager';
 import Loader from '../../Loader';
 
 import FlashMessage from '../../FlashMessage';
+import PopinInfos from '../../PopinInfos';
 
 import ClassifiedAdvertisementForm from './ClassifiedAdvertisementForm';
 import ClassifiedAdvertisementFormDelete from './ClassifiedAdvertisementFormDelete';
 
-
-
-// import './style.scss';
 
 class ClassifiedAdvertisementFormContainer extends Component {
   constructor(props) {
@@ -77,18 +75,19 @@ class ClassifiedAdvertisementFormContainer extends Component {
   render() {
     return (
       <div className={ classNames('PopinOverlay',
-                                  { 'small': this.props.router.routes[2].path === 'delete' },
+                                  { 'small': (this.props.router.routes[2].path === 'delete' || !this.props.resource.is_mine) },
                                   { 'closed': this.state.closePopin }) }>
         <div className={ classNames('PopinForm',
                                   { 'closed': this.state.closePopin }) }>
           <div className='PopinFormWrapper'>
-          { this.state.hasErrors && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='error' onClick={ this._handleClick } /> }
-          { this.state.isSuccess && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='success' onClick={ this._handleClick } /> }
+            { this.state.hasErrors && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='error' onClick={ this._handleClick } /> }
+            { this.state.isSuccess && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='success' onClick={ this._handleClick } /> }
 
-          { this.state.isLoading && <Loader /> }
-          { (this.props.resource.is_mine && this.props.router.routes[2].path === 'edit') && <ClassifiedAdvertisementForm onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
-          { (this.props.resource.is_mine && this.props.router.routes[2].path === 'delete') && <ClassifiedAdvertisementFormDelete onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
-          
+            { this.state.isLoading && <Loader /> }
+            { (this.props.resource.is_mine && this.props.router.routes[2].path === 'edit') && <ClassifiedAdvertisementForm onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
+            { (this.props.resource.is_mine && this.props.router.routes[2].path === 'delete') && <ClassifiedAdvertisementFormDelete onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
+            
+            { !this.props.resource.is_mine && <PopinInfos type='forbidden' message={"Vous n'avez pas accès à ce contenu. \nSi vous êtes le propriétaire de cette annonce, veuillez vous connecter."} onClick={ this._closePopin } /> }
           </div>
         </div>
       </div>

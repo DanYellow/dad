@@ -1,24 +1,38 @@
 @import '../../styles/variables';
 
-.no-results {
+.PopinInfos {
+  color: $text-color-second;
   font-family: $opensans-regular;
   display: flex;
   justify-content: center; 
   align-items: center;
   flex-direction: column;
-  color: $text-color;
+
+  &.forbidden, &.error {
+    color: $alert-red-border;
+  }
+
+  .buttons-container {
+    align-self: normal;
+
+    button.form-button {
+      flex: 1;
+    }
+  }
+
+
 
   h1 {
     font-size: 56px;
     margin-bottom: 26px;
-    color: inherit;
   }
 
   p {
-    font-size: 36px;
-    font-family: $opensans-light;
+    font-size: 20px;
+    font-family: $opensans-regular;
     white-space: pre-wrap;
     text-align: center;
     color: inherit;
+    margin-bottom: 20px;
   }
 }

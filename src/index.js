@@ -38,6 +38,8 @@ ReactDOM.render(
         <Route path='delete' component={ClassifiedAdvertisementFormContainer} />
       </Route>
 
+      <Route path='classified_advertisement/create' component={ClassifiedAdvertisementFormContainer} />
+
 
       <Route path="signin" component={(props) => (<SignInSignUpContainer type='signin' />)} />
       <Route path="signup" component={(props) => (<SignInSignUpContainer type='signup' />)} />
