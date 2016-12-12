@@ -16,31 +16,36 @@ const CustomSelect = (props) => {
 
   function handleInputChange({ value }) {
     props.input.onChange(value)
-    // console.log("props.input", props.input)
   }
 
-  // handleInputChange({value: 9})
+  let selectValue = {value: (props.input.value && typeof props.input.value === 'object') ? props.input.value.id : null};
+  
+  console.log(props.input.value)
+  if (props.input.value && typeof props.input.value === 'number') {
+    selectValue = {value: props.input.value}; 
+  }
 
   const getOptions = (input) => {
     return APIManager.getCategories();
   }
-  console.log('input', input);
+  console.log('input', {...Object.assign(input, selectValue)});
   return (
-    <label className={props.className}>
+    <div className='fieldset'>
       <label htmlFor={ id }>{ label }</label>
       <Select.Async
         clearable={ false }
-        searchable={ false }
+        searchable={ true }
         loadOptions={ getOptions }
         placeholder={'Sélectionnez...'}
         noResultsText={ 'Aucun résultat trouvé' }
         id={ id }
-        {...Object.assign(input, {value: 9})}
+        {...Object.assign(input, selectValue)}
         onBlurResetsInput={false}
+        onBlur={null}
         onCloseResetsInput={false}
         onChange={handleInputChange}
       />
-    </label>
+    </div>
   )
 }
 export default CustomSelect;

@@ -9,14 +9,14 @@ class TopHeader extends Component {
     return (
       <ul>
           <li className='home'>
-            <Link to={ '/'}>Accueil</Link>
+            <Link to={ '/' }>Accueil</Link>
           </li>
 
           <li>
-            <Link to={ '/signin'}>Se connecter</Link>
+            <Link to={ '/signin' }>Se connecter</Link>
           </li>
           <li>
-            <Link to={ '/'}>Publier une annonce</Link>
+            <Link to={ '/classified_advertisement/create' }>Publier une annonce</Link>
           </li>
       </ul>
     )

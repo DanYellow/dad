@@ -29,11 +29,20 @@ class ClassifiedAdvertisementFormContainer extends Component {
   }
 
   _handleSubmit = (values) => {
-    if (this.props.router.routes[2].path === 'edit') {
-      APIManager.updateClassifiedAdvertisement(values, this._updateSuccess.bind(this), this._apiFail.bind(this));
+    if (this.props.router.params.id && /^\d+$/.test(Number(this.props.router.params.id))) {
+      if (this.props.router.routes[3].path === 'edit') {
+        APIManager.updateClassifiedAdvertisement(values, this._updateSuccess.bind(this), this._apiFail.bind(this));
+      } else {
+        APIManager.deleteClassifiedAdvertisement(values.id, this._deleteSuccess.bind(this), this._apiFail.bind(this));
+      }
     } else {
-      APIManager.deleteClassifiedAdvertisement(values.id, this._deleteSuccess.bind(this), this._apiFail.bind(this));
+      APIManager.createClassifiedAdvertisement(values, this._createSuccess.bind(this), this._apiFail.bind(this));
     }
+  }
+
+  _createSuccess(response) {
+    this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
+    this._redirectUser('/classified_advertisements/1');
   }
 
   _updateSuccess(response) {
@@ -44,7 +53,7 @@ class ClassifiedAdvertisementFormContainer extends Component {
   _deleteSuccess(response) {
     this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
     this._redirectUser('/classified_advertisements/1');
-  }           
+  }
 
   _apiFail(response) {
     this.setState({ hasErrors: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
@@ -70,7 +79,7 @@ class ClassifiedAdvertisementFormContainer extends Component {
     }, 700);
   }
 
-  render() {
+  _renderPopinContent() {
     return (
       <div className={ classNames('PopinOverlay',
                                   { 'small': (this.props.router.routes[2].path === 'delete' || !this.props.resource.is_mine) },
@@ -82,14 +91,34 @@ class ClassifiedAdvertisementFormContainer extends Component {
             { this.state.isSuccess && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='success' onClick={ this._handleClick } /> }
 
             { this.state.isLoading && <Loader /> }
-            { (this.props.resource.is_mine && this.props.router.routes[2].path === 'edit') && <ClassifiedAdvertisementForm onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
-            { (this.props.resource.is_mine && this.props.router.routes[2].path === 'delete') && <ClassifiedAdvertisementFormDelete onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
+            { (this.props.resource.is_mine && this.props.router.routes[3].path === 'edit') && <ClassifiedAdvertisementForm onSubmit={ this._handleSubmit } initialValues={ this.props.resource } type='update' onClick={ this._closePopin } /> }
+            { (this.props.resource.is_mine && this.props.router.routes[3].path === 'delete') && <ClassifiedAdvertisementFormDelete onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
             
             { !this.props.resource.is_mine && <PopinInfos type='forbidden' message={"Vous n'avez pas accès à ce contenu. \nSi vous êtes le propriétaire de cette annonce, veuillez vous connecter."} onClick={ this._closePopin } /> }
           </div>
         </div>
       </div>
     );
+  }
+
+  _renderCreateForm() {
+    return (
+      <div className="App">
+        { this.state.hasErrors && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='error' onClick={ this._handleClick } /> }
+        { this.state.isSuccess && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='success' onClick={ this._handleClick } /> }
+
+        { this.state.isLoading && <Loader /> }
+        <ClassifiedAdvertisementForm onSubmit={ this._handleSubmit } initialValues={{}} onClick={ this._closePopin } type='create' />
+      </div>
+    )
+  }
+
+  render() {
+    if (this.props.router.params.id && /^\d+$/.test(Number(this.props.router.params.id))) {
+      return this._renderPopinContent();
+    } else {
+      return this._renderCreateForm();
+    }
   }
 }
 

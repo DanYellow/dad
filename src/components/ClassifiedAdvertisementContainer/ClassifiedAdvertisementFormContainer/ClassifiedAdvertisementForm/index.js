@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 import FormButton from '../../../_Form/FormButton';
@@ -17,8 +17,8 @@ const validate = values => {
     errors.title = ErrorMessages.required;
   }
 
-  var numberRegex = /^\d{1,4}$/g;
-  if (!numberRegex.test(Number(values.price))) {
+  // var numberRegex = /^\d{1,4}$/g;
+  if (values.price > 9999) {
     errors.price = ErrorMessages.price;
   }
 
@@ -27,16 +27,31 @@ const validate = values => {
 
 
 class ClassifiedAdvertisementForm extends Component {
+
+  _renderUpdateHeader() {
+    return (
+      <legend className='legend'>
+        <h2 className='bordered-title'>Mettre à jour l'annonce</h2>
+        <button title='Fermer popin' className='reset icon-close' onClick={ this.props.onClick }></button>
+      </legend>
+    )
+  }
+
+  _renderCreateHeader() {
+    return (
+      <legend className='legend'>
+        <h2 className='bordered-title'>Créer une annonce</h2>
+      </legend>
+    )
+  }
+
   render() {
-    const { handleSubmit, initialValues, onClick } = this.props;
-    console.log(initialValues.category.id);
+    const { handleSubmit, initialValues } = this.props;
+
     return (
       <div>
-        <legend className='legend'>
-          <h2 className='bordered-title'>Mettre à jour l'annonce</h2>
-          <button title='Fermer popin' className='reset icon-close' onClick={ onClick }></button>
-        </legend>
-
+        { this.props.type === 'update' && this._renderUpdateHeader() }
+        { this.props.type === 'create' && this._renderCreateHeader() }
         <form onSubmit={ handleSubmit } className='form'>
           {  initialValues.id && <input type='hidden' value={ initialValues.id } name='id' /> }
           <section className='wrapper'>
@@ -47,16 +62,17 @@ class ClassifiedAdvertisementForm extends Component {
               </div>
             </figure>
             <div className='content'>
-              <Field name='title' type='text' component={InputLitteral} label='Titre' value={  initialValues.title } />
-              <Field name='description' component={TextArea} label='Description' type='text' placeholder='' value={ initialValues.description } />
-              <Field name='price' type='text' component={InputLitteral} label='Prix (entre 0 et 9 999 euros)' placeholder='Prix' value={ initialValues.price } />
+              <Field name='title' type='text' component={InputLitteral} label='Titre' value={  initialValues.title || '' } />
+              <Field name='description' component={TextArea} label='Description' type='text' placeholder='' value={ initialValues.description || '' } />
+              <Field name='price' type='text' component={InputLitteral} label='Prix (entre 0 et 9 999 euros)' placeholder='Prix' value={ initialValues.price || '' } />
               
               <Field name='category' component={props =>
                 <Select {...props} />
               } label='Catégorie' value={ {value: 9} }/>
 
               <div className='buttons-container fieldset'>
-                <FormButton design='validation' text='Mettre à jour' type='submit' />
+                { this.props.type === 'update' && <FormButton design='validation' text='Mettre à jour' type='submit' /> }
+                { this.props.type === 'create' && <FormButton design='validation' text='Créer' type='submit' /> }
               </div>
               </div>
           </section>
@@ -70,5 +86,10 @@ ClassifiedAdvertisementForm = reduxForm({
   form: 'update_classifiedadvertisement',
   validate
 })(ClassifiedAdvertisementForm);
+
+ClassifiedAdvertisementForm.propTypes = {
+  type: PropTypes.oneOf(['create', 'update'])
+};
+
 
 export default ClassifiedAdvertisementForm;

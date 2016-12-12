@@ -20,7 +20,7 @@ export default class APIManager {
         message = 'Token invalide';
         break;
       case 1006:
-        message = 'Token invalide';
+        message = 'Identifiants inconnus';
         break;
       case 1007:
         message = 'Cette entrée existe déjà';
@@ -63,7 +63,7 @@ export default class APIManager {
    * @return null
    */
   static getClassifiedAdvertisements(params={p: 1, q: null, cat: null}, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisements/${params.p}${Utils.objectToQueryString(params)}`, APIManager.fetchConfig);
+    let request = new Request(`${APIManager.baseURL}/classified_advertisements/${params.p}${Utils.objectToQueryString(params)}`, APIManager.getConfig());
     fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();
     }).then(function(data) {
@@ -86,7 +86,7 @@ export default class APIManager {
    * @return null
    */
   static getClassifiedAdvertisement(id, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${id}`, APIManager.fetchConfig);
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${id}`, APIManager.getConfig());
 
     fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();
@@ -109,7 +109,7 @@ export default class APIManager {
    * @return null
    */
   static createClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${bodyParams.id}`, APIManager.fetchConfig);
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement`, APIManager.getConfig());
 
     fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
       return response.json();
@@ -132,7 +132,7 @@ export default class APIManager {
    * @return {[type]}                 [description]
    */
   static updateClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${bodyParams.id}`, APIManager.fetchConfig);
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${bodyParams.id}`, APIManager.getConfig());
 
     fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
       return response.json();
@@ -155,7 +155,7 @@ export default class APIManager {
    * @return null
    */
   static deleteClassifiedAdvertisement(id, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${id}`, APIManager.fetchConfig);
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${id}`, APIManager.getConfig());
 
     fetch(request, { method: 'DELETE' }).then(function(response) {
       return response.json();
@@ -180,7 +180,7 @@ export default class APIManager {
    *           /____/                             /____/           /_/      
    */
   static signIn(bodyParams, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/get_token`, APIManager.fetchConfig);
+    let request = new Request(`${APIManager.baseURL}/get_token`, APIManager.getConfig());
 
     fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
       return response.json();
@@ -196,7 +196,7 @@ export default class APIManager {
   }
 
   static signUp(bodyParams, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/sign_up`, APIManager.fetchConfig);
+    let request = new Request(`${APIManager.baseURL}/sign_up`, APIManager.getConfig());
 
     fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
       return response.json();
@@ -225,7 +225,7 @@ export default class APIManager {
    * @return {Promise - Object} Results from API
    */
   static getCategories() {
-    let request = new Request(`${APIManager.baseURL}/categories`, APIManager.fetchConfig);
+    let request = new Request(`${APIManager.baseURL}/categories`, APIManager.getConfig());
 
     return fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();
@@ -235,17 +235,21 @@ export default class APIManager {
       return { options: [] };
     });
   }
+
+
+  static getConfig () {
+    APIManager.fetchConfigInit.headers.append('X-TOKEN', window.localStorage.getItem('token'))
+
+    return APIManager.fetchConfigInit;
+  }
 }
 
 APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://localhost:9000/api';
-APIManager.getUserToken = function() {
-  return window.localStorage.getItem('token');
-}
 
 APIManager.header = new Headers();
-APIManager.header.append('X-TOKEN', APIManager.getUserToken());
+// APIManager.header.append('X-TOKEN', window.localStorage.getItem('token'))
 
-APIManager.fetchConfig = { 
+APIManager.fetchConfigInit = { 
   headers: APIManager.header,
   mode: 'cors',
   cache: 'default'

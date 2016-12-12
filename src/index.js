@@ -33,13 +33,13 @@ ReactDOM.render(
       <IndexRedirect to='classified_advertisements/1' />
       <Route path='classified_advertisements(/:page)(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
       
-      <Route path='classified_advertisement/:id' component={(props) => (<ClassifiedAdvertisementContainer {...props} />)}>
-        <Route path='edit' component={ClassifiedAdvertisementFormContainer} />
-        <Route path='delete' component={ClassifiedAdvertisementFormContainer} />
-      </Route>
-
       <Route path='classified_advertisement/create' component={ClassifiedAdvertisementFormContainer} />
-
+      <Route path='classified_advertisement'>
+        <Route path=':id' component={(props) => (<ClassifiedAdvertisementContainer {...props} />)}>
+          <Route path='edit' component={ClassifiedAdvertisementFormContainer} />
+          <Route path='delete' component={ClassifiedAdvertisementFormContainer} />
+        </Route>
+      </Route>
 
       <Route path="signin" component={(props) => (<SignInSignUpContainer type='signin' />)} />
       <Route path="signup" component={(props) => (<SignInSignUpContainer type='signup' />)} />

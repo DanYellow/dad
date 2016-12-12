@@ -33,6 +33,7 @@ class ClassifiedAdvertisementContainer extends Component {
   }
 
   _renderResults() {
+    console.log(this.state.APIDatas)
     if (this.state.APIDatas.data.resource) {
       return this._renderClassifiedAdvertisement();
     } else {
