@@ -29,7 +29,7 @@ const validate = values => {
 class ClassifiedAdvertisementForm extends Component {
   render() {
     const { handleSubmit, initialValues, onClick } = this.props;
-
+    console.log(initialValues.category.id);
     return (
       <div>
         <legend className='legend'>
@@ -53,7 +53,7 @@ class ClassifiedAdvertisementForm extends Component {
               
               <Field name='category' component={props =>
                 <Select {...props} />
-              } label='Catégorie' value={ initialValues.category }/>
+              } label='Catégorie' value={ {value: 9} }/>
 
               <div className='buttons-container fieldset'>
                 <FormButton design='validation' text='Mettre à jour' type='submit' />
