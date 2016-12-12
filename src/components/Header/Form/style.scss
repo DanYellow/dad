@@ -22,6 +22,11 @@
       position: relative;
       width: 52px; height: 52px;
 
+      &:focus {
+        background: $white;
+        color: $primary-red;
+      }
+
       .icon-magnifier {
         font-size: 30px;
         position: absolute;

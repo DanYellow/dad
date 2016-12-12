@@ -17,7 +17,6 @@ const validate = values => {
     errors.title = ErrorMessages.required;
   }
 
-  // var numberRegex = /^\d{1,4}$/g;
   if (values.price > 9999) {
     errors.price = ErrorMessages.price;
   }

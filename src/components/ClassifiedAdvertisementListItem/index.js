@@ -15,7 +15,7 @@ export default class ClassifiedAdvertisementListItem extends Component {
 
     return (
       <li className='classified_advertisement'>
-        <Link to={ '/classified_advertisement/' + id }>
+        <Link to={ '/classified_advertisement/' + id } title={ 'Annonce :' + title }>
           <figure>
             <img src="https://placekitten.com/g/300/300" width="130" alt={ altImg } />
           </figure>
@@ -25,7 +25,7 @@ export default class ClassifiedAdvertisementListItem extends Component {
             <p>{ location }</p>
             <p className='date'>{ 'Posté le ' + createdAt }</p>
           </article>
-          { price > 0 && <h3 className='price'>{ new Intl.NumberFormat("fr-FR", {style: 'currency', currency: 'EUR'}).format(price) }</h3>}
+          { price > 0 && <h3 className='price'>{ new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(price) }</h3>}
           { price === 0 && <h3 className='price'>{ 'Gratuit' }</h3>}
         </Link>
       </li>

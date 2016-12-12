@@ -37,9 +37,7 @@ class Pagination extends Component {
         </li>)
       } 
 
-      // console.log((i < maxElement && i >= minElement), i)
       if ((i < maxElement && i >= minElement) || i === datas.total_pages || i === 1) {
-
         element = (<li key={ uuid.v1() }>
           <Link to={ url }  key={ uuid.v1() } activeClassName='active' className='number-item'>
             {i}

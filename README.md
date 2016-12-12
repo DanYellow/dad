@@ -10,3 +10,9 @@ It allows user to create classified advertisement.
 
 
 ## Table of Contents
+
+
+## TODO List
+[] Add image upload
+[] Update header related to user props
+[] Send action when popin is displayed to avoir "underscoll"

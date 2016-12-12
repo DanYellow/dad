@@ -11,7 +11,7 @@ import 'react-select/dist/react-select.css';
 // https://github.com/JedWatson/react-select/issues/1129#issuecomment-241950075
 
 const CustomSelect = (props) => {
-  const { children, input, label, value } = props;
+  const { input, label } = props;
   const id = uuid.v1();
 
   function handleInputChange({ value }) {
@@ -20,7 +20,6 @@ const CustomSelect = (props) => {
 
   let selectValue = {value: (props.input.value && typeof props.input.value === 'object') ? props.input.value.id : null};
   
-  console.log(props.input.value)
   if (props.input.value && typeof props.input.value === 'number') {
     selectValue = {value: props.input.value}; 
   }
@@ -28,7 +27,7 @@ const CustomSelect = (props) => {
   const getOptions = (input) => {
     return APIManager.getCategories();
   }
-  console.log('input', {...Object.assign(input, selectValue)});
+
   return (
     <div className='fieldset'>
       <label htmlFor={ id }>{ label }</label>
