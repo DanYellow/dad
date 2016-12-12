@@ -24,6 +24,10 @@ class ClassifiedAdvertisementContainer extends Component {
     APIManager.getClassifiedAdvertisement(this.props.params.id, this._getAdvertisementSuccess.bind(this), this._getAdvertisementFail.bind(this));
   }
 
+  componentDidUpdate() {
+    APIManager.getClassifiedAdvertisement(this.props.params.id, this._getAdvertisementSuccess.bind(this), this._getAdvertisementFail.bind(this));
+  }
+
   _getAdvertisementSuccess(response) {
     this.setState({ APIDatas:response, isLoading: false });
   }
@@ -33,7 +37,6 @@ class ClassifiedAdvertisementContainer extends Component {
   }
 
   _renderResults() {
-    console.log(this.state.APIDatas)
     if (this.state.APIDatas.data.resource) {
       return this._renderClassifiedAdvertisement();
     } else {

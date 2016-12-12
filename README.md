@@ -1,10 +1,12 @@
 # D-A-D Project 
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+Dad is a project for an intern leboncoin. That's why there is no messages system or something like that.
+It allows user to create classified advertisement.
+
+## Starter
+- clone the project
+- run npm install into your terminal
+- open localhost:3000
+
 
 ## Table of Contents
-
-
-
-http://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writting-manually
