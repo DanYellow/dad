@@ -58,6 +58,7 @@ class ClassifiedAdvertisementForm extends Component {
               <img src="https://placekitten.com/g/300/300" width="250" alt={ 'altImg' } />
               <div className='buttons-container fieldset'>
                 <FormButton design='cancel' text='Supprimer' type='button' />
+                <Field name='image' type='file' component={InputLitteral} label='Prix (entre 0 et 9 999 euros)' />
               </div>
             </figure>
             <div className='content'>

@@ -42,11 +42,12 @@ class ClassifiedAdvertisementFormContainer extends Component {
 
   _createSuccess(response) {
     this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
-    this._redirectUser('/classified_advertisements/1');
+    this._redirectUser(`/classified_advertisement/${response.data.resource.id}`);
   }
 
   _updateSuccess(response) {
     this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
+    this.props.classifiedAdvertisementUpdated(true, response);
     this._redirectUser(`/classified_advertisement/${this.props.params.id}`);
   }
 
@@ -68,7 +69,7 @@ class ClassifiedAdvertisementFormContainer extends Component {
 
     setTimeout(() => {
       router.push(url);
-    }, 2500);
+    }, 1500);
   }
 
   _closePopin = () => {
@@ -76,13 +77,13 @@ class ClassifiedAdvertisementFormContainer extends Component {
 
     setTimeout(() => {
       this._redirectUser(`/classified_advertisement/${this.props.params.id}`);
-    }, 700);
+    }, 300);
   }
 
   _renderPopinContent() {
     return (
       <div className={ classNames('PopinOverlay',
-                                  { 'small': (this.props.router.routes[2].path === 'delete' || !this.props.resource.is_mine) },
+                                  { 'small': (this.props.router.routes[3].path === 'delete' || !this.props.resource.is_mine) },
                                   { 'closed': this.state.closePopin }) }>
         <div className={ classNames('PopinForm',
                                   { 'closed': this.state.closePopin }) }>

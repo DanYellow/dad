@@ -39,7 +39,7 @@ class Form extends Component {
         <div className='main-input'>
           <input 
           ref={(ref) => this.searchInput = ref}
-          type='text'
+          type='search'
           maxLength='40'
           value={ this.state.inputValue }
           onChange={ (e) => this._inputValueChange(e) }

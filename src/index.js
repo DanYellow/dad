@@ -6,9 +6,11 @@ import { Router, Route, hashHistory, IndexRedirect } from 'react-router'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
+import appReducers from './reducers'
 
 const reducers = {
-  form: formReducer
+  form: formReducer,
+  app: appReducers
 }
 const reducer = combineReducers(reducers)
 const store = createStore(reducer)
@@ -16,8 +18,10 @@ const store = createStore(reducer)
 
 import App from './components/App';
 import ClassifiedAdvertisementsContainer from './components/ClassifiedAdvertisementsContainer';
-import ClassifiedAdvertisementContainer from './components/ClassifiedAdvertisementContainer';
-import ClassifiedAdvertisementFormContainer from './components/ClassifiedAdvertisementContainer/ClassifiedAdvertisementFormContainer';
+import ClassifiedAdvertisementContainer from './containers/ClassifiedAdvertisementContainer';
+// import ClassifiedAdvertisementContainer from './components/ClassifiedAdvertisementContainer';
+import ClassifiedAdvertisementFormContainer from './containers/ClassifiedAdvertisementForm';
+// import ClassifiedAdvertisementFormContainer from './components/ClassifiedAdvertisementContainer/ClassifiedAdvertisementFormContainer';
 import NotFoundPage from './components/NotFoundPage';
 import SignInSignUpContainer from './components/SignInSignUpContainer';
 

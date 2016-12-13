@@ -17,7 +17,7 @@ export default class APIManager {
         message = 'Élément non trouvé';
         break;
       case 1005:
-        message = 'Token invalide';
+        message = 'Vous n\'êtes pas connecté(e)';
         break;
       case 1006:
         message = 'Identifiants inconnus';

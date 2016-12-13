@@ -20,19 +20,19 @@ class ClassifiedAdvertisementContainer extends Component {
     }
   }
 
-
   componentDidMount() {
     this.setState({ isLoading: true });
     APIManager.getClassifiedAdvertisement(this.props.params.id, this._getAdvertisementSuccess.bind(this), this._getAdvertisementFail.bind(this));
   }
 
   componentDidUpdate(prevProps) {
-    let oldId = prevProps.params.page;
-    let currentId = this.props.params.page;
-
-    if (currentId !== oldId) {
-      this.setState({ isLoading: true });
-      APIManager.getClassifiedAdvertisement(currentId, this._getAdvertisementSuccess.bind(this), this._getAdvertisementFail.bind(this));
+    if (this.props.isCAUpdated) {
+      // let currentId = this.props.params.id;
+      // console.log("fezer", this.props)
+      this.props.classifiedAdvertisementUpdated(false, {});
+      // this.setState({ isLoading: true });
+      this._getAdvertisementSuccess(this.props.updatedCADatas)
+      // APIManager.getClassifiedAdvertisement(currentId, this._getAdvertisementSuccess.bind(this), this._getAdvertisementFail.bind(this));
     }
   }
 
@@ -58,7 +58,7 @@ class ClassifiedAdvertisementContainer extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         { !this.state.isLoading && this._renderResults() }
         { this.state.isLoading && <Loader /> }
         
