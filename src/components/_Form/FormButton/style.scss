@@ -12,6 +12,10 @@ button.form-button {
   flex: .5;
   font-family: $opensans-semibold;
 
+  &:only-child {
+    flex: 1;
+  }
+
   &.validation {
     border-color: $validation-color;
     color: $validation-color;

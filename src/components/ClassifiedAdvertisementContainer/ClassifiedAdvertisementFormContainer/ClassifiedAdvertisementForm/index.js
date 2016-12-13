@@ -44,6 +44,10 @@ class ClassifiedAdvertisementForm extends Component {
     )
   }
 
+  _resetFileInput() {
+    console.log(this.fileInput)
+  }
+
   render() {
     const { handleSubmit, initialValues } = this.props;
 
@@ -52,13 +56,13 @@ class ClassifiedAdvertisementForm extends Component {
         { this.props.type === 'update' && this._renderUpdateHeader() }
         { this.props.type === 'create' && this._renderCreateHeader() }
         <form onSubmit={ handleSubmit } className='form'>
-          {  initialValues.id && <input type='hidden' value={ initialValues.id } name='id' /> }
+          { initialValues.id && <input type='hidden' value={ initialValues.id } name='id' /> }
           <section className='wrapper'>
             <figure>
               <img src="https://placekitten.com/g/300/300" width="250" alt={ 'altImg' } />
               <div className='buttons-container fieldset'>
-                <FormButton design='cancel' text='Supprimer' type='button' />
-                <Field name='image' type='file' component={InputLitteral} label='Prix (entre 0 et 9 999 euros)' />
+                <FormButton design='cancel' text='Supprimer' type='button' onClick={ this._resetFileInput.bind(this) } />
+                <Field name='image' ref={(ref) => this.fileInput = ref} type='file' component={InputLitteral} label='Prix (entre 0 et 9 999 euros)' />
               </div>
             </figure>
             <div className='content'>
