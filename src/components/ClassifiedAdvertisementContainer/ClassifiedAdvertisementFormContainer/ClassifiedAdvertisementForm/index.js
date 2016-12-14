@@ -5,6 +5,7 @@ import FormButton from '../../../_Form/FormButton';
 import InputLitteral from '../../../_Form/InputLitteral';
 import TextArea from '../../../_Form/TextArea';
 import Select from '../../../_Form/Select';
+import InputFile from '../../../_Form/InputFile';
 
 import ErrorMessages from '../../../_Form/validation.js';
 
@@ -58,13 +59,7 @@ class ClassifiedAdvertisementForm extends Component {
         <form onSubmit={ handleSubmit } className='form'>
           { initialValues.id && <input type='hidden' value={ initialValues.id } name='id' /> }
           <section className='wrapper'>
-            <figure>
-              <img src="https://placekitten.com/g/300/300" width="250" alt={ 'altImg' } />
-              <div className='buttons-container fieldset'>
-                <FormButton design='cancel' text='Supprimer' type='button' onClick={ this._resetFileInput.bind(this) } />
-                <Field name='image' ref={(ref) => this.fileInput = ref} type='file' component={InputLitteral} label='Prix (entre 0 et 9 999 euros)' />
-              </div>
-            </figure>
+            <Field name='image' type='text' component={InputFile} label='Titre' value={  initialValues.title || '' } />
             <div className='content'>
               <Field name='title' type='text' component={InputLitteral} label='Titre' value={  initialValues.title || '' } />
               <Field name='description' component={TextArea} label='Description' type='text' placeholder='' value={ initialValues.description || '' } />

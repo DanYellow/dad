@@ -1,0 +1,15 @@
+@import '../style';
+@import '../../../styles/variables';
+
+.InputFile {
+  input[type='file'] {
+    display: none;
+  }
+
+  figure {
+    width: 250px;
+    height: 250px;
+    background-color: #eeeeee;
+    border: 1px solid $text-color;
+  }
+}
