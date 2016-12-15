@@ -29,6 +29,9 @@ class ClassifiedAdvertisementFormContainer extends Component {
   }
 
   _handleSubmit = (values) => {
+    // values.image = window.foo;
+    // console.log(values)
+    // return
     if (this.props.router.params.id && /^\d+$/.test(Number(this.props.router.params.id))) {
       if (this.props.router.routes[3].path === 'edit') {
         APIManager.updateClassifiedAdvertisement(values, this._updateSuccess.bind(this), this._apiFail.bind(this));
@@ -36,6 +39,7 @@ class ClassifiedAdvertisementFormContainer extends Component {
         APIManager.deleteClassifiedAdvertisement(values.id, this._deleteSuccess.bind(this), this._apiFail.bind(this));
       }
     } else {
+      
       APIManager.createClassifiedAdvertisement(values, this._createSuccess.bind(this), this._apiFail.bind(this));
     }
   }

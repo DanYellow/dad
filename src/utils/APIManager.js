@@ -111,7 +111,11 @@ export default class APIManager {
   static createClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
     let request = new Request(`${APIManager.baseURL}/classified_advertisement`, APIManager.getConfig());
 
-    fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
+    let imageFormData = new FormData();
+
+    imageFormData.append('image', window.foo)
+    // JSON.stringify(bodyParams)
+    fetch(request, { method: 'POST', body: imageFormData }).then(function(response) {
       return response.json();
     }).then(function(data) {
       if (data.status_code > 210 || !data.success) {

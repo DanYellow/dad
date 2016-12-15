@@ -27,7 +27,6 @@ const validate = values => {
 
 
 class ClassifiedAdvertisementForm extends Component {
-
   _renderUpdateHeader() {
     return (
       <legend className='legend'>
@@ -45,10 +44,6 @@ class ClassifiedAdvertisementForm extends Component {
     )
   }
 
-  _resetFileInput() {
-    console.log(this.fileInput)
-  }
-
   render() {
     const { handleSubmit, initialValues } = this.props;
 
@@ -56,7 +51,7 @@ class ClassifiedAdvertisementForm extends Component {
       <div>
         { this.props.type === 'update' && this._renderUpdateHeader() }
         { this.props.type === 'create' && this._renderCreateHeader() }
-        <form onSubmit={ handleSubmit } className='form'>
+        <form onSubmit={ handleSubmit } className='form' encType='multipart/form-data'>
           { initialValues.id && <input type='hidden' value={ initialValues.id } name='id' /> }
           <section className='wrapper'>
             <Field name='image' type='text' component={InputFile} label='Titre' value={  initialValues.title || '' } />
