@@ -13,13 +13,10 @@ class InputFile extends Component {
     super(props);
     
     this.state = {
-      hasImage: false,
       imagePreview: null
     }
 
     this.id = uuid.v1();
-    this.fileInput;
-    this.reader = new FileReader();
   }
 
   _openFM = () => {
@@ -28,15 +25,15 @@ class InputFile extends Component {
 
   _removeImage = () => {
     document.getElementById('uploadImage').setAttribute('src', '');
-    this.fileInput.setAttribute('value', '');
-    this.setState({ hasImage: false });
+    this.setState({ imagePreview: null });
+    this.props.input.onChange(null);
   }
 
   _onDropAccepted = ( filesToUpload, e ) => {
     let image = filesToUpload[0];
     this.setState({imagePreview: image.preview})
-    console.log("gnrgrhtgrbtr")
-    this.props.input.onChange(filesToUpload)
+
+    this.props.input.onChange(image)
   }
 
   _onDropRejected = () => {
@@ -45,20 +42,13 @@ class InputFile extends Component {
 
   render() {
     let { input, label, ...extras } = this.props;
-
+    let imgAlt = null;
+    
     return (
       <div className='InputFile'>
-        <figure>
-          <img id='uploadImage' src={this.state.imagePreview} width="250" alt={ 'altImg' } />
-        </figure>
-        <div className='buttons-container fieldset'>
-          { !this.state.hasImage && <FormButton design='validation' text='Ajouter une image' type='button' onClick={ this._openFM } /> }
-          { this.state.hasImage && <FormButton design='cancel' text='Supprimer' type='button' onClick={ this._removeImage } /> }
-        </div>
-
         <Dropzone
-          name='image'
-          maxSize={42000}
+          name={input.name}
+          maxSize={420000}
           disableClick={true}
           activeClassName='dropzone-overlay'
           className='dropzone'
@@ -67,7 +57,18 @@ class InputFile extends Component {
           onDropAccepted={ this._onDropAccepted }
           onDropRejected={ this._onDropRejected }
           >
+          <figure onClick={ this._openFM }>
+            <img id='uploadImage' src={this.state.imagePreview} width="250" alt={ imgAlt } />
+            <div className="drop-placeholder">
+              <p className="icon-download"></p>
+              <p> Glissez votre image</p>
+            </div>
+          </figure>
         </Dropzone>
+        <div className='buttons-container fieldset column-layout'>
+          <FormButton design='validation' text='Ajouter une image' type='button' onClick={ this._openFM } />
+          { this.state.imagePreview && <FormButton design='cancel' text='Supprimer' type='button' onClick={ this._removeImage } /> }
+        </div>
       </div>
     );
   }
