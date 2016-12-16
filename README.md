@@ -13,6 +13,6 @@ It allows user to create classified advertisement.
 
 
 ## TODO List
-[] Add image upload
+[x] Add image upload
 [] Update header related to user props
-[] Send action when popin is displayed to avoir "underscoll"
+[] Send action when popin is displayed to avoid "underscoll"
