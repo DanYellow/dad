@@ -1,6 +1,7 @@
 import React from 'react';
 
 import uuid from 'node-uuid';
+// import Dropzone from 'react-dropzone'
 
 import './style.scss';
 
@@ -24,13 +25,9 @@ const InputFile = function ({ input, fields, label, type, meta: { touched, error
       
       reader.onload = function (e) {
         document.getElementById('uploadImage').setAttribute('src', e.target.result);
-        // console.log();
-        // const files = [ ...e.target.files ];
-        // fileInput.setAttribute('value', e.target);
       }
+      
       window.foo = fileInput.files[0];
-      // fileInput.setAttribute('value', fileInput.files[0]);
-      console.log('fileInput.files[0]', fileInput.files[0]);
 
       reader.readAsDataURL(target.files[0]);
     }
@@ -40,12 +37,23 @@ const InputFile = function ({ input, fields, label, type, meta: { touched, error
     <div className='InputFile'>
       <label htmlFor={id}>
         <figure>
-          <img id='uploadImage' src="https://placekitten.com/g/300/300" width="250" alt={ 'altImg' } />
+          <img id='uploadImage' src={input.value} width="250" alt={ 'altImg' } />
         </figure>
       </label>
       <div className='buttons-container fieldset'>
         <FormButton design='cancel' text='Supprimer' type='button' onClick={ removeImage } />
       </div>
+
+      {/*<Field name="file" component='input' type="hidden" />
+
+      <Dropzone
+          ref="dropzone"
+          onDrop={(upload) => dispatch(change('FileUploadExampleForm', 'file', upload[0]))}
+          multiple={false}
+          accept='image/*'>
+          <div>Click here select files to upload.</div>
+      </Dropzone>*/}
+
       <input
         id={id}
         ref={(ref) => fileInput = ref}

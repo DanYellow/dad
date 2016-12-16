@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 
 import APIManager from '../../../utils/APIManager';
+import Utils from '../../../utils/Utils';
 
 
 import Loader from '../../Loader';
@@ -29,18 +30,18 @@ class ClassifiedAdvertisementFormContainer extends Component {
   }
 
   _handleSubmit = (values) => {
-    // values.image = window.foo;
-    // console.log(values)
-    // return
+
+    
     if (this.props.router.params.id && /^\d+$/.test(Number(this.props.router.params.id))) {
       if (this.props.router.routes[3].path === 'edit') {
-        APIManager.updateClassifiedAdvertisement(values, this._updateSuccess.bind(this), this._apiFail.bind(this));
+        const formData = Utils.createFormDataObject(values);
+        APIManager.updateClassifiedAdvertisement(formData, this._updateSuccess.bind(this), this._apiFail.bind(this));
       } else {
         APIManager.deleteClassifiedAdvertisement(values.id, this._deleteSuccess.bind(this), this._apiFail.bind(this));
       }
     } else {
-      
-      APIManager.createClassifiedAdvertisement(values, this._createSuccess.bind(this), this._apiFail.bind(this));
+      const formData = Utils.createFormDataObject(values);
+      APIManager.createClassifiedAdvertisement(formData, this._createSuccess.bind(this), this._apiFail.bind(this));
     }
   }
 
@@ -51,7 +52,7 @@ class ClassifiedAdvertisementFormContainer extends Component {
 
   _updateSuccess(response) {
     this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
-    this.props.classifiedAdvertisementUpdated(true, response);
+    this.props.classifiedAdvertisementUpdated(response);
     this._redirectUser(`/classified_advertisement/${this.props.params.id}`);
   }
 

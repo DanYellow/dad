@@ -111,11 +111,11 @@ export default class APIManager {
   static createClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
     let request = new Request(`${APIManager.baseURL}/classified_advertisement`, APIManager.getConfig());
 
-    let imageFormData = new FormData();
+    // let imageFormData = new FormData();
 
-    imageFormData.append('image', window.foo)
+    // imageFormData.append('image', window.foo)
     // JSON.stringify(bodyParams)
-    fetch(request, { method: 'POST', body: imageFormData }).then(function(response) {
+    fetch(request, { method: 'POST', body: bodyParams }).then(function(response) {
       return response.json();
     }).then(function(data) {
       if (data.status_code > 210 || !data.success) {
@@ -136,9 +136,9 @@ export default class APIManager {
    * @return {[type]}                 [description]
    */
   static updateClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${bodyParams.id}`, APIManager.getConfig());
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${bodyParams.get('id')}`, APIManager.getConfig());
 
-    fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
+    fetch(request, { method: 'POST', body: bodyParams }).then(function(response) {
       return response.json();
     }).then(function(data) {
       if (data.status_code > 210 || !data.success) {

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 
 import { classifiedAdvertisementUpdated } from '../actions'
@@ -6,7 +7,8 @@ import ClassifiedAdvertisementForm from '../components/ClassifiedAdvertisementCo
 
 function mapStateToProps(state) {
   return {
-    isCAUpdated: state.app.isCAUpdated,
+    isCAUpdated: !_.isEmpty(state.app.updatedCADatas),
+    // isCAUpdated: state.app.isCAUpdated,
   }
 }
 

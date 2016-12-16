@@ -26,6 +26,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    figure {
+      height: 250px;
+    }
   
     .content {
       display: flex;
@@ -42,7 +46,7 @@
           margin-bottom: 20px;
         }
         p {
-          font-size: 16px;
+          font-size: 14px;
           color: $text-color;
           font-family: $opensans-regular;
           white-space: pre-wrap;

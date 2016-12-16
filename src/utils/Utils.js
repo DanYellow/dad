@@ -23,13 +23,37 @@ export default class Utils {
     return queryString;
   }
 
-  static mapCategoriesToSelectOptions (categories) {
+  /**
+   * Returns a clean array for select tag to display properly list of categories
+   * @param  {Array} categories [description]
+   * @return {Array<{value, label}>}            Clean array of categories fir
+   */
+  static mapCategoriesToSelectOptions(categories) {
     let options = [];
     categories.forEach(function(category) {
-      // options.push({ value: category.name, label: category.name });
       options.push({ value: category.id, label: category.name });
     });
 
     return options;
+  }
+
+  /**
+   * [createFormDataObject description]
+   * @param  {Object} formValues [description]
+   * @return {[type]}            [description]
+   */
+  static createFormDataObject(formValues = {}) {
+    let formData = new FormData();
+    for(let name in formValues) {
+      formData.append(name, formValues[name]);
+    }
+    formData.delete('image');
+    formData.delete('seller');
+    formData.delete('created_at');
+    formData.delete('last_update');
+    formData.delete('is_mine');
+    // formData.append('image', window.foo);
+  
+    return formData;
   }
 }

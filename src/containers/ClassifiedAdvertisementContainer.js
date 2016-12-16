@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
-
+import _ from 'lodash'
 
 import { classifiedAdvertisementUpdated } from '../actions'
 import ClassifiedAdvertisementContainer from '../components/ClassifiedAdvertisementContainer'
 
 function mapStateToProps(state) {
   return {
-    isCAUpdated: state.app.isCAUpdated,
+    isCAUpdated: !_.isEmpty(state.app.updatedCADatas),
     updatedCADatas: state.app.updatedCADatas,
   }
 }

@@ -6,11 +6,10 @@ export const closePopin = function () {
   }
 }
 
-export const classifiedAdvertisementUpdated = function (value, newDatas) {
+export const classifiedAdvertisementUpdated = (data) => {
   return {
     type: ActionTypes.CA_UPDATED,
-    value,
-    datas: newDatas
+    data
   }
 }
 

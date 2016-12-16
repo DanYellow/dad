@@ -38,8 +38,9 @@ export default class FlashMessage extends Component {
 
   componentDidMount() {
     if (this.props.autodelete) {
-      this.remove(3000);
+      // this.remove(3000);
     }
+    console.log(this);
   }
 
   render() {

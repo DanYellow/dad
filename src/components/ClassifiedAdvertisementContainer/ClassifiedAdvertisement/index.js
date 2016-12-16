@@ -25,7 +25,7 @@ class ClassifiedAdvertisement extends Component {
   }
 
   render() {
-    let { title, price, created_at, category, description, is_mine } = this.props;
+    let { title, price, created_at, category, description, is_mine, image } = this.props;
     let productInfos = { seller: this.props.seller, price }
 
     let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
@@ -40,12 +40,13 @@ class ClassifiedAdvertisement extends Component {
         </header>
         <section className='wrapper'>
           <figure>
-            <img src="https://placekitten.com/g/300/300" width="250" alt={ altImg } />
+            <img src={ image } width="250" alt={ altImg } />
           </figure>
           <article className='content'>
             <header>
               <h3>Description</h3>
-              <p>{ description }</p>
+              <p>{ description && description }</p>
+              <p>{ !description && 'Pas de description' }</p>
             </header>
             <ProductInfos {...productInfos} />
           </article>
@@ -64,6 +65,7 @@ const ProductInfos = function (props) {
   if (price === 0) {
     price = 'Gratuit';
   } else {
+    // price = price;
     price = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(price);
   }
   
@@ -80,7 +82,7 @@ const ProductInfos = function (props) {
        <li>
          <h5>Vendeur</h5>
          <section className='seller'>
-          <h3 title='Entre ce pseudo dans Outlook si tu veux contacter le propriétaire'>{ seller.pseudo }</h3>
+          <h3 title='Entrez ce pseudonyme dans Outlook si vous souhaitez contacter le propriétaire'>{ seller.pseudo }</h3>
           { seller.location && <p>{ seller.location }</p> }
          </section>
        </li>

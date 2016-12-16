@@ -17,7 +17,7 @@ class Pagination extends Component {
 
     let currentPage = datas.current;
     
-    let maxElement = 4 + currentPage;
+    let maxElement = 7 + currentPage;
     let minElement = currentPage - 2;
 
     let displayedEllipsis = false;

@@ -27,12 +27,9 @@ class ClassifiedAdvertisementContainer extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.isCAUpdated) {
-      // let currentId = this.props.params.id;
-      // console.log("fezer", this.props)
-      this.props.classifiedAdvertisementUpdated(false, {});
-      // this.setState({ isLoading: true });
+      this.props.classifiedAdvertisementUpdated({});
+      console.log("this.props.updatedCADatas", this.props.updatedCADatas);
       this._getAdvertisementSuccess(this.props.updatedCADatas)
-      // APIManager.getClassifiedAdvertisement(currentId, this._getAdvertisementSuccess.bind(this), this._getAdvertisementFail.bind(this));
     }
   }
 
