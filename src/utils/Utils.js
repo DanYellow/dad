@@ -52,8 +52,14 @@ export default class Utils {
     formData.delete('created_at');
     formData.delete('last_update');
     formData.delete('is_mine');
-    // formData.append('image', window.foo);
+    formData.append('image', window.foo);
   
     return formData;
+  }
+
+  static formatCurrency = (price) => {
+    let finalPrice = price.toFixed(2).replace('.', ',');
+
+    return finalPrice + ' €';
   }
 }
