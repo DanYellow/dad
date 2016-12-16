@@ -38,22 +38,17 @@ export default class Utils {
   }
 
   /**
-   * [createFormDataObject description]
+   * Returns a object FormData 
    * @param  {Object} formValues [description]
-   * @return {[type]}            [description]
+   * @return {Object}            Form data
    */
   static createFormDataObject(formValues = {}) {
     let formData = new FormData();
-    for(let name in formValues) {
-      formData.append(name, formValues[name]);
-    }
-    formData.delete('image');
-    formData.delete('seller');
-    formData.delete('created_at');
-    formData.delete('last_update');
-    formData.delete('is_mine');
-    formData.append('image', window.foo);
-  
+
+    Object.keys(formValues).forEach(( key ) => {
+      formData.append(key, formValues[ key ]);
+    });
+
     return formData;
   }
 
