@@ -4,13 +4,14 @@
 $validation-color: #69b302;
 $cancel-color: #b70011;
 
-button.form-button {
+button.form-button, .form-button {
   border-radius: 5px;
   border: 2px solid transparent;
   padding: 15px 23px;
   font-size: 20px;
   flex: .5;
   font-family: $opensans-semibold;
+  text-align: center;
 
   &:only-child {
     flex: 1;

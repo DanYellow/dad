@@ -1,20 +1,20 @@
 import React, {Component} from 'react';
 
 import uuid from 'node-uuid';
-// import Dropzone from 'react-dropzone'
+import Dropzone from 'react-dropzone';
 
 import './style.scss';
 
 import FormButton from '../FormButton'
 
-// http://stackoverflow.com/questions/36654641/file-attachments-for-redux-form-and-elixir-phoenix-as-backend-api-serialization
 
 class InputFile extends Component {
   constructor(props) {
     super(props);
     
     this.state = {
-      hasImage: false
+      hasImage: false,
+      imagePreview: null
     }
 
     this.id = uuid.v1();
@@ -22,66 +22,56 @@ class InputFile extends Component {
     this.reader = new FileReader();
   }
 
-  _displayImageUploaded = ({ target }) => {
-
-    if (target.files && target.files[0]) {
-      
-      this.reader.onload = function (e) {
-        document.getElementById('uploadImage').setAttribute('src', e.target.result);
-      }
-      
-      window.foo = this.fileInput.files[0];
-
-      this.reader.readAsDataURL(target.files[0]);
-    }
+  _openFM = () => {
+    this.dropzone.open()
   }
 
   _removeImage = () => {
     document.getElementById('uploadImage').setAttribute('src', '');
     this.fileInput.setAttribute('value', '');
+    this.setState({ hasImage: false });
   }
 
+  _onDropAccepted = ( filesToUpload, e ) => {
+    let image = filesToUpload[0];
+    this.setState({imagePreview: image.preview})
+    console.log("gnrgrhtgrbtr")
+    this.props.input.onChange(filesToUpload)
+  }
+
+  _onDropRejected = () => {
+
+  }
 
   render() {
-    let { input, fields, label, type, meta: { touched, error, warning, placeholder }, ...extras } = this.props;
+    let { input, label, ...extras } = this.props;
 
     return (
       <div className='InputFile'>
-        <label htmlFor={this.id}>
-          <figure>
-            <img id='uploadImage' src={input.value} width="250" alt={ 'altImg' } />
-          </figure>
-        </label>
+        <figure>
+          <img id='uploadImage' src={this.state.imagePreview} width="250" alt={ 'altImg' } />
+        </figure>
         <div className='buttons-container fieldset'>
-          <FormButton design='cancel' text='Supprimer' type='button' onClick={ this._removeImage } />
+          { !this.state.hasImage && <FormButton design='validation' text='Ajouter une image' type='button' onClick={ this._openFM } /> }
+          { this.state.hasImage && <FormButton design='cancel' text='Supprimer' type='button' onClick={ this._removeImage } /> }
         </div>
 
-        {/*<Field name="file" component='input' type="hidden" />
-
         <Dropzone
-            ref="dropzone"
-            onDrop={(upload) => dispatch(change('FileUploadExampleForm', 'file', upload[0]))}
-            multiple={false}
-            accept='image/*'>
-            <div>Click here select files to upload.</div>
-        </Dropzone>*/}
-
-        <input
-          id={this.id}
-          ref={(ref) => this.fileInput = ref}
-          {...input}
-          onChange={ this._displayImageUploaded }
-          type="file" />
+          name='image'
+          maxSize={42000}
+          disableClick={true}
+          activeClassName='dropzone-overlay'
+          className='dropzone'
+          style={{width: 'auto'}}
+          ref={(ref) => { this.dropzone = ref; }}
+          onDropAccepted={ this._onDropAccepted }
+          onDropRejected={ this._onDropRejected }
+          >
+        </Dropzone>
       </div>
     );
   }
 }
 
-
-// const InputFile = function () {
-  
-
-
-  
 
 export default InputFile;
