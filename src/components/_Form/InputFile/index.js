@@ -48,7 +48,7 @@ class InputFile extends Component {
       <div className='InputFile'>
         <Dropzone
           name={input.name}
-          maxSize={420000}
+          maxSize={4200000}
           disableClick={true}
           activeClassName='dropzone-overlay'
           className='dropzone'
@@ -57,18 +57,25 @@ class InputFile extends Component {
           onDropAccepted={ this._onDropAccepted }
           onDropRejected={ this._onDropRejected }
           >
+          <div className="drop-placeholder">
+            <p className="icon-download"></p>
+            <h2>Glissez votre image</h2>
+            <p>Taille maximale autorisée : 4,2 Mo | Formats acceptés : .jp(e)g, .png, .gif</p>
+          </div>
+        </Dropzone>
           <figure onClick={ this._openFM }>
             <img id='uploadImage' src={this.state.imagePreview} width="250" alt={ imgAlt } />
-            <div className="drop-placeholder">
+            { !this.state.imagePreview && <div className="drop-placeholder">
               <p className="icon-download"></p>
-              <p> Glissez votre image</p>
-            </div>
+              <h2>Glissez votre image</h2>
+              <p>Taille maximale autorisée : 4,2 Mo <br/>Formats acceptés : .jp(e)g, .png, .gif</p>
+            </div> }
           </figure>
-        </Dropzone>
         <div className='buttons-container fieldset column-layout'>
           <FormButton design='validation' text='Ajouter une image' type='button' onClick={ this._openFM } />
           { this.state.imagePreview && <FormButton design='cancel' text='Supprimer' type='button' onClick={ this._removeImage } /> }
         </div>
+        
       </div>
     );
   }

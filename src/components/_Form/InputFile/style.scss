@@ -14,6 +14,8 @@
     background-color: transparent;
     border: 1px solid $text-color;
     overflow: hidden;
+    display: flex;
+    align-items: center;
     img {
       z-index: 1;
       position: relative;
@@ -33,6 +35,16 @@
     justify-content: center;
     flex-direction: column;
     text-align: center;
+
+    h2 {
+      font-size: 16px;
+      font-family: $opensans-semibold;
+      margin-bottom: 5px;
+    }
+
+    p {
+      font-size: 14px;
+    }
     
     .icon-download {
       font-size: 150px;
@@ -40,26 +52,30 @@
   }
 
   .dropzone {
-    position: relative;
+    position: fixed;
     top: 0px; left: 0px; right: 0px; bottom: 0px;
     z-index: 0;
+    opacity: 0;
+    color: white;
+    transition: opacity .5s;
+
+    .drop-placeholder {
+      opacity: 1;
+    }
   }
 
   .dropzone-overlay {
-    // position: fixed;
+    opacity: 1;
     top: 0px; left: 0px; right: 0px; bottom: 0px;
     z-index: 9999;
+    background-color: rgba($text-color, .85);
 
     &:after {
       content: '';
-
       position: fixed;
       z-index: 1000;
-      // top: 24px; left: 24px; right: 24px; bottom: 24px;
-      top: 0; left: 0; right: 0; bottom: 0;
+      top: 24px; left: 24px; right: 24px; bottom: 24px;
       padding: 24px;
-      background-color: rgba($text-color, .85);
-      
       border: 3px $white dashed;
     }
   }
