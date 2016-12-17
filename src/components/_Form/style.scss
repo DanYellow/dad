@@ -15,7 +15,7 @@
     flex-direction: row;
     &.column-layout {
       flex-direction: column;
-      & > * {
+      & > *:nth-child(n+2) {
         margin-left: 0;
       }
     }

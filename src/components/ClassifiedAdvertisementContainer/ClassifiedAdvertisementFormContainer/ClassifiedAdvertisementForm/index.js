@@ -46,7 +46,7 @@ class ClassifiedAdvertisementForm extends Component {
 
   render() {
     const { handleSubmit, initialValues } = this.props;
-
+    console.log('initialValues', initialValues)
     return (
       <div>
         { this.props.type === 'update' && this._renderUpdateHeader() }
@@ -54,7 +54,7 @@ class ClassifiedAdvertisementForm extends Component {
         <form onSubmit={ handleSubmit } className='form' encType='multipart/form-data'>
           { initialValues.id && <input type='hidden' value={ initialValues.id } name='id' /> }
           <section className='wrapper'>
-            { <Field name='image' type='text' component={InputFile} label='Titre' value={  initialValues.image } /> }
+            { <Field name='image' type='text' component={InputFile} label='Titre' value={ initialValues.image } /> }
             <div className='content'>
               <Field name='title' type='text' component={InputLitteral} label='Titre' value={  initialValues.title || '' } />
               <Field name='description' component={TextArea} label='Description' type='text' placeholder='' value={ initialValues.description || '' } />
