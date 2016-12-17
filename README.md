@@ -15,5 +15,10 @@ It allows user to create classified advertisement.
 ## TODO List
 [x] Add image upload
 [] Update header related to user props
-[] Display a placeholder for no image
+[x] Display a placeholder for no image
 [] Send action when popin is displayed to avoid "underscoll"
+[] Display uploaded image
+[] Display button next and previous classified advertisement
+[] Add easter eggs
+[] Add more easter eggs
+[] Allow user to show ca's image in full size

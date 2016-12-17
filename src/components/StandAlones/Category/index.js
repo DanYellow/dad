@@ -2,10 +2,10 @@ import React from 'react';
 
 import './style.scss';
 
-const Category = function ({name}) {
+const Category = function ({name, nb_items}) {
   return (
    <div>
-     <span className='category'>{ name }</span>
+     <span className='category' title={'Plus de ' + nb_items + ' élements dans la catégorie'}>{ name }</span>
    </div>
   );
 };

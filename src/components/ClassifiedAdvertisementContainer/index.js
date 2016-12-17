@@ -28,7 +28,6 @@ class ClassifiedAdvertisementContainer extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.isCAUpdated) {
       this.props.classifiedAdvertisementUpdated({});
-      console.log("this.props.updatedCADatas", this.props.updatedCADatas);
       this._getAdvertisementSuccess(this.props.updatedCADatas)
     }
   }

@@ -13,10 +13,16 @@ class InputFile extends Component {
     super(props);
     
     this.state = {
-      imagePreview: null
+      imagePreview: this.props.input.value
     }
 
     this.id = uuid.v1();
+    this.imagerequirements = 'Taille maximale autorisée : 4,2 Mo | Formats acceptés : .jp(e)g, .png, .gif';
+  }
+
+  componentDidMount() {
+    var image = new File([this.props.input.value], null, null);
+    this.props.input.onChange(image);
   }
 
   _openFM = () => {
@@ -41,7 +47,7 @@ class InputFile extends Component {
   }
 
   render() {
-    let { input, label, ...extras } = this.props;
+    let { input } = this.props;
     let imgAlt = null;
     
     return (
@@ -60,7 +66,7 @@ class InputFile extends Component {
           <div className="drop-placeholder">
             <p className="icon-download"></p>
             <h2>Glissez votre image</h2>
-            <p>Taille maximale autorisée : 4,2 Mo | Formats acceptés : .jp(e)g, .png, .gif</p>
+            <p>{ this.imagerequirements }</p>
           </div>
         </Dropzone>
           <figure onClick={ this._openFM }>
@@ -68,7 +74,7 @@ class InputFile extends Component {
             { !this.state.imagePreview && <div className="drop-placeholder">
               <p className="icon-download"></p>
               <h2>Glissez votre image</h2>
-              <p>Taille maximale autorisée : 4,2 Mo <br/>Formats acceptés : .jp(e)g, .png, .gif</p>
+              <p>{ this.imagerequirements }</p>
             </div> }
           </figure>
         <div className='buttons-container fieldset column-layout'>

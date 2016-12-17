@@ -19,9 +19,9 @@ export default class ClassifiedAdvertisementListItem extends Component {
 
     return (
       <li className='classified_advertisement'>
-        <Link to={ '/classified_advertisement/' + id } title={ 'Annonce :' + title }>
+        <Link to={ '/classified_advertisement/' + id } title={ 'Annonce : ' + title }>
           <figure>
-            { image && <img src={ image } width="160" alt={ altImg } /> }
+            { image && <img src={ image } alt={ altImg } /> }
             { !image && <PlaceholderImage /> }
           </figure>
           <article>

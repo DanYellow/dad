@@ -18,8 +18,13 @@ const validate = values => {
     errors.title = ErrorMessages.required;
   }
 
-  if (values.price > 9999) {
-    errors.price = ErrorMessages.price;
+  if (values.price) {
+    if (values.price > 9999) {
+      errors.price = ErrorMessages.price;
+    }
+    if (isNaN(values.price)) {
+      errors.price = ErrorMessages.not_price;
+    }
   }
 
   return errors;
@@ -46,7 +51,7 @@ class ClassifiedAdvertisementForm extends Component {
 
   render() {
     const { handleSubmit, initialValues } = this.props;
-    console.log('initialValues', initialValues)
+
     return (
       <div>
         { this.props.type === 'update' && this._renderUpdateHeader() }
@@ -58,11 +63,11 @@ class ClassifiedAdvertisementForm extends Component {
             <div className='content'>
               <Field name='title' type='text' component={InputLitteral} label='Titre' value={  initialValues.title || '' } />
               <Field name='description' component={TextArea} label='Description' type='text' placeholder='' value={ initialValues.description || '' } />
-              <Field name='price' type='text' component={InputLitteral} label='Prix (entre 0 et 9 999 euros)' placeholder='Prix' value={ initialValues.price || '' } />
+              <Field name='price' type='text' component={InputLitteral} label='Prix (Inutile de préciser la devise)' placeholder='Prix' value={ initialValues.price || '' } />
               
               <Field name='category' component={props =>
                 <Select {...props} />
-              } label='Catégorie' value={ {value: 9} }/>
+              } label='Catégorie'/>
 
               <div className='buttons-container fieldset'>
                 { this.props.type === 'update' && <FormButton design='validation' text='Mettre à jour' type='submit' /> }
