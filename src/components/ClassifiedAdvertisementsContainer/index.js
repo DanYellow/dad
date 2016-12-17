@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 
 import APIManager from '../../utils/APIManager';
 
-import ClassfiedAdvertisements from './../../fixtures/classified_advertisements.json';
+// import ClassfiedAdvertisements from './../../fixtures/classified_advertisements.json';
 
 import Pagination from '../Pagination';
 import ClassifiedAdvertisementsList from '../ClassifiedAdvertisementsList';

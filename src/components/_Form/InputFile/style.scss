@@ -56,6 +56,10 @@
     opacity: 0;
     color: white;
     transition: opacity .5s;
+    display: none;
+    &.show {
+      display: block;
+    }
 
     .drop-placeholder {
       opacity: 1;
@@ -63,6 +67,7 @@
   }
 
   .dropzone-overlay {
+    
     opacity: 1;
     top: 0px; left: 0px; right: 0px; bottom: 0px;
     z-index: 9999;

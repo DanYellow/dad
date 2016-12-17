@@ -17,11 +17,12 @@ const store = createStore(reducer)
 
 
 import App from './components/App';
+import Events from './utils/Events';
+new Events();
+
 import ClassifiedAdvertisementsContainer from './components/ClassifiedAdvertisementsContainer';
 import ClassifiedAdvertisementContainer from './containers/ClassifiedAdvertisementContainer';
-// import ClassifiedAdvertisementContainer from './components/ClassifiedAdvertisementContainer';
 import ClassifiedAdvertisementFormContainer from './containers/ClassifiedAdvertisementForm';
-// import ClassifiedAdvertisementFormContainer from './components/ClassifiedAdvertisementContainer/ClassifiedAdvertisementFormContainer';
 import NotFoundPage from './components/NotFoundPage';
 import SignInSignUpContainer from './components/SignInSignUpContainer';
 

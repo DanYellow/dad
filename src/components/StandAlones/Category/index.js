@@ -2,10 +2,10 @@ import React from 'react';
 
 import './style.scss';
 
-const Category = function (props) {
+const Category = function ({name}) {
   return (
    <div>
-     <span className='category'>{ props.name }</span>
+     <span className='category'>{ name }</span>
    </div>
   );
 };

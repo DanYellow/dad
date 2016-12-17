@@ -25,17 +25,23 @@
   .wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
 
     figure {
       height: 250px;
+      width: 250px;
+      display: flex;
+      align-items: center;
+      img {
+        object-fit: contain;
+        vertical-align: bottom;
+      }
     }
   
     .content {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: 100%;
+      flex: 1;
       padding-left: 30px;
 
       header {
@@ -57,6 +63,8 @@
 
   .toolbar {
     margin-top: 30px;
+    padding-top: 14px;
+    border-top: 1px solid $primary-red;
     ul {
       display: flex;
       justify-content: center;

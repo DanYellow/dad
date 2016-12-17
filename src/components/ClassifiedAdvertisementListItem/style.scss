@@ -27,6 +27,11 @@
     }
   }
 
+  figure {
+    width: 160px;
+    height: 160px;
+  }
+
   article {
     padding-left: 35px;
     display: flex;
@@ -38,18 +43,7 @@
       color: $primary-red;
       margin-bottom: 20px;
     }
-
-    .category {
-      padding: 6px;
-      background-color: $primary-red;
-      color: $white;
-      font-family: $opensans-semibold;
-      display: inline-block;
-      border-radius: 3px;
-      margin-bottom: 18px;
-      font-size: 12px;
-    }
-
+    
     .date {
       font-size: 12px;
       margin-top: auto;

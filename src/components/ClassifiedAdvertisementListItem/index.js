@@ -4,6 +4,8 @@ import { Link } from 'react-router';
 import moment from 'moment';
 
 import Utils from '../../utils/Utils';
+import Category from '../StandAlones/Category';
+import PlaceholderImage from '../StandAlones/PlaceholderImage';
 
 import './style.scss';
 
@@ -19,7 +21,8 @@ export default class ClassifiedAdvertisementListItem extends Component {
       <li className='classified_advertisement'>
         <Link to={ '/classified_advertisement/' + id } title={ 'Annonce :' + title }>
           <figure>
-            <img src={ image } width="130" alt={ altImg } />
+            { image && <img src={ image } width="160" alt={ altImg } /> }
+            { !image && <PlaceholderImage /> }
           </figure>
           <article>
             <h3>{ title }</h3>
@@ -32,17 +35,5 @@ export default class ClassifiedAdvertisementListItem extends Component {
         </Link>
       </li>
     );
-  }
-}
-
-class Category extends Component {
-  render() {
-    let { name } = this.props;
-
-    return (
-      <div>
-        <span className='category'>{ name }</span>
-      </div>
-    )
   }
 }

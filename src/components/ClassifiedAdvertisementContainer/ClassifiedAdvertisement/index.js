@@ -6,6 +6,7 @@ import moment from 'moment';
 import Utils from '../../../utils/Utils';
 
 import Category from '../../StandAlones/Category';
+import PlaceholderImage from '../../StandAlones/PlaceholderImage';
 
 import './style.scss';
 
@@ -32,7 +33,7 @@ class ClassifiedAdvertisement extends Component {
 
     let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
     let altImg = title + ' image';
-
+    console.log("image", image);
     return (
       <div className="ClassifiedAdvertisement">
         <header>
@@ -42,7 +43,8 @@ class ClassifiedAdvertisement extends Component {
         </header>
         <section className='wrapper'>
           <figure>
-            <img src={ image } width="250" alt={ altImg } />
+            { image && <img src={ image } width="250" alt={ altImg } /> }
+            { !image && <PlaceholderImage /> }
           </figure>
           <article className='content'>
             <header>

@@ -15,4 +15,5 @@ It allows user to create classified advertisement.
 ## TODO List
 [x] Add image upload
 [] Update header related to user props
+[] Display a placeholder for no image
 [] Send action when popin is displayed to avoid "underscoll"
