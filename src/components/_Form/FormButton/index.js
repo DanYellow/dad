@@ -14,7 +14,7 @@ const FormButton = function (props) {
 };
 
 FormButton.propTypes = {
-  design: PropTypes.string,
+  design: PropTypes.oneOf(['validation', 'cancel', 'info']),
   type: PropTypes.string,
   text: PropTypes.string,
 };

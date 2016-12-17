@@ -3,21 +3,23 @@ import { Link } from 'react-router';
 
 import moment from 'moment';
 
+import Utils from '../../utils/Utils';
+
 import './style.scss';
 
 export default class ClassifiedAdvertisementListItem extends Component {
   render() {
-    let { id, title, price, created_at, category } = this.props;
+    let { id, title, price, created_at, category, image } = this.props;
     let { location } = this.props.seller;
 
     let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
-    let altImg = title + ' image';
+    let altImg = 'Annonce ' + title + ' image';
 
     return (
       <li className='classified_advertisement'>
         <Link to={ '/classified_advertisement/' + id } title={ 'Annonce :' + title }>
           <figure>
-            <img src="https://placekitten.com/g/300/300" width="130" alt={ altImg } />
+            <img src={ image } width="130" alt={ altImg } />
           </figure>
           <article>
             <h3>{ title }</h3>
@@ -25,7 +27,7 @@ export default class ClassifiedAdvertisementListItem extends Component {
             <p>{ location }</p>
             <p className='date'>{ 'Posté le ' + createdAt }</p>
           </article>
-          { price > 0 && <h3 className='price'>{ price }</h3>}
+          { price > 0 && <h3 className='price'>{ Utils.formatCurrency(price) }</h3>}
           { price === 0 && <h3 className='price'>{ 'Gratuit' }</h3>}
         </Link>
       </li>

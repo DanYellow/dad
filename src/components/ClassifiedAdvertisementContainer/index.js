@@ -50,7 +50,7 @@ class ClassifiedAdvertisementContainer extends Component {
   }
 
   _renderClassifiedAdvertisement() {
-    return <ClassifiedAdvertisement {...this.state.APIDatas.data.resource } />
+    return <ClassifiedAdvertisement { ...this.state.APIDatas.data.resource } />
   }
 
   render() {

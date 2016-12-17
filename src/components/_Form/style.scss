@@ -13,6 +13,12 @@
 
   &.buttons-container {
     flex-direction: row;
+    &.column-layout {
+      flex-direction: column;
+      & > * {
+        margin-left: 0;
+      }
+    }
     justify-content: space-between;
 
     & > *:nth-child(n+2) {

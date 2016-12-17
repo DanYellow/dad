@@ -3,6 +3,8 @@ import { withRouter, Link } from 'react-router';
 
 import moment from 'moment';
 
+import Utils from '../../../utils/Utils';
+
 import Category from '../../StandAlones/Category';
 
 import './style.scss';
@@ -66,7 +68,7 @@ const ProductInfos = function (props) {
     price = 'Gratuit';
   } else {
     // price = price;
-    price = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(price);
+    price = Utils.formatCurrency(price);
   }
   
   let { seller } = props;
