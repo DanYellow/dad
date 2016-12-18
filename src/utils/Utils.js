@@ -46,7 +46,8 @@ export default class Utils {
     let formData = new FormData();
 
     Object.keys(formValues).forEach(( key ) => {
-      formData.append(key, formValues[ key ]);
+      console.log(key, formValues[key])
+      formData.append(key, formValues[key]);
     });
 
     return formData;
@@ -80,5 +81,23 @@ export default class Utils {
     } else {
       return false;
     }
+  }
+
+  /**
+   * Returns image
+   * @param  {String} linkImage URL image
+   * @return {[type]}           [description]
+   */
+  static getFileObject(linkImage) {
+    let request = new Request(linkImage, { mode: 'cors', cache: 'default' });
+    return;
+    return fetch(request, {method: 'GET'}).then(function(response) {
+      return response.blob();
+    }).then(function(data) {
+      console.log(data);
+      return { options: "hello"};
+    }).catch(function(data) {
+      return { options: [] };
+    });
   }
 }

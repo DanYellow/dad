@@ -183,6 +183,14 @@ export default class APIManager {
    *    /____/_/\__, /_/ /_/___/_/ /_/_/   /____/_/\__, /_/ /_/\____/ .___/ 
    *           /____/                             /____/           /_/      
    */
+  
+  /**
+   * Request API to log in user
+   * @param  {Object} bodyParams      [description]
+   * @param  {Function} successCallback [description]
+   * @param  {Function} errorCallback   [description]
+   * @return null
+   */
   static signIn(bodyParams, successCallback, errorCallback) {
     let request = new Request(`${APIManager.baseURL}/get_token`, APIManager.getConfig());
 
@@ -199,6 +207,13 @@ export default class APIManager {
     });
   }
 
+  /**
+   * Requests API to log
+   * @param  {Object} bodyParams      [description]
+   * @param  {Function} successCallback [description]
+   * @param  {Function} errorCallback   [description]
+   * @return null
+   */
   static signUp(bodyParams, successCallback, errorCallback) {
     let request = new Request(`${APIManager.baseURL}/sign_up`, APIManager.getConfig());
 
@@ -251,7 +266,6 @@ export default class APIManager {
 APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://localhost:9000/api';
 
 APIManager.header = new Headers();
-// APIManager.header.append('X-TOKEN', window.localStorage.getItem('token'))
 
 APIManager.fetchConfigInit = { 
   headers: APIManager.header,

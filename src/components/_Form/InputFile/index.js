@@ -7,13 +7,16 @@ import './style.scss';
 
 import FormButton from '../FormButton'
 
+import Utils from '../../../utils/Utils'
+
 
 class InputFile extends Component {
   constructor(props) {
     super(props);
     
     this.state = {
-      imagePreview: this.props.input.value
+      imagePreview: this.props.input.value,
+      hasUpdatedImage: false
     }
 
     this.id = uuid.v1();
@@ -21,8 +24,11 @@ class InputFile extends Component {
   }
 
   componentDidMount() {
-    var image = new File([this.props.input.value], null, null);
-    this.props.input.onChange(image);
+    // console.log(Utils.getFileObject(this.props.input.value));
+    // var image = new File([this.props.input.value], null, null);
+    // this.props.input.onChange(image);
+
+    // console.log("image", image)
   }
 
   _openFM = () => {
@@ -32,12 +38,17 @@ class InputFile extends Component {
   _removeImage = () => {
     document.getElementById('uploadImage').setAttribute('src', '');
     this.setState({ imagePreview: null });
+
     this.props.input.onChange(null);
+    
+    this.props.onImageUpdated(true);
   }
 
   _onDropAccepted = ( filesToUpload, e ) => {
     let image = filesToUpload[0];
-    this.setState({imagePreview: image.preview})
+    this.setState({ imagePreview: image.preview });
+
+    this.props.onImageUpdated(true)
 
     this.props.input.onChange(image)
   }
@@ -69,8 +80,11 @@ class InputFile extends Component {
             <p>{ this.imagerequirements }</p>
           </div>
         </Dropzone>
+
+          
+
           <figure onClick={ this._openFM }>
-            <img id='uploadImage' src={this.state.imagePreview} width="250" alt={ imgAlt } />
+            <img id='uploadImage' src={ this.state.imagePreview } width='250' alt={ imgAlt } />
             { !this.state.imagePreview && <div className="drop-placeholder">
               <p className="icon-download"></p>
               <h2>Glissez votre image</h2>

@@ -95,7 +95,7 @@ class ClassifiedAdvertisementFormContainer extends Component {
             { this.state.isSuccess && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='success' onClick={ this._handleClick } /> }
 
             { this.state.isLoading && <Loader /> }
-            { (this.props.resource.is_mine && this.props.router.routes[3].path === 'edit') && <ClassifiedAdvertisementForm onSubmit={ this._handleSubmit } initialValues={ this.props.resource } type='update' onClick={ this._closePopin } /> }
+            { (this.props.resource.is_mine && this.props.router.routes[3].path === 'edit') && <ClassifiedAdvertisementForm onSubmit={ this._handleSubmit } initialValues={ {...this.props.resource, ...{has_updated_image: false}} } type='update' onClick={ this._closePopin } /> }
             { (this.props.resource.is_mine && this.props.router.routes[3].path === 'delete') && <ClassifiedAdvertisementFormDelete onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
             
             { !this.props.resource.is_mine && <PopinInfos type='forbidden' message={"Vous n'avez pas accès à ce contenu. \nSi vous êtes le propriétaire de cette annonce, veuillez vous connecter."} onClick={ this._closePopin } /> }
