@@ -9,6 +9,7 @@ const FormButton = function (props) {
    <button className={ classNames('reset form-button', props.design) } 
            type={ props.type || 'submit' }
            onClick={ props.onClick }
+           disabled={ props.disabled || false }
            >{props.text}</button>
   );
 };

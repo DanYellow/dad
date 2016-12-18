@@ -78,13 +78,13 @@ class ClassifiedAdvertisementForm extends Component {
             <div className='content'>
               <Field name='title' type='text' component={InputLitteral} label='Titre' value={  initialValues.title || '' } />
               <Field name='description' component={TextArea} label='Description' type='text' placeholder='' value={ initialValues.description || '' } />
-              <Field name='price' type='text' component={InputLitteral} label='Prix (Inutile de préciser la devise)' placeholder='Prix' value={ initialValues.price || '' } />
+              <Field name='price' type='text' component={InputLitteral} label='Prix (Ne pas préciser la devise)' placeholder='Prix' value={ initialValues.price || '' } />
               <Field name='category' component={props =>
                 <Select {...props} />
               } label='Catégorie'/>
 
               <div className='buttons-container fieldset'>
-                { this.props.type === 'update' && <FormButton design='validation' text='Mettre à jour' type='submit' disabled={pristine || submitting} /> }
+                { this.props.type === 'update' && <FormButton design='validation' text='Mettre à jour' type='submit' disabled={ submitting } /> }
                 { this.props.type === 'update' && <FormButton design='cancel' text='Annuler' type='button' onClick={ this.props.onClick } /> }
                 { this.props.type === 'create' && <FormButton design='validation' text='Créer' type='submit' /> }
               </div>

@@ -43,5 +43,13 @@ button.form-button, .form-button {
       background-color: rgba(darken($cancel-color, 10%), .25);
     }
   }
+  
+  &:disabled {
+    opacity: .3;
+    cursor: not-allowed;
+    &:hover {
+      background-color: transparent;
 
+    }
+  }
 }

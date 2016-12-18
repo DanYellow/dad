@@ -24,7 +24,7 @@ const validate = values => {
 
 class SignInForm extends Component {
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, pristine, submitting } = this.props;
     return (
       <div className='SignIn'>
         <h2 className='bordered-title'>Se connecter</h2>
@@ -33,7 +33,7 @@ class SignInForm extends Component {
           <Field name='password' type='password' component={InputLitteral} label='Mot de passe'/>
 
           <div className='buttons-container fieldset'>
-            <FormButton design='validation' text='Se connecter' type='submit' />
+            <FormButton design='validation' text='Se connecter' type='submit' disabled={ submitting } />
           </div>
         </form>
       </div>
