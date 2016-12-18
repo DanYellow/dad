@@ -7,10 +7,5 @@ export default class Events {
     window.addEventListener('dragenter', function(e) {
       document.querySelector('.dropzone').classList.add('show');
     });
-
-    window.addEventListener('dragleave', function(e) {
-      // console.log('ffzfzefz')
-      // document.querySelector('.dropzone').classList.remove('show');
-    });
   }
 }

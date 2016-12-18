@@ -76,7 +76,7 @@ const ProductInfos = function (props) {
   let { seller } = props;
 
   return (
-   <div className='SellerInfos'>
+   <div className='Insert'>
     <div className='wrapper'>
      <ul>
        <li>

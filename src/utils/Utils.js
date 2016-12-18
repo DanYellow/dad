@@ -57,4 +57,28 @@ export default class Utils {
 
     return finalPrice + ' €';
   }
+
+  /**
+   * Checks if user token is valid
+   * @param  {[type]}  token [description]
+   * @return {Boolean}       [description]
+   */
+  static isTokenValid() {
+    const token            = window.localStorage.getItem('token_expire_date') || 0;
+    const currentTimeStamp = Math.floor(Date.now() / 1000);
+    return(token >= currentTimeStamp);
+  }
+
+  /**
+   * Indicates if a popin is displayed currently
+   * @param  {[type]} currentPath [description]
+   * @return {Boolean}             
+   */
+  static aPopinIsOpened(currentPath) {
+    if (['edit', 'delete'].some(function(v) { return currentPath.indexOf(v) >= 0; })) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

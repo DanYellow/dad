@@ -37,7 +37,18 @@ class Header extends Component {
 
   _renderBackView() {
     return (
+      <div>
       <SearchBar />
+      <nav className='navigation-header'>
+        <ul>
+          <li>
+            <Link to='admin/mycas' activeClassName='active'>
+              <span>Mes annonces</span>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+      </div>
     )
   }
 
@@ -46,7 +57,7 @@ class Header extends Component {
       <header className='header'>
         <div className='app'>
           <TopHeader />
-          <Link to={'/'}>
+          <Link to={'/'} title="Retourner à l'accueil">
             <figure className='logo'><img src={logo} alt='logo site' /></figure>
           </Link>
           { this.props.env === 'public' && this._renderPublicView() }

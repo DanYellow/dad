@@ -17,8 +17,9 @@ It allows user to create classified advertisement.
 [] Update header related to user props
 [x] Display a placeholder for no image
 [] Send action when popin is displayed to avoid "underscoll"
-[] Display uploaded image
+[] Display uploaded image after upload/create
 [] Display button next and previous classified advertisement
 [] Add easter eggs
 [] Add more easter eggs
 [] Allow user to show ca's image in full size
+[] Allow user to put/remove from sale an item

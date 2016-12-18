@@ -42,6 +42,7 @@ class SignInSignUpContainer extends Component {
     this._redirectUser('/classified_advertisements/1');
 
     window.localStorage.setItem('token', response.data.resource.token);
+    window.localStorage.setItem('token_expire_date', response.data.resource.expire);
   }
 
   _signUpSuccess(response) {

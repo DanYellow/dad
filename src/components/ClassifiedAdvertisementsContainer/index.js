@@ -11,6 +11,8 @@ import FlashMessage from '../FlashMessage';
 import Loader from '../Loader';
 import NoResults from '../NoResults';
 
+// import Utils from '../../utils/Utils';
+
 
 import './style.scss';
 
@@ -71,7 +73,11 @@ class ClassifiedAdvertisementsContainer extends Component {
     if (this.state.APIDatas.data.list.length > 0) {
       return this._renderClassifiedAdvertisements();
     } else {
-      return <NoResults />;
+      if (this.props.env === 'public') {
+        return <NoResults />;
+      } else {
+        return <NoResults message="Vous n'avez pas d'annonces"/>;
+      }
     }
   }
 
@@ -86,7 +92,7 @@ class ClassifiedAdvertisementsContainer extends Component {
 
         { this.props.env === 'back' && <h2 id='title' className='bordered-title'>Mes annonces</h2> }
 
-        <ClassifiedAdvertisementsList list={ list } />
+        <ClassifiedAdvertisementsList list={ list } env={ this.props.env } />
 
         { (pagination.prev || pagination.next) && <Pagination pagination={ pagination } /> }
       </div>

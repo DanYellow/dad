@@ -43,7 +43,7 @@ class SignUpForm extends Component {
     return (
       <div className='SignIn'>
         <h2 className='bordered-title'>S'inscrire</h2>
-        <form onSubmit={ handleSubmit } className='form' novalidate>
+        <form onSubmit={ handleSubmit } className='form' noValidate>
           <Field name='username' type='text' component={ InputLitteral } label='Pseudonyme' />
           <Field name='email' type='text' component={ InputLitteral } label='Adresse mail'/>
           <Field name='password' type='password' component={ InputLitteral } label='Mot de passe'/>

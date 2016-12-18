@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
-import './style.scss';
-
 import { Link } from 'react-router';
 
+import Utils from '../../../utils/Utils'
+
+import './style.scss';
 
 class TopHeader extends Component {
   _renderLoggedContent() {
     return (
       <ul>
-          <li className='home'>
-            <Link to={ '/' }>Accueil</Link>
-          </li>
+          <li className='home'><Link to={ '/' }>Accueil</Link></li>
 
-          <li>
-            <Link to={ '/signin' }>Se connecter</Link>
-          </li>
-          <li>
-            <Link to={ '/classified_advertisement/create' }>Publier une annonce</Link>
-          </li>
+          { Utils.isTokenValid() && <li><Link to={ 'admin/mycas' }>Mes annonces</Link></li> }
+
+          <li><Link to={ '/classified_advertisement/create' }>Publier une annonce</Link></li>
+          { !Utils.isTokenValid() && <li><Link to={ '/signin' }>Se connecter</Link></li> }
+          { Utils.isTokenValid() && <li><Link className='logout' to={ '/signin' }>Se déconnecter</Link></li> }
       </ul>
     )
   }

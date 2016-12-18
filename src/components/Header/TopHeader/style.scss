@@ -38,6 +38,10 @@
           color: $text-color;
           text-decoration: none;
         }
+
+        &.logout {
+          font-family: $opensans-bold;
+        }
       }
     }
   }

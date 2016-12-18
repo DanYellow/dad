@@ -16,7 +16,7 @@ const reducer = combineReducers(reducers)
 const store = createStore(reducer)
 
 
-import App from './components/App';
+import AppContainer from './containers/AppContainer';
 import Events from './utils/Events';
 new Events();
 
@@ -31,12 +31,16 @@ import './index.scss';
 ReactDOM.render(
   <Provider store={store}>
   <Router history={hashHistory}>
-    <Route path='/' component={App}>
+    <Route path='/' component={AppContainer}>
       <Route path='/classified_advertisements'>
         <IndexRedirect to='1' />
       </Route>
       <IndexRedirect to='classified_advertisements/1' />
       <Route path='classified_advertisements(/:page)(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
+      
+      <Route path='admin'>
+        <Route path='mycas(/:page)(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='back' {...props} />)} />
+      </Route>
       
       <Route path='classified_advertisement/create' component={ClassifiedAdvertisementFormContainer} />
       <Route path='classified_advertisement'>
@@ -48,6 +52,7 @@ ReactDOM.render(
 
       <Route path="signin" component={(props) => (<SignInSignUpContainer type='signin' />)} />
       <Route path="signup" component={(props) => (<SignInSignUpContainer type='signup' />)} />
+      <Route path="logout" component={(props) => (<SignInSignUpContainer type='signup' />)} />
       
       <Route path='*' component={NotFoundPage}/>
     </Route>
