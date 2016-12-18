@@ -62,7 +62,7 @@ class ClassifiedAdvertisementForm extends Component {
   }
 
   render() {
-    const { handleSubmit, initialValues, pristine, submitting } = this.props;
+    const { handleSubmit, initialValues, submitting } = this.props;
     return (
       <div>
         { this.props.type === 'update' && this._renderUpdateHeader() }

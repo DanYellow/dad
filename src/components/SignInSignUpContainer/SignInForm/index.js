@@ -24,7 +24,7 @@ const validate = values => {
 
 class SignInForm extends Component {
   render() {
-    const { handleSubmit, pristine, submitting } = this.props;
+    const { handleSubmit, submitting } = this.props;
     return (
       <div className='SignIn'>
         <h2 className='bordered-title'>Se connecter</h2>

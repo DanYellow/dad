@@ -34,7 +34,7 @@
         &:visited {
           color: $primary-red;
         }
-        &:hover, &:active, &:focus {
+        &:hover, &:active, &:focus, &.active {
           color: $text-color;
           text-decoration: none;
         }

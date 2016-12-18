@@ -46,7 +46,6 @@ export default class Utils {
     let formData = new FormData();
 
     Object.keys(formValues).forEach(( key ) => {
-      console.log(key, formValues[key])
       formData.append(key, formValues[key]);
     });
 
@@ -54,9 +53,13 @@ export default class Utils {
   }
 
   static formatCurrency = (price) => {
-    let finalPrice = price.toFixed(2).replace('.', ',');
+    let finalPrice = price.toFixed(2).replace('.', ',') + ' €';
 
-    return finalPrice + ' €';
+    if (Intl) {
+      finalPrice = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR'}).format(price);
+    }
+
+    return finalPrice;
   }
 
   /**

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+import uuid from 'node-uuid';
 
 import './style.scss';
 
@@ -7,6 +8,8 @@ export default class FlashMessage extends Component {
   constructor(props) {
     super(props);
     
+    this.id = uuid.v1();
+
     this.state = {
       closed: false,
       mustBeRemoved: false
@@ -31,23 +34,29 @@ export default class FlashMessage extends Component {
     }
 
     setTimeout(() => {
-      this.setState({mustBeRemoved: !this.state.mustBeRemoved});
+      this.setState({ mustBeRemoved: !this.state.mustBeRemoved });
       this.props.onClick();
     }, delay);
+  }
+
+  _scrollTo() {
+    let DOMElement = document.getElementById(this.id);
+    if (!DOMElement) { return; }
+    DOMElement.parentNode.scrollTop = DOMElement.offsetTop;
   }
 
   componentDidMount() {
     if (this.props.autodelete) {
       // this.remove(3000);
     }
-    console.log(this);
+    this._scrollTo();
   }
 
   render() {
     let { type, message } = this.props;
 
     return (
-      <div id={type} className={ classNames('flash-message',
+      <div id={this.id} className={ classNames('flash-message',
                                   type,
                                   { 'closed': this.state.closed, 
                                     'must-be-removed': this.state.mustBeRemoved }) }

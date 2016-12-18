@@ -39,7 +39,7 @@ const validate = values => {
 
 class SignUpForm extends Component {
   render() {
-    const { handleSubmit, pristine, submitting } = this.props;
+    const { handleSubmit, submitting } = this.props;
     return (
       <div className='SignIn'>
         <h2 className='bordered-title'>S'inscrire</h2>
@@ -50,7 +50,7 @@ class SignUpForm extends Component {
           <Field name='password_confirmation' type='password' component={ InputLitteral } label='Confirmer mot de passe'/>
 
           <div className='buttons-container fieldset'>
-            <FormButton design='validation' text={ "S'inscrire" } type='submit' disabled={ pristine || submitting } />
+            <FormButton design='validation' text={ "S'inscrire" } type='submit' disabled={ submitting } />
           </div>
         </form>
       </div>

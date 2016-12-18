@@ -23,14 +23,6 @@ class InputFile extends Component {
     this.imagerequirements = 'Taille maximale autorisée : 4,2 Mo | Formats acceptés : .jp(e)g, .png, .gif';
   }
 
-  componentDidMount() {
-    // console.log(Utils.getFileObject(this.props.input.value));
-    // var image = new File([this.props.input.value], null, null);
-    // this.props.input.onChange(image);
-
-    // console.log("image", image)
-  }
-
   _openFM = () => {
     this.dropzone.open()
   }
@@ -38,8 +30,6 @@ class InputFile extends Component {
   _removeImage = () => {
     document.getElementById('uploadImage').setAttribute('src', '');
     this.setState({ imagePreview: null });
-
-    this.props.input.onChange(null);
     
     this.props.onImageUpdated(true);
   }
