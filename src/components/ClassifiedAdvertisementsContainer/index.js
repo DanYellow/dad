@@ -12,7 +12,7 @@ import FlashMessage from '../FlashMessage';
 import Loader from '../Loader';
 import NoResults from '../NoResults';
 
-// import Utils from '../../utils/Utils';
+import Utils from '../../utils/Utils';
 
 
 import './style.scss';
@@ -30,7 +30,7 @@ class ClassifiedAdvertisementsContainer extends Component {
 
   componentDidMount() {
     const paramsURL = { p: this.props.params.page, q: this.props.params.query, cat: this.props.params.category }
-    APIManager.getClassifiedAdvertisements(paramsURL, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
+    this._getClassifiedAdvertisements(paramsURL);
   }
 
   componentDidUpdate(prevProps) {
@@ -42,12 +42,30 @@ class ClassifiedAdvertisementsContainer extends Component {
 
     let oldCategory = prevProps.params.category;
     let currentCategory = this.props.params.category;
+
+    window.localStorage.setItem('session_expire', false);
     
     if (currentId !== oldId || currentQuery !== oldQuery || oldCategory !== currentCategory) {
       this.setState({ isLoading: true });
       const paramsURL = {p: currentId, q: currentQuery, cat: currentCategory}
-      APIManager.getClassifiedAdvertisements(paramsURL, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
+      this._getClassifiedAdvertisements(paramsURL);
     };
+  }
+
+  _getClassifiedAdvertisements(paramsURL) {
+    if (this.props.env === 'public') {
+      APIManager.getClassifiedAdvertisements(paramsURL, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this));
+    } else {
+      if (Utils.isTokenValid()) {
+        APIManager.getClassifiedAdvertisements(paramsURL, this._getAdvertisementsSuccess.bind(this), this._getAdvertisementsFail.bind(this), true);
+      } else {
+        this.setState({ isLoading: false });
+
+        window.localStorage.setItem('session_expire', true);
+        let { router } = this.props;
+        router.push(`/classified_advertisements/1`);
+      }
+    }
   }
 
   _getAdvertisementsSuccess(response) {
@@ -57,7 +75,7 @@ class ClassifiedAdvertisementsContainer extends Component {
 
   _getAdvertisementsFail(error) {
     this.setState({ failAPIQuery: true, isLoading: false });
-    this._scrollToId('error');
+    // this._scrollToId('error');
   }
 
   _scrollToId(id) {
@@ -104,6 +122,8 @@ class ClassifiedAdvertisementsContainer extends Component {
       <div className="App">
         { this.props.children }
         { this.state.failAPIQuery && <FlashMessage message='Une erreur est survenue' type='error' autodelete={true} /> }
+        
+        { (Boolean(window.localStorage.getItem('session_expire')) === true) && <FlashMessage message='Votre session a expiré' type='error' autodelete={true} /> }
         
         { (Object.keys(this.state.APIDatas).length > 0 && !this.state.isLoading) && this._renderResults() }
         { (Object.keys(this.state.APIDatas).length === 0 || this.state.isLoading) && <Loader /> }

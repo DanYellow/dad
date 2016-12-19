@@ -32,10 +32,13 @@ export default class APIManager {
         message = 'Cet utilisateur n\'existe pas';
         break;
       case 1010:
-        message = 'Votre compte a été crée, vous allez recevoir un mail de confirmation.';
+        message = 'Votre compte a été crée, vous pouvez vous connecter.';
         break;
       case 1011:
         message = 'Vous êtes connecté(e). Vous allez être redirigé vers l\'accueil';
+        break;
+      case 1012:
+        message = 'Mot de passe incorrect';
         break;
         
       default:
@@ -62,8 +65,13 @@ export default class APIManager {
    * @param  {[type]} errorCallback   Callback function fail to call when API call failed
    * @return null
    */
-  static getClassifiedAdvertisements(params={p: 1, q: null, cat: null}, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisements/${params.p}${Utils.objectToQueryString(params)}`, APIManager.getConfig());
+  static getClassifiedAdvertisements(params={p: 1, q: null, cat: null}, successCallback, errorCallback, currentUser = false) {
+    let url = `${APIManager.baseURL}/classified_advertisements/${params.p}${Utils.objectToQueryString(params)}`
+    if (currentUser) {
+      url = `${APIManager.baseURL}/me/classified_advertisements/${params.p}${Utils.objectToQueryString(params)}`
+    }
+
+    let request = new Request(url, APIManager.getConfig());
     fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();
     }).then(function(data) {

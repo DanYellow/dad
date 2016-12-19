@@ -42,7 +42,7 @@ class Header extends Component {
       <nav className='navigation-header'>
         <ul>
           <li>
-            <Link to='admin/mycas' activeClassName='active'>
+            <Link to='admin/my_classified_advertisements/' activeClassName='active'>
               <span>Mes annonces</span>
             </Link>
           </li>

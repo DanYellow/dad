@@ -39,7 +39,11 @@ ReactDOM.render(
       <Route path='classified_advertisements(/:page)(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
       
       <Route path='admin'>
-        <Route path='mycas(/:page)(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='back' {...props} />)} />
+        <Route path='/my_classified_advertisements'>
+          <IndexRedirect to='1' />
+        </Route>
+        <IndexRedirect to='my_classified_advertisements/1' />
+        <Route path='my_classified_advertisements(/:page)(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='back' {...props} />)} />
       </Route>
       
       <Route path='classified_advertisement/create' component={ClassifiedAdvertisementFormContainer} />
