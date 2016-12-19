@@ -72,7 +72,7 @@ class ClassifiedAdvertisementFormContainer extends Component {
 
     setTimeout(() => {
       router.push(url);
-    }, 1500);
+    }, 300);
   }
 
   _closePopin = () => {
