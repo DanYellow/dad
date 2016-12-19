@@ -28,8 +28,9 @@ class ClassifiedAdvertisement extends Component {
   }
 
   render() {
-    let { title, price, created_at, category, description, is_mine, image } = this.props;
-    let productInfos = { seller: this.props.seller, price }
+    const { resource, siblings } = this.props;
+    const { title, price, created_at, category, description, is_mine, image, seller } = resource;
+    const productInfos = { seller: seller, price }
 
     let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
     let altImg = title + ' image';
@@ -54,6 +55,15 @@ class ClassifiedAdvertisement extends Component {
             </header>
             <ProductInfos {...productInfos} />
           </article>
+        </section>
+        <section className="siblings">
+          <ul>
+            <li>{ siblings.prev && 
+              <Link to={ '/classified_advertisement/' + siblings.prev}> <span className='icon-arrow-left'></span> Annonce précédente</Link>}</li>
+            <li>{ siblings.next && 
+              <Link to={ '/classified_advertisement/' + siblings.next }><span className='icon-arrow-right'></span> Annonce suivante</Link>
+            }</li>
+          </ul>
         </section>
         { is_mine && this._renderFooter() }
 

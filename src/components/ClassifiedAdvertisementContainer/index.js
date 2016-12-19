@@ -10,6 +10,8 @@ import NoResults from '../NoResults';
 
 import './style.scss';
 
+// bjnrky
+
 class ClassifiedAdvertisementContainer extends Component {
   constructor(props) {
     super(props);
@@ -30,6 +32,13 @@ class ClassifiedAdvertisementContainer extends Component {
       this.props.classifiedAdvertisementUpdated({});
       this._getAdvertisementSuccess(this.props.updatedCADatas)
     }
+
+    let oldId = prevProps.params.id;
+    let currentId = this.props.params.id;
+    if (currentId !== oldId && !this.props.isCAUpdated) {
+      this.setState({ isLoading: true });
+      APIManager.getClassifiedAdvertisement(this.props.params.id, this._getAdvertisementSuccess.bind(this), this._getAdvertisementFail.bind(this));
+    }
   }
 
   _getAdvertisementSuccess(response) {
@@ -49,7 +58,7 @@ class ClassifiedAdvertisementContainer extends Component {
   }
 
   _renderClassifiedAdvertisement() {
-    return <ClassifiedAdvertisement { ...this.state.APIDatas.data.resource } />
+    return <ClassifiedAdvertisement {...{resource: this.state.APIDatas.data.resource, siblings: this.state.APIDatas.siblings || {} }} />
   }
 
   render() {

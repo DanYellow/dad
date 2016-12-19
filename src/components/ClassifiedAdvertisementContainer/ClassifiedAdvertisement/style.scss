@@ -25,7 +25,7 @@
   .wrapper {
     display: flex;
     flex-direction: row;
-
+    margin-bottom: 22px;
     figure {
       height: 250px;
       width: 250px;
@@ -90,12 +90,28 @@
       }
     }
   }
+
+  .siblings {
+    ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    a {
+      font-family: $opensans-semibold;
+      color: $primary-red;
+      font-size: 1rem;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
 }
 
 
 .Insert {
   margin-top: auto;
-
   .wrapper {
     display: inline-block;
     padding: 16px 50px 16px 16px;
