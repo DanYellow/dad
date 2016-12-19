@@ -103,4 +103,15 @@ export default class Utils {
       return { options: [] };
     });
   }
+
+  static getCurrentEvent(path) {
+    let env = 'public';
+    if (path.includes('sign')) {
+      env = 'login'
+    } else if (path.includes('admin')) {
+      env = 'back'
+    }
+
+    return env;
+  }
 }

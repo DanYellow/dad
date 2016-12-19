@@ -22,10 +22,10 @@
     }
   }
 
-  .wrapper {
+  & > .wrapper {
     display: flex;
     flex-direction: row;
-    margin-bottom: 22px;
+    margin-bottom: 30px;
     figure {
       height: 250px;
       width: 250px;
@@ -120,6 +120,7 @@
 
   ul {
     display: flex;
+    // flex: 1;
   }
 
   li {
@@ -128,6 +129,13 @@
     display: inline-block;
     vertical-align: top;
     height: 100%;
+
+    a {
+      color: $text-color;
+      &:hover, &:active, &:visited {
+        color: $primary-red!important;
+      }
+    }
 
     h5 {
       font-size: 18px;

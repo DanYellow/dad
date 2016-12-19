@@ -8,12 +8,12 @@ import './style.scss';
 export default class ClassifiedAdvertisementsList extends Component {
 
   render() {
-    let { list } = this.props;
+    let { list, env } = this.props;
 
     return (
       <ul className='classified_advertisements'>
         {list.map((classifiedAdvertisement) => {
-          return <ClassifiedAdvertisementListItem {...classifiedAdvertisement} key={ uuid.v1() } />
+          return <ClassifiedAdvertisementListItem { ...classifiedAdvertisement } env={ env } key={ uuid.v1() } />
         })}
       </ul>
     );

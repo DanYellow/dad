@@ -14,12 +14,7 @@ class App extends Component {
       document.getElementsByTagName('body')[0].classList.remove('show-popin');
     }
     
-    let env = 'public';
-    if (this.props.location.pathname.includes('sign')) {
-      env = 'login'
-    } else if (this.props.location.pathname.includes('admin')) {
-      env = 'back'
-    }
+    const env = Utils.getCurrentEvent(this.props.location.pathname);
 
     return (
       <div>

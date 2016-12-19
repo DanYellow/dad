@@ -56,13 +56,13 @@ class Pagination extends Component {
     return (
       <div className='pagination'>
         <Link to={ 'classified_advertisements/' + pagination.prev } 
-              className={ classNames('icon-arrow pagination-arrow',
+              className={ classNames('icon-leftarrow pagination-arrow',
                                   { 'disabled': !pagination.prev }) }/>
         <ul className='number-items'>
           { this._getListNumbers(pagination) }
         </ul>
         <Link to={ 'classified_advertisements/' + pagination.next } 
-              className={ classNames('icon-arrow-right icon-arrow pagination-arrow',
+              className={ classNames('icon-rightarrow pagination-arrow',
                                   { 'disabled': !pagination.next }) }/>
       </div>
     );

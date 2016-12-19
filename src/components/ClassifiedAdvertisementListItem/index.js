@@ -11,15 +11,19 @@ import './style.scss';
 
 export default class ClassifiedAdvertisementListItem extends Component {
   render() {
-    let { id, title, price, created_at, category, image } = this.props;
-    let { location } = this.props.seller;
+    const { id, title, price, created_at, category, image, env } = this.props;
+    const { location, pseudo } = this.props.seller;
+    const createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
+    const altImg = 'Illustration annonce ' + title;
 
-    let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
-    let altImg = 'Annonce ' + title + ' image';
+    let url = '/classified_advertisement/' + id;
+    if (env === 'back') {
+      url = 'admin/classified_advertisement/' + id;
+    }
 
     return (
       <li className='classified_advertisement'>
-        <Link to={ '/classified_advertisement/' + id } title={ 'Annonce : ' + title }>
+        <Link to={ url } title={ 'Annonce : ' + title }>
           <figure>
             { image && <img src={ image } alt={ altImg } /> }
             { !image && <PlaceholderImage /> }
@@ -28,7 +32,7 @@ export default class ClassifiedAdvertisementListItem extends Component {
             <h3>{ title }</h3>
             { category && <Category {...category} /> }
             <p>{ location }</p>
-            <p className='date'>{ 'Posté le ' + createdAt }</p>
+            <p className='date'>{ 'Posté le ' + createdAt + ' par <b>' + pseudo + '</b>' }</p>
           </article>
           { price > 0 && <h3 className='price'>{ Utils.formatCurrency(price) }</h3>}
           { price === 0 && <h3 className='price'>{ 'Gratuit' }</h3>}

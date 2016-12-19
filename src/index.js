@@ -39,11 +39,17 @@ ReactDOM.render(
       <Route path='classified_advertisements(/:page)(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
       
       <Route path='admin'>
-        <Route path='/my_classified_advertisements'>
+        <Route path='classified_advertisements'>
           <IndexRedirect to='1' />
         </Route>
-        <IndexRedirect to='my_classified_advertisements/1' />
-        <Route path='my_classified_advertisements(/:page)(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='back' {...props} />)} />
+        <IndexRedirect to='classified_advertisements/1' />
+        <Route path='classified_advertisements(/:page)(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='back' {...props} />)} />
+        <Route path='classified_advertisement'>
+          <Route path=':id' component={(props) => (<ClassifiedAdvertisementContainer {...props} />)}>
+            <Route path='edit' component={ClassifiedAdvertisementFormContainer} />
+            <Route path='delete' component={ClassifiedAdvertisementFormContainer} />
+          </Route>
+        </Route>
       </Route>
       
       <Route path='classified_advertisement/create' component={ClassifiedAdvertisementFormContainer} />
@@ -54,9 +60,9 @@ ReactDOM.render(
         </Route>
       </Route>
 
-      <Route path="signin" component={(props) => (<SignInSignUpContainer type='signin' />)} />
-      <Route path="signup" component={(props) => (<SignInSignUpContainer type='signup' />)} />
-      <Route path="logout" component={(props) => (<SignInSignUpContainer type='signup' />)} />
+      <Route path='signin' component={(props) => (<SignInSignUpContainer type='signin' />)} />
+      <Route path='signup' component={(props) => (<SignInSignUpContainer type='signup' />)} />
+      <Route path='logout' component={(props) => (<SignInSignUpContainer type='signup' />)} />
       
       <Route path='*' component={NotFoundPage}/>
     </Route>

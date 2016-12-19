@@ -34,13 +34,13 @@ class ClassifiedAdvertisementsContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    let oldId = prevProps.params.page;
-    let currentId = this.props.params.page;
-
-    let oldQuery = prevProps.params.query;
-    let currentQuery = this.props.params.query;
-
-    let oldCategory = prevProps.params.category;
+    let oldId           = prevProps.params.page;
+    let currentId       = this.props.params.page;
+    
+    let oldQuery        = prevProps.params.query;
+    let currentQuery    = this.props.params.query;
+    
+    let oldCategory     = prevProps.params.category;
     let currentCategory = this.props.params.category;
 
     window.localStorage.setItem('session_expire', false);
@@ -70,7 +70,7 @@ class ClassifiedAdvertisementsContainer extends Component {
 
   _getAdvertisementsSuccess(response) {
     this.setState({ failAPIQuery: false, APIDatas:response, isLoading: false });
-    this._scrollToId('title');
+    // this._scrollToId('title');
   }
 
   _getAdvertisementsFail(error) {
@@ -123,7 +123,7 @@ class ClassifiedAdvertisementsContainer extends Component {
         { this.props.children }
         { this.state.failAPIQuery && <FlashMessage message='Une erreur est survenue' type='error' autodelete={true} /> }
         
-        { (Boolean(window.localStorage.getItem('session_expire')) === true) && <FlashMessage message='Votre session a expiré' type='error' autodelete={true} /> }
+        { (JSON.parse(window.localStorage.getItem('session_expire')) === true) && <FlashMessage message='Votre session a expiré' type='error' autodelete={true} /> }
         
         { (Object.keys(this.state.APIDatas).length > 0 && !this.state.isLoading) && this._renderResults() }
         { (Object.keys(this.state.APIDatas).length === 0 || this.state.isLoading) && <Loader /> }
