@@ -32,8 +32,8 @@ class ClassifiedAdvertisement extends Component {
     const { title, price, created_at, category, description, is_mine, image, seller } = resource;
     const productInfos = { seller: seller, price }
 
-    let createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
-    let altImg = title + ' image';
+    const createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
+    const altImg    = title + ' image';
 
     return (
       <div className="ClassifiedAdvertisement">
@@ -59,9 +59,9 @@ class ClassifiedAdvertisement extends Component {
         <section className="siblings">
           <ul>
             <li>{ siblings.prev && 
-              <Link to={ '/classified_advertisement/' + siblings.prev}> <span className='icon-arrow-left'></span> Annonce précédente</Link>}</li>
+              <Link to={ '/classified_advertisement/' + siblings.prev}><span className='icon-arrow'></span>Annonce précédente</Link>}</li>
             <li>{ siblings.next && 
-              <Link to={ '/classified_advertisement/' + siblings.next }><span className='icon-arrow-right'></span> Annonce suivante</Link>
+              <Link to={ '/classified_advertisement/' + siblings.next }>Annonce suivante<span className='icon-arrow-right icon-arrow'></span></Link>
             }</li>
           </ul>
         </section>
@@ -79,10 +79,8 @@ const ProductInfos = function (props) {
   if (price === 0) {
     price = 'Gratuit';
   } else {
-    // price = price;
     price = Utils.formatCurrency(price);
   }
-  
   let { seller } = props;
 
   return (

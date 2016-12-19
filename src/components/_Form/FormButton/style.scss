@@ -4,7 +4,7 @@
 $validation-color: #69b302;
 $cancel-color: #b70011;
 
-button.form-button, .form-button {
+button.form-button, a.form-button {
   border-radius: 5px;
   border: 2px solid transparent;
   padding: 15px 23px;
@@ -49,7 +49,6 @@ button.form-button, .form-button {
     cursor: not-allowed;
     &:hover {
       background-color: transparent;
-
     }
   }
 }

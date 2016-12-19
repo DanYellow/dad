@@ -6,6 +6,7 @@ import APIManager from '../../utils/APIManager';
 // import ClassfiedAdvertisements from './../../fixtures/classified_advertisements.json';
 
 import Pagination from '../Pagination';
+import { Button } from '../_Form/FormButton';
 import ClassifiedAdvertisementsList from '../ClassifiedAdvertisementsList';
 import FlashMessage from '../FlashMessage';
 import Loader from '../Loader';
@@ -89,8 +90,11 @@ class ClassifiedAdvertisementsContainer extends Component {
         { this.props.env === 'back' && <h2 id='title' className='bordered-title'>Mes annonces</h2> }
 
         <ClassifiedAdvertisementsList list={ list } env={ this.props.env } />
-
         { (pagination.prev || pagination.next) && <Pagination pagination={ pagination } /> }
+        <div className='buttons-container fieldset'>
+
+          <Button design='validation' text='Publier une annonce' link='/classified_advertisement/create' />
+        </div>
       </div>
     );
   }
