@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 import uuid from 'node-uuid';
 
+import Utils from '../../utils/Utils';
+
 import './style.scss';
 
 export default class FlashMessage extends Component {
@@ -44,8 +46,11 @@ export default class FlashMessage extends Component {
     if (!DOMElement) { return; }
 
     setTimeout(() => {
-      // document.getElementById(this.id).scrollIntoView();
-      DOMElement.parentNode.scrollTop = DOMElement.offsetTop;
+      if (Utils.aPopinIsOpened()) {
+        DOMElement.parentNode.scrollTop = DOMElement.offsetTop;
+      } else {
+        document.getElementById(this.id).scrollIntoView();
+      }
     }, 1000);
   }
 

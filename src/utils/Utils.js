@@ -70,7 +70,7 @@ export default class Utils {
   static isTokenValid() {
     const token            = window.localStorage.getItem('token_expire_date') || 0;
     const currentTimeStamp = Math.floor(Date.now() / 1000);
-    return(token >= currentTimeStamp);
+    return (token >= currentTimeStamp);
   }
 
   /**
@@ -78,7 +78,7 @@ export default class Utils {
    * @param  {[type]} currentPath [description]
    * @return {Boolean}             
    */
-  static aPopinIsOpened(currentPath) {
+  static aPopinIsOpened(currentPath = window.location.hash) {
     if (['edit', 'delete'].some(function(v) { return currentPath.indexOf(v) >= 0; })) {
       return true;
     } else {

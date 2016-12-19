@@ -21,16 +21,16 @@ a {
   text-decoration: none;
 }
 
+b {
+  font-family: $opensans-bold;
+}
+
 .reset {
   background: none;
   outline: none;
   border: none;
   appearance: button;
   user-select: none;
-}
-
-.icon-arrow-right {
-  transform: rotate(180deg);
 }
 
 .icon-download {

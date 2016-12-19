@@ -78,15 +78,16 @@ class ClassifiedAdvertisementFormContainer extends Component {
   _closePopin = () => {
     this.setState({ closePopin: true });
 
+    const url = this.props.location.pathname.replace('/' + this.props.route.path, '')
     setTimeout(() => {
-      this._redirectUser(`/classified_advertisement/${this.props.params.id}`);
+      this._redirectUser(url);
     }, 300);
   }
 
   _renderPopinContent() {
     return (
       <div className={ classNames('PopinOverlay',
-                                  { 'small': (this.props.router.routes[3].path === 'delete' || !this.props.resource.is_mine) },
+                                  { 'small': (this.props.location.pathname.includes('delete') || !this.props.resource.is_mine) },
                                   { 'closed': this.state.closePopin }) }>
         <div className={ classNames('PopinForm',
                                   { 'closed': this.state.closePopin }) }>
@@ -95,8 +96,8 @@ class ClassifiedAdvertisementFormContainer extends Component {
             { this.state.isSuccess && <FlashMessage message={ APIManager.getMessageForStatusCode(this.state.APIResponseCode) } type='success' onClick={ this._handleClick } /> }
 
             { this.state.isLoading && <Loader /> }
-            { (this.props.resource.is_mine && this.props.router.routes[3].path === 'edit') && <ClassifiedAdvertisementForm onSubmit={ this._handleSubmit } initialValues={ {...this.props.resource, ...{has_updated_image: false}} } type='update' onClick={ this._closePopin } /> }
-            { (this.props.resource.is_mine && this.props.router.routes[3].path === 'delete') && <ClassifiedAdvertisementFormDelete onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
+            { (this.props.resource.is_mine && this.props.location.pathname.includes('edit')) && <ClassifiedAdvertisementForm onSubmit={ this._handleSubmit } initialValues={ {...this.props.resource, ...{has_updated_image: false}} } type='update' onClick={ this._closePopin } /> }
+            { (this.props.resource.is_mine && this.props.location.pathname.includes('delete')) && <ClassifiedAdvertisementFormDelete onSubmit={ this._handleSubmit } initialValues={ this.props.resource } onClick={ this._closePopin } /> }
             
             { !this.props.resource.is_mine && <PopinInfos type='forbidden' message={"Vous n'avez pas accès à ce contenu. \nSi vous êtes le propriétaire de cette annonce, veuillez vous connecter."} onClick={ this._closePopin } /> }
           </div>

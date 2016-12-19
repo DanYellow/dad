@@ -18,6 +18,7 @@ const store = createStore(reducer)
 
 import AppContainer from './containers/AppContainer';
 import Events from './utils/Events';
+import Utils from './utils/Utils';
 new Events();
 
 import ClassifiedAdvertisementsContainer from './components/ClassifiedAdvertisementsContainer';
@@ -27,6 +28,15 @@ import NotFoundPage from './components/NotFoundPage';
 import SignInSignUpContainer from './components/SignInSignUpContainer';
 
 import './index.scss';
+
+function requireAuth(nextState, replace) {
+  if (!Utils.isTokenValid()) {
+    replace({
+      pathname: 'classified_advertisements/1',
+      state: { tokenIsInvalid: true }
+    })
+  }
+}
 
 ReactDOM.render(
   <Provider store={store}>
@@ -38,7 +48,7 @@ ReactDOM.render(
       <IndexRedirect to='classified_advertisements/1' />
       <Route path='classified_advertisements(/:page)(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
       
-      <Route path='admin'>
+      <Route path='admin' onEnter={requireAuth}>
         <Route path='classified_advertisements'>
           <IndexRedirect to='1' />
         </Route>

@@ -104,15 +104,46 @@
       text-decoration: underline;
       &:hover {
         text-decoration: none;
+        color: $text-color;
       }
     }
   }
 }
 
+.Toolbar.Insert {
+  .wrapper {
+    padding: 16px;
+    display: flex;
+  }
+
+  ul {
+    flex: 1;
+  }
+  
+  li {
+    text-align: center;
+    height: 100%;
+    flex: 1;
+    h5 {
+      display: inline;
+      font-size: 16px;
+    }
+    & > * {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      & > *:last-child {
+        margin-top: auto;
+      }
+    }
+  }
+} 
+
 .Insert {
   margin-top: auto;
   .wrapper {
     display: inline-block;
+    
     padding: 16px 50px 16px 16px;
     background-color: $dark-white;
     border: 1px solid $primary-red;
@@ -129,12 +160,20 @@
     display: inline-block;
     vertical-align: top;
     height: 100%;
+    
 
     a {
       color: $text-color;
-      &:hover, &:active, &:visited {
+      h5 {
+        color: inherit;
+      }
+      &:hover, &:active {
         color: $primary-red!important;
       }
+    }
+
+    .icon {
+      font-size: 70px;
     }
 
     h5 {

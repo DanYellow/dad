@@ -47,8 +47,7 @@
 
       &:focus {
         outline: none;
-        border-top: 1px solid $primary-red;
-        border-left: 1px solid $primary-red;
+        border-bottom: 2px solid $text-color;
       }
 
       :placeholder-shown {

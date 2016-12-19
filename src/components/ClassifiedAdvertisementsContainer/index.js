@@ -20,7 +20,6 @@ import './style.scss';
 class ClassifiedAdvertisementsContainer extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       failAPIQuery: false,
       APIDatas: {},
@@ -118,12 +117,18 @@ class ClassifiedAdvertisementsContainer extends Component {
   }
 
   render() {
+    let isSessionExpire = false;
+
+    if (this.props.location.state && this.props.location.state.tokenIsInvalid) {
+      isSessionExpire = true;
+    }
+
     return (
       <div className="App">
         { this.props.children }
         { this.state.failAPIQuery && <FlashMessage message='Une erreur est survenue' type='error' autodelete={true} /> }
         
-        { (JSON.parse(window.localStorage.getItem('session_expire')) === true) && <FlashMessage message='Votre session a expiré' type='error' autodelete={true} /> }
+        { isSessionExpire && <FlashMessage message='Votre session a expiré' type='error' autodelete={true} /> }
         
         { (Object.keys(this.state.APIDatas).length > 0 && !this.state.isLoading) && this._renderResults() }
         { (Object.keys(this.state.APIDatas).length === 0 || this.state.isLoading) && <Loader /> }

@@ -32,7 +32,7 @@ export default class ClassifiedAdvertisementListItem extends Component {
             <h3>{ title }</h3>
             { category && <Category {...category} /> }
             <p>{ location }</p>
-            <p className='date'>{ 'Posté le ' + createdAt + ' par <b>' + pseudo + '</b>' }</p>
+            <p className='date' dangerouslySetInnerHTML={{ __html: 'Posté le ' + createdAt + ' par <b>' + pseudo + '</b>' }} />
           </article>
           { price > 0 && <h3 className='price'>{ Utils.formatCurrency(price) }</h3>}
           { price === 0 && <h3 className='price'>{ 'Gratuit' }</h3>}

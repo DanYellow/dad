@@ -91,21 +91,23 @@ class Toolbar extends Component {
     let saleText = (isActive) ? 'Déclarer comme vendu' : '(Re)mettre en vente';
 
     return (
-      <div className='Insert'>
+      <div className='Insert Toolbar'>
        <div className='wrapper'>
         <ul>
           <li>
             <h5>{ saleText }</h5>
-
+            <span className='icon-sold icon' />
           </li>
           <li>
             <Link to={ location.pathname + '/edit' }>
               <h5>Editer</h5>
+              <span className='icon-edit icon' />
             </Link>
           </li>
           <li>
             <Link to={ location.pathname + '/delete' }>
               <h5>Supprimer</h5>
+              <span className='icon-trashcan icon' />
             </Link>
           </li>
          </ul>
