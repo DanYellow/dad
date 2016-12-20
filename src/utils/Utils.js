@@ -104,7 +104,7 @@ export default class Utils {
     });
   }
 
-  static getCurrentEvent(path) {
+  static getCurrentEvent(path = window.location.hash) {
     let env = 'public';
     if (path.includes('sign')) {
       env = 'login'
@@ -113,5 +113,9 @@ export default class Utils {
     }
 
     return env;
+  }
+
+  static isAdminEnv(path) {
+    return (Utils.getCurrentEvent(path) === 'back') ? 1 : 0;
   }
 }

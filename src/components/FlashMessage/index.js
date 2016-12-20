@@ -37,7 +37,7 @@ export default class FlashMessage extends Component {
 
     setTimeout(() => {
       this.setState({ mustBeRemoved: !this.state.mustBeRemoved });
-      this.props.onClick();
+      // this.props.onClick();
     }, delay);
   }
 
@@ -56,14 +56,13 @@ export default class FlashMessage extends Component {
 
   componentDidMount() {
     if (this.props.autodelete) {
-      // this.remove(3000);
+      this._remove(3000);
     }
     this._scrollTo();
   }
 
-  render() {
+  _render() {
     let { type, message } = this.props;
-
     return (
       <div id={this.id} className={ classNames('flash-message',
                                   type,
@@ -73,7 +72,12 @@ export default class FlashMessage extends Component {
         <p>{ message || 'Pas de message ?!' }</p>
         <button title='Fermer message' className='reset icon-close' onClick={ (e) => this._remove(e) }></button>
       </div>
-    );
+    )
+  }
+
+  render() {
+    const render = (this.state.mustBeRemoved) ? null : this._render();
+    return render;
   }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, hashHistory, IndexRedirect } from 'react-router'
-
+import Helmet from 'react-helmet'
 
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
@@ -41,6 +41,11 @@ function requireAuth(nextState, replace) {
 ReactDOM.render(
   <Provider store={store}>
   <Router history={hashHistory}>
+    <Helmet
+        title="De Digitalien à Digitalien"
+        defaultTitle="De Digitalien à Digitalien"
+        titleTemplate="D-A-D | %s"
+    />
     <Route path='/' component={AppContainer}>
       <Route path='/classified_advertisements'>
         <IndexRedirect to='1' />
@@ -64,7 +69,7 @@ ReactDOM.render(
       
       <Route path='classified_advertisement/create' component={ClassifiedAdvertisementFormContainer} />
       <Route path='classified_advertisement'>
-        <Route path=':id' component={(props) => (<ClassifiedAdvertisementContainer {...props} />)}>
+        <Route path=':id' component={(props) => (<ClassifiedAdvertisementContainer {...props} env='admin' />)}>
           <Route path='edit' component={ClassifiedAdvertisementFormContainer} />
           <Route path='delete' component={ClassifiedAdvertisementFormContainer} />
         </Route>

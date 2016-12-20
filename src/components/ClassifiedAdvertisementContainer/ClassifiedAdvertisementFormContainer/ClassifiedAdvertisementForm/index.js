@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import Helmet from 'react-helmet'
 
 import FormButton from '../../../_Form/FormButton';
 import InputLitteral from '../../../_Form/InputLitteral';
@@ -67,6 +68,9 @@ class ClassifiedAdvertisementForm extends Component {
       <div>
         { this.props.type === 'update' && this._renderUpdateHeader() }
         { this.props.type === 'create' && this._renderCreateHeader() }
+
+        { this.props.type === 'update' && <Helmet title={ "Mettre à jour l'annonce" } /> }
+        { this.props.type === 'create' && <Helmet title={ "Créer une annonce" } /> }
 
         <form onSubmit={ handleSubmit } className='form' encType='multipart/form-data'>
           { initialValues.id && <input type='hidden' value={ initialValues.id } name='id' /> }

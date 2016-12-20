@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 
 import APIManager from '../../utils/APIManager';
+import Utils from '../../utils/Utils';
 
 import ClassifiedAdvertisement from './ClassifiedAdvertisement';
 
@@ -24,7 +25,7 @@ class ClassifiedAdvertisementContainer extends Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    APIManager.getClassifiedAdvertisement(this.props.params.id, this._getAdvertisementSuccess.bind(this), this._getAdvertisementFail.bind(this));
+    APIManager.getClassifiedAdvertisement({ id: this.props.params.id, is_admin_part: Utils.isAdminEnv() }, this._getAdvertisementSuccess.bind(this), this._getAdvertisementFail.bind(this));
   }
 
   componentDidUpdate(prevProps) {
@@ -37,7 +38,7 @@ class ClassifiedAdvertisementContainer extends Component {
     let currentId = this.props.params.id;
     if (currentId !== oldId && !this.props.isCAUpdated) {
       this.setState({ isLoading: true });
-      APIManager.getClassifiedAdvertisement(this.props.params.id, this._getAdvertisementSuccess.bind(this), this._getAdvertisementFail.bind(this));
+      APIManager.getClassifiedAdvertisement({ id: this.props.params.id, is_admin_part: Utils.isAdminEnv() }, this._getAdvertisementSuccess.bind(this), this._getAdvertisementFail.bind(this));
     }
   }
 

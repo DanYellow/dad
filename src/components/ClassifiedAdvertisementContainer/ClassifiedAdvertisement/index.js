@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router';
+import Helmet from "react-helmet";
 
 import moment from 'moment';
 
@@ -27,19 +28,29 @@ class ClassifiedAdvertisement extends Component {
     )
   }
 
+  _getSiblingURL(id, env) {
+    let url = '/classified_advertisement/' + id;
+    if (env === 'back') {
+      url = 'admin/classified_advertisement/' + id;
+    }
+
+    return url;
+  }
+
   render() {
     const { resource, siblings } = this.props;
     const { title, price, created_at, category, description, is_mine, image, seller, id, is_active } = resource;
     const productInfos = { seller: seller, price }
     const toolbarDatas = { id, is_active, location: this.props.location }
-
-    const createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
-    const altImg    = title + ' image';
-
-    const env = Utils.getCurrentEvent(this.props.location.pathname);
+    
+    const createdAt    = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
+    const altImg       = title + ' image';
+    
+    const env          = Utils.getCurrentEvent(this.props.location.pathname);
 
     return (
       <div className="ClassifiedAdvertisement">
+        <Helmet title={ 'Annonce ' + title + ' par ' + seller.pseudo } />
         <header>
           <h2>{ title }</h2>
           { category && <Category {...category} /> }
@@ -63,9 +74,9 @@ class ClassifiedAdvertisement extends Component {
         <section className="siblings">
           <ul>
             <li>{ siblings.prev && 
-              <Link to={ '/classified_advertisement/' + siblings.prev}><span className='icon-leftarrow'></span>Annonce précédente</Link>}</li>
+              <Link to={ this._getSiblingURL(siblings.prev, env) }><span className='icon-leftarrow'></span>Annonce précédente</Link>}</li>
             <li>{ siblings.next && 
-              <Link to={ '/classified_advertisement/' + siblings.next }>Annonce suivante<span className='icon-rightarrow'></span></Link>
+              <Link to={ this._getSiblingURL(siblings.next, env) }>Annonce suivante<span className='icon-rightarrow'></span></Link>
             }</li>
           </ul>
         </section>

@@ -23,7 +23,7 @@
       position: relative;
       width: 52px; height: 52px;
 
-      &:focus {
+      &:focus, &:hover {
         background: $white;
         color: $primary-red;
       }

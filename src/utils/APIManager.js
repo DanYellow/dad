@@ -40,6 +40,12 @@ export default class APIManager {
       case 1012:
         message = 'Mot de passe incorrect';
         break;
+      case 1013:
+        message = 'Format d\'image incorrect. Seul les formats suivants sont acceptés : .png, .jp(e)g, .gif';
+        break;
+      case 1014:
+        message = 'Un lien de récupération de mot de passe vient d\'être envoyé à votre adresse mail';
+        break;
         
       default:
         message = '';
@@ -93,8 +99,8 @@ export default class APIManager {
    * @param  {Function} errorCallback   callback function fail to call when API call failed
    * @return null
    */
-  static getClassifiedAdvertisement(id, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${id}`, APIManager.getConfig());
+  static getClassifiedAdvertisement(params, successCallback, errorCallback) {
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${params.id}?is_admin_part=${params.is_admin_part}`, APIManager.getConfig());
 
     fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();

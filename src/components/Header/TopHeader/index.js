@@ -9,7 +9,7 @@ class TopHeader extends Component {
   _renderLoggedContent() {
     return (
       <ul>
-          <li className='home'><Link onlyActiveOnIndex={true} to={ '/' } activeClassName='active'>Accueil</Link></li>
+          <li className='home'><Link onlyActiveOnIndex={false} to={ 'classified_advertisements' } activeClassName='active'>Accueil</Link></li>
 
           { Utils.isTokenValid() && <li><Link to={ 'admin/classified_advertisements/' } activeClassName='active'>Mes annonces</Link></li> }
 

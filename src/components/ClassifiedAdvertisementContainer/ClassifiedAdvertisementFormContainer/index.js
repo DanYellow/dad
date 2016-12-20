@@ -24,17 +24,17 @@ class ClassifiedAdvertisementFormContainer extends Component {
       isSuccess: false,
       hasErrors: false,
       isLoading: false,
-      APIResponseCode: 0,
+      APIResponseCode: -1,
       closePopin: false
     }
   }
 
   _handleSubmit = (values) => {
     if (this.props.router.params.id && /^\d+$/.test(Number(this.props.router.params.id))) {
-      if (this.props.router.routes[3].path === 'edit') {
+      if (this.props.location.pathname.includes('edit')) {
         const formData = Utils.createFormDataObject(values);
         APIManager.updateClassifiedAdvertisement(formData, this._updateSuccess.bind(this), this._apiFail.bind(this));
-      } else {
+      } else if (this.props.location.pathname.includes('delete')) {
         APIManager.deleteClassifiedAdvertisement(values.id, this._deleteSuccess.bind(this), this._apiFail.bind(this));
       }
     } else {
@@ -51,12 +51,16 @@ class ClassifiedAdvertisementFormContainer extends Component {
   _updateSuccess(response) {
     this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
     this.props.classifiedAdvertisementUpdated(response);
-    this._redirectUser(`/classified_advertisement/${this.props.params.id}`);
+
+    const prefixURL = (Utils.isAdminEnv()) ? 'admin' : null;
+    this._redirectUser(`${prefixURL}/classified_advertisement/${this.props.params.id}`);
   }
 
   _deleteSuccess(response) {
     this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
-    this._redirectUser('/classified_advertisements/1');
+
+    const prefixURL = (Utils.isAdminEnv()) ? 'admin' : null;
+    this._redirectUser(`${prefixURL}/classified_advertisements/1`);
   }
 
   _apiFail(response) {
