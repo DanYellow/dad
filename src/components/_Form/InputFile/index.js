@@ -7,9 +7,6 @@ import './style.scss';
 
 import FormButton from '../FormButton'
 
-import Utils from '../../../utils/Utils'
-
-
 class InputFile extends Component {
   constructor(props) {
     super(props);

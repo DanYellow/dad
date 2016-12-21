@@ -59,6 +59,7 @@ class ClassifiedAdvertisementContainer extends Component {
   }
 
   _renderClassifiedAdvertisement() {
+    console.log(this.props)
     return <ClassifiedAdvertisement {...{resource: this.state.APIDatas.data.resource, siblings: this.state.APIDatas.siblings || {} }} />
   }
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import Helmet from 'react-helmet';
 
-import FormButton from '../../_Form/FormButton';
+import FormButton, { Button } from '../../_Form/FormButton';
 import InputLitteral from '../../_Form/InputLitteral';
 import ErrorMessages from '../../_Form/validation.js';
 
@@ -27,6 +28,7 @@ class SignInForm extends Component {
     const { handleSubmit, submitting } = this.props;
     return (
       <div className='SignIn'>
+        <Helmet title={ 'Connexion' } />
         <h2 className='bordered-title'>Se connecter</h2>
         <form onSubmit={ handleSubmit } className='form'>
           <Field name='username' type='text' component={InputLitteral} label='Pseudonyme / Adresse mail' maxLength="2" />
@@ -34,6 +36,7 @@ class SignInForm extends Component {
 
           <div className='buttons-container fieldset'>
             <FormButton design='validation' text='Se connecter' type='submit' disabled={ submitting } />
+            <Button design='infos' text={ "J'ai perdu mon mot de passe" } link='/forgot_password' />
           </div>
         </form>
       </div>

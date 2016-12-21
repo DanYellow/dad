@@ -8,6 +8,7 @@ import Loader from '../Loader';
 
 import SignIn from './SignInForm';
 import SignUp from './SignUpForm';
+import ForgotPasswordForm from './ForgotPasswordForm';
 
 import FlashMessage from '../FlashMessage';
 
@@ -34,6 +35,10 @@ class SignInSignUpContainer extends Component {
       APIManager.signIn(values, this._signInSuccess.bind(this), this._apiCallFail.bind(this));
     } else if (this.props.router.routes[1].path === 'signup') {
       APIManager.signUp(values, this._signUpSuccess.bind(this), this._apiCallFail.bind(this));
+    } else if (this.props.router.routes[1].path === 'forgot_password') {
+      APIManager.forgotPassword(values, this._signUpSuccess.bind(this), this._apiCallFail.bind(this));
+    } else {
+      this.setState({ isSuccess: true, isLoading: false})
     }
   }
 
@@ -49,9 +54,14 @@ class SignInSignUpContainer extends Component {
     this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
   }
 
+  _forgotPasswordSuccess(response) {
+    this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
+  }
+
   _apiCallFail(response) {
     this.setState({ hasErrors: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
   }
+
 
   _handleClick = (e) => {
     this.setState({ hasErrors: false });
@@ -73,6 +83,7 @@ class SignInSignUpContainer extends Component {
 
         { this.props.router.routes[1].path === 'signin' && <SignIn onSubmit={ this._handleSubmit }/> }
         { this.props.router.routes[1].path === 'signup' && <SignUp onSubmit={ this._handleSubmit }/> }
+        { this.props.router.routes[1].path === 'forgot_password' && <ForgotPasswordForm onSubmit={ this._handleSubmit }/> }
         { this.state.isLoading && <Loader /> }
       </div>
     );

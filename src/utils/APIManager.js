@@ -188,6 +188,22 @@ export default class APIManager {
     });
   }
 
+  static updateStatusClassifiedAdvertisement(id, successCallback, errorCallback) {
+    let request = new Request(`${APIManager.baseURL}/classified_advertisement/activate/${id}`, APIManager.getConfig());
+
+    fetch(request, {method: 'POST'}).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      if (data.status_code > 210 || !data.success) {
+        errorCallback(data);
+      } else {
+        successCallback(data);
+      }
+    }).catch(function(data) {
+      errorCallback(data);
+    });
+  }
+
 
   /***
    *       _____ _             ____         _______ _             __  __    
@@ -270,9 +286,25 @@ export default class APIManager {
   }
 
 
+  static forgotPassword(bodyParams, successCallback, errorCallback) {
+    let request = new Request(`${APIManager.baseURL}/forgot_password`, APIManager.getConfig());
+
+    fetch(request, { method: 'POST', body: JSON.stringify(bodyParams) }).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      if (data.status_code > 210 || !data.success) {
+        errorCallback(data);
+      } else {
+        successCallback(data);
+      }
+    }).catch(function(data) {
+      errorCallback(data);
+    });
+  }
+
+
   static getConfig () {
     APIManager.fetchConfigInit.headers.append('X-TOKEN', window.localStorage.getItem('token'))
-
     return APIManager.fetchConfigInit;
   }
 }

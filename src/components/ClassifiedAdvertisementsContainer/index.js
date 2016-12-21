@@ -28,6 +28,11 @@ class ClassifiedAdvertisementsContainer extends Component {
   }
 
   componentDidMount() {
+    if (this.props.location.state && this.props.location.state.logged_out === true) {
+      window.localStorage.setItem('token', null);
+      window.localStorage.setItem('token_expire_date', null);
+    }
+
     const paramsURL = { p: this.props.params.page, q: this.props.params.query, cat: this.props.params.category }
     this._getClassifiedAdvertisements(paramsURL);
   }
@@ -129,6 +134,7 @@ class ClassifiedAdvertisementsContainer extends Component {
         { this.state.failAPIQuery && <FlashMessage message='Une erreur est survenue' type='error' autodelete={true} /> }
         
         { isSessionExpire && <FlashMessage message='Votre session a expiré' type='error' autodelete={true} /> }
+        { (this.props.location.state && this.props.location.state.logged_out == true) && <FlashMessage message='Vous avez été deconnectée' type='success' autodelete={true} /> }
         
         { (Object.keys(this.state.APIDatas).length > 0 && !this.state.isLoading) && this._renderResults() }
         { (Object.keys(this.state.APIDatas).length === 0 || this.state.isLoading) && <Loader /> }

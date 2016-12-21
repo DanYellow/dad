@@ -52,14 +52,14 @@ class ClassifiedAdvertisementFormContainer extends Component {
     this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
     this.props.classifiedAdvertisementUpdated(response);
 
-    const prefixURL = (Utils.isAdminEnv()) ? 'admin' : null;
+    const prefixURL = (Utils.isAdminEnv()) ? 'admin' : '';
     this._redirectUser(`${prefixURL}/classified_advertisement/${this.props.params.id}`);
   }
 
   _deleteSuccess(response) {
     this.setState({ isSuccess: true, isLoading: false, APIResponseCode: response.data.flash_message.api_code });
 
-    const prefixURL = (Utils.isAdminEnv()) ? 'admin' : null;
+    const prefixURL = (Utils.isAdminEnv()) ? 'admin' : '';
     this._redirectUser(`${prefixURL}/classified_advertisements/1`);
   }
 

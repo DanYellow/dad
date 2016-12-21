@@ -18,7 +18,7 @@ class TopHeader extends Component {
           { !Utils.isTokenValid() && <li><Link to={ '/signin' } activeClassName='active'>Se connecter</Link></li> }
           { !Utils.isTokenValid() && <li><Link to={ '/signup' } activeClassName='active'>S'inscrire</Link></li> }
 
-          { Utils.isTokenValid() && <li><Link className='logout' to={ '/signin' }>Se déconnecter</Link></li> }
+          { Utils.isTokenValid() && <li><Link className='logout' to={{ pathname: '/classified_advertisements', state: { logged_out: true } }}>Se déconnecter</Link></li> }
       </ul>
     )
   }

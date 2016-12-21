@@ -23,4 +23,7 @@ It allows user to create classified advertisement.
 [] Add easter eggs
 [] Add more easter eggs
 [] Allow user to show ca's image in full size
-[] Allow user to put/remove from sale an item
+[x] Allow user to put/remove from sale an item
+[] Use local datas for react-select
+[x] Implements log out
+[] Manage anti-csrf token

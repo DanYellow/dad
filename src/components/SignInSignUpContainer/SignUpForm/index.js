@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import Helmet from 'react-helmet';
 
 import FormButton from '../../_Form/FormButton';
 import InputLitteral from '../../_Form/InputLitteral';
@@ -26,11 +27,8 @@ const validate = values => {
     errors.password = ErrorMessages.password_confirmation;
   }
 
-  var mailpattern = /[\w\d-]+@(digitas|digitaslbi).(fr|com)/g;
   if (!values.email) {
     errors.email = ErrorMessages.required;
-  } else if (!mailpattern.test(values.email)) {
-    errors.email = ErrorMessages.email_incorrect;
   }
 
   return errors;
@@ -42,6 +40,7 @@ class SignUpForm extends Component {
     const { handleSubmit, submitting } = this.props;
     return (
       <div className='SignIn'>
+        <Helmet title={ 'Inscription' } />
         <h2 className='bordered-title'>S'inscrire</h2>
         <form onSubmit={ handleSubmit } className='form' noValidate>
           <Field name='username' type='text' component={ InputLitteral } label='Pseudonyme' />

@@ -27,14 +27,14 @@ export const Button = function (props) {
   return (
     <Link to={ props.link } 
          className={ classNames('reset form-button', props.design)}>
-          { props.text }
+          <span>{ props.text }</span>
     </Link>
 
   );
 };
 
 Button.propTypes = {
-  design: PropTypes.oneOf(['validation', 'cancel', 'info']),
+  design: PropTypes.oneOf(['validation', 'cancel', 'infos']),
   type: PropTypes.string,
   text: PropTypes.string,
 };

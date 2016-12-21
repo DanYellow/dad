@@ -77,6 +77,7 @@ ReactDOM.render(
 
       <Route path='signin' component={(props) => (<SignInSignUpContainer type='signin' />)} />
       <Route path='signup' component={(props) => (<SignInSignUpContainer type='signup' />)} />
+      <Route path='forgot_password' component={(props) => (<SignInSignUpContainer type='forgot_password' />)} />
       <Route path='logout' component={(props) => (<SignInSignUpContainer type='signup' />)} />
       
       <Route path='*' component={NotFoundPage}/>
