@@ -16,15 +16,14 @@ class Pagination extends Component {
 
     let currentPage = datas.current;
     
-    let maxElement = 7 + currentPage;
+    let maxElement = 2 + currentPage;
     let minElement = currentPage - 2;
-
     let displayedEllipsis = false;
     
     for (var i = 1; i < datas.total_pages + 1; i++) {
       let element;
       url = `classified_advertisements/${i}/${this.props.location.search}`;
-      if (i > maxElement && !displayedEllipsis) {
+      if ( (i < minElement || i > maxElement) && i !== 1 && !displayedEllipsis) {
         displayedEllipsis = true;
         element = (<li key={ uuid.v1() }>
           <span className='number-item ellipsis'>
@@ -33,12 +32,15 @@ class Pagination extends Component {
         </li>)
       } 
 
-      if ((i < maxElement && i >= minElement) || i === datas.total_pages || i === 1) {
-        element = (<li key={ uuid.v1() }>
-          <Link to={ url }  key={ uuid.v1() } activeClassName='active' className='number-item'>
-            {i}
-          </Link>
-        </li>)
+      if ((i <= maxElement && i >= minElement) || 
+           i === datas.total_pages || i === 1) {
+        element = (
+          <li key={ uuid.v1() }>
+            <Link to={ url }  key={ uuid.v1() } activeClassName='active' className='number-item'>
+              {i}
+            </Link>
+          </li>
+        )
       }
 
       items.push(element);
