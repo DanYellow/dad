@@ -10,7 +10,7 @@ import './style.scss';
 
 class Pagination extends Component {
 
-  _getListNumbers (datas) {
+  _getPagination(datas) {
     let items = [];
     let url;
 
@@ -32,7 +32,7 @@ class Pagination extends Component {
         </li>)
       } 
 
-      if ((i <= maxElement && i >= minElement) || 
+      if ((i <= maxElement && i >= minElement) ||
            i === datas.total_pages || i === 1) {
         element = (
           <li key={ uuid.v1() }>
@@ -57,7 +57,7 @@ class Pagination extends Component {
               className={ classNames('icon-leftarrow pagination-arrow',
                                   { 'disabled': !pagination.prev }) }/>
         <ul className='number-items'>
-          { this._getListNumbers(pagination) }
+          { this._getPagination(pagination) }
         </ul>
         <Link to={ 'classified_advertisements/' + pagination.next } 
               className={ classNames('icon-rightarrow pagination-arrow',
@@ -71,4 +71,4 @@ Pagination.propTypes = {
   pagination: PropTypes.object.isRequired
 };
 
-export default withRouter(Pagination, { withRef: false });
+export default withRouter(Pagination);
