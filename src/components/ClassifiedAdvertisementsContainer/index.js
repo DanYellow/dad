@@ -3,8 +3,6 @@ import { withRouter } from 'react-router';
 
 import APIManager from '../../utils/APIManager';
 
-// import ClassfiedAdvertisements from './../../fixtures/classified_advertisements.json';
-
 import Pagination from '../Pagination';
 import { Button } from '../_Form/FormButton';
 import ClassifiedAdvertisementsList from '../ClassifiedAdvertisementsList';
@@ -77,12 +75,10 @@ class ClassifiedAdvertisementsContainer extends Component {
 
   _getAdvertisementsSuccess(response) {
     this.setState({ failAPIQuery: false, APIDatas:response, isLoading: false });
-    // this._scrollToId('title');
   }
 
   _getAdvertisementsFail(error) {
     this.setState({ failAPIQuery: true, isLoading: false });
-    // this._scrollToId('error');
   }
 
   _scrollToId(id) {
@@ -117,7 +113,6 @@ class ClassifiedAdvertisementsContainer extends Component {
         <ClassifiedAdvertisementsList list={ list } env={ this.props.env } />
         { (pagination.prev || pagination.next) && <Pagination pagination={ pagination } /> }
         <div className='buttons-container fieldset'>
-
           <Button design='validation' text='Publier une annonce' link='/classified_advertisement/create' />
         </div>
       </div>
