@@ -38,8 +38,8 @@ class ClassifiedAdvertisementsContainer extends Component {
       extraParams = {mine: 1};
     }
 
-    const paramsURL = { p: this.props.params.page, q: this.props.params.query, 
-                        c: this.props.params.category, ...extraParams }
+    const paramsURL = { p: this.props.params.page, q: this.props.location.query.q, 
+                        c: this.props.location.query.c, ...extraParams }
     this._getClassifiedAdvertisements(paramsURL);
   }
 
@@ -47,17 +47,14 @@ class ClassifiedAdvertisementsContainer extends Component {
     let oldId           = prevProps.params.page;
     let currentId       = this.props.params.page;
     
-    let oldQuery        = prevProps.params.query;
-    let currentQuery    = this.props.params.query;
-    
-    let oldCategory     = prevProps.params.category;
-    let currentCategory = this.props.params.category;
+    let oldQuery        = prevProps.location.search;
+    let currentQuery    = this.props.location.search;
 
     window.localStorage.setItem('session_expire', false);
     
-    if (currentId !== oldId || currentQuery !== oldQuery || oldCategory !== currentCategory) {
+    if (currentId !== oldId || currentQuery !== oldQuery) {
       this.setState({ isLoading: true });
-      const paramsURL = {p: currentId, q: currentQuery, c: currentCategory}
+      const paramsURL = {p: currentId, q: this.props.location.query.q, c: this.props.location.query.c}
       this._getClassifiedAdvertisements(paramsURL);
     };
   }

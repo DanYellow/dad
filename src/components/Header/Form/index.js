@@ -9,7 +9,7 @@ class Form extends Component {
     super(props);
 
     this.state = {
-      inputValue: this.props.params.query
+      inputValue: this.props.location.query.q
     }
   }
 
@@ -18,13 +18,18 @@ class Form extends Component {
 
     let { router, params } = this.props;
     let inputValue = this.searchInput.value;
+
     // We set 1 per default because or else we will asking to the API the n page for the query
-    let url = `/classified_advertisements/1/${inputValue}`
+    let url = '/classified_advertisements/1/';
 
-    if (params.category) {
-      url += `/${params.category}`
+    if (inputValue) {
+      url +=`?q=${inputValue}`;
     }
-
+    
+    if (params.category) {
+      url += `&c=${params.category}`
+    }
+    
     router.push(url);
   }
 

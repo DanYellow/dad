@@ -13,7 +13,6 @@ class Pagination extends Component {
   _getListNumbers (datas) {
     let items = [];
     let url;
-    let optionalParams;
 
     let currentPage = datas.current;
     
@@ -21,13 +20,10 @@ class Pagination extends Component {
     let minElement = currentPage - 2;
 
     let displayedEllipsis = false;
-
-    optionalParams = [this.props.params.query, this.props.params.category].filter(Boolean);
-    optionalParams = optionalParams.join('/');
     
     for (var i = 1; i < datas.total_pages + 1; i++) {
       let element;
-      url = `classified_advertisements/${i}/${optionalParams}`;
+      url = `classified_advertisements/${i}/${this.props.location.search}`;
       if (i > maxElement && !displayedEllipsis) {
         displayedEllipsis = true;
         element = (<li key={ uuid.v1() }>
