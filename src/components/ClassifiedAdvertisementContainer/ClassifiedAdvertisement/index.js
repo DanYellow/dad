@@ -43,6 +43,7 @@ class ClassifiedAdvertisement extends Component {
   }
 
   _updateSuccess () {
+    console.log('gregerge')
     this.props.router.push('/users/12')
     // this.props.router.push({
     //   pathname: 'admin/classified_advertisement/' + this.props.resource.id,
@@ -123,7 +124,7 @@ class Toolbar extends Component {
   }
 
   render() {
-    let { is_active, location } = this.props;
+    let { location } = this.props;
     let saleText = (this.state.isActive) ? 'Déclarer comme vendu' : '(Re)mettre en vente';
 
     return (

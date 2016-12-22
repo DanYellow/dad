@@ -71,7 +71,7 @@ export default class APIManager {
    * @param  {[type]} errorCallback   Callback function fail to call when API call failed
    * @return null
    */
-  static getClassifiedAdvertisements(params={p: 1, q: null, cat: null}, successCallback, errorCallback, currentUser = false) {
+  static getClassifiedAdvertisements(params={p: 1, q: null, c: null}, successCallback, errorCallback, currentUser = false) {
     let url = `${APIManager.baseURL}/classified_advertisements/${params.p}${Utils.objectToQueryString(params)}`
     if (currentUser) {
       url = `${APIManager.baseURL}/me/classified_advertisements/${params.p}${Utils.objectToQueryString(params)}`
@@ -309,7 +309,7 @@ export default class APIManager {
   }
 }
 
-APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://localhost:9000/api';
+APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://dad.danyellow.net/api';
 
 APIManager.header = new Headers();
 

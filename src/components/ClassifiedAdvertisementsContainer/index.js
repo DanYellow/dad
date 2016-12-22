@@ -33,7 +33,13 @@ class ClassifiedAdvertisementsContainer extends Component {
       window.localStorage.setItem('token_expire_date', null);
     }
 
-    const paramsURL = { p: this.props.params.page, q: this.props.params.query, cat: this.props.params.category }
+    let extraParams = {}
+    if (this.props.env === 'back') {
+      extraParams = {mine: 1};
+    }
+
+    const paramsURL = { p: this.props.params.page, q: this.props.params.query, 
+                        c: this.props.params.category, ...extraParams }
     this._getClassifiedAdvertisements(paramsURL);
   }
 
@@ -51,7 +57,7 @@ class ClassifiedAdvertisementsContainer extends Component {
     
     if (currentId !== oldId || currentQuery !== oldQuery || oldCategory !== currentCategory) {
       this.setState({ isLoading: true });
-      const paramsURL = {p: currentId, q: currentQuery, cat: currentCategory}
+      const paramsURL = {p: currentId, q: currentQuery, c: currentCategory}
       this._getClassifiedAdvertisements(paramsURL);
     };
   }
@@ -134,7 +140,7 @@ class ClassifiedAdvertisementsContainer extends Component {
         { this.state.failAPIQuery && <FlashMessage message='Une erreur est survenue' type='error' autodelete={true} /> }
         
         { isSessionExpire && <FlashMessage message='Votre session a expiré' type='error' autodelete={true} /> }
-        { (this.props.location.state && this.props.location.state.logged_out == true) && <FlashMessage message='Vous avez été deconnectée' type='success' autodelete={true} /> }
+        { (this.props.location.state && this.props.location.state.logged_out === true) && <FlashMessage message='Vous avez été deconnectée' type='success' autodelete={true} /> }
         
         { (Object.keys(this.state.APIDatas).length > 0 && !this.state.isLoading) && this._renderResults() }
         { (Object.keys(this.state.APIDatas).length === 0 || this.state.isLoading) && <Loader /> }
