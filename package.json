@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "dad-fonticons": "git+https://github.com/DanYellow/dad-fonticons.git#1.0.6",
+    "dad-fonticons": "git+https://github.com/DanYellow/dad-fonticons.git#1.0.7",
     "@kadira/storybook": "^2.32.1",
     "autoprefixer": "6.5.1",
     "babel-core": "6.17.0",
