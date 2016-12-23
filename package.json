@@ -6,7 +6,6 @@
     "dad-fonticons": "git+https://github.com/DanYellow/dad-fonticons.git#1.0.6",
     "@kadira/storybook": "^2.32.1",
     "autoprefixer": "6.5.1",
-    "axios": "^0.15.3",
     "babel-core": "6.17.0",
     "babel-eslint": "7.0.0",
     "babel-jest": "16.0.0",
@@ -57,6 +56,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "json-loader": "^0.5.4",
+    "lodash": "^4.17.2",
     "moment": "^2.17.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
@@ -64,7 +64,8 @@
     "react-redux": "^4.4.6",
     "react-router": "^3.0.0",
     "react-select": "^1.0.0-rc.2",
-    "redux-form": "^6.3.2"
+    "redux-form": "^6.3.2",
+    "voca": "^1.0.0"
   },
   "scripts": {
     "start": "node scripts/start.js",

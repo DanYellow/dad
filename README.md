@@ -27,3 +27,10 @@ It allows user to create classified advertisement.
 [] Use local datas for react-select
 [x] Implements log out
 [] Manage anti-csrf token
+
+
+
+
+shouldComponentUpdate(nextProp, nextState) {
+  return !(_.isEqual(nextProp, this.props) && _.isEqual(nextState, this.state));
+}

@@ -39,28 +39,23 @@ class ClassifiedAdvertisement extends Component {
   }
 
   _updateStatus() {
-    APIManager.updateStatusClassifiedAdvertisement(this.props.resource.id, this._updateSuccess, this._updateFailed)
+    APIManager.updateStatusClassifiedAdvertisement(this.props.resource.id, this._updateSuccess.bind(this), this._updateFailed.bind(this))
   }
 
   _updateSuccess () {
-    console.log('gregerge')
-    this.props.router.push('/users/12')
-    // this.props.router.push({
-    //   pathname: 'admin/classified_advertisement/' + this.props.resource.id,
-    //   state: { updateStatus: true }
-    // })
+    this.props.router.push({
+      pathname: 'admin/classified_advertisement/' + this.props.resource.id,
+      state: { updateStatus: true }
+    });
   }
 
-  _updateFailed() {
-
-  }
+  _updateFailed(data) {}
 
   render() {
-    // console.log(this.props);
     const { resource, siblings } = this.props;
     const { title, price, created_at, category, description, is_mine, image, seller, id, is_active } = resource;
     const productInfos = { seller: seller, price }
-    const toolbarDatas = { id, is_active, location: this.props.location, _updateStatus: () => this._updateStatus() }
+    const toolbarDatas = { id, forSale: is_active, location: this.props.location, _updateStatus: () => this._updateStatus() }
     
     const createdAt    = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
     const altImg       = title + ' image';
@@ -87,7 +82,7 @@ class ClassifiedAdvertisement extends Component {
               <p>{ !description && 'Pas de description' }</p>
             </header>
             { env !== 'back' && <ProductInfos {...productInfos}/> }
-            { (env === 'back' && is_mine) && <Toolbar {...toolbarDatas}/> }
+            { (env === 'back' && is_mine) && <Toolbar {...toolbarDatas} /> }
           </article>
         </section>
         <section className="siblings">
@@ -107,7 +102,6 @@ class ClassifiedAdvertisement extends Component {
   }
 }
 
-
 class Toolbar extends Component {
   constructor(props) {
     super(props);
@@ -116,11 +110,18 @@ class Toolbar extends Component {
       isActive: this.props.is_active,
       isDisabled: false
     }
-  } 
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    this.setState({ isActive: !this.props.request_ended });
+  }
 
   _updateStatus() {
     this.props._updateStatus()
     this.setState({ isActive: !this.state.isActive, isDisabled: true });
+    setTimeout(function() {
+      this.setState({ isDisabled: false });
+    }, 1000);
   }
 
   render() {

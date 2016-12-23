@@ -100,7 +100,7 @@ class ClassifiedAdvertisementsContainer extends Component {
       return this._renderClassifiedAdvertisements();
     } else {
       if (this.props.env === 'public') {
-        return <NoResults />;
+        return <NoResults {...{ query: this.props.location.query.q }} />;
       } else {
         return <NoResults message="Vous n'avez pas d'annonces"/>;
       }
@@ -157,12 +157,6 @@ class ClassifiedAdvertisementsContainer extends Component {
   }
 
   render() {
-    let isSessionExpire = false;
-
-    if (this.props.location.state && this.props.location.state.tokenIsInvalid) {
-      isSessionExpire = true;
-    }
-
     return (
       <div className='App'>
         { this.props.children }

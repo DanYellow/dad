@@ -22,6 +22,11 @@ export default class ClassifiedAdvertisementListItem extends Component {
       url = 'admin/classified_advertisement/' + id;
     }
 
+    let tplDate = 'Posté le ' + createdAt + ' par <b>' + pseudo + '</b>' + suffix;
+    if (is_mine) {
+      tplDate = 'Posté le ' + createdAt + ' par <b class="mine">' + pseudo + '</b>' + suffix
+    }
+
     return (
       <li className='classified_advertisement'>
         <Link to={ url } title={ 'Annonce : ' + title }>
@@ -33,7 +38,7 @@ export default class ClassifiedAdvertisementListItem extends Component {
             <h3>{ title }</h3>
             { category && <Category {...category} /> }
             <p>{ location }</p>
-            <p className='date' dangerouslySetInnerHTML={{ __html: 'Posté le ' + createdAt + ' par <b>' + pseudo + '</b>' + suffix }} />
+            <p className='date' dangerouslySetInnerHTML={{ __html: tplDate }} />
           </article>
           { price > 0 && <h3 className='price'>{ Utils.formatCurrency(price) }</h3>}
           { price === 0 && <h3 className='price'>{ 'Gratuit' }</h3>}
