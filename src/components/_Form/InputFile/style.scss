@@ -3,13 +3,18 @@
 
 .InputFile {
   position: relative;
+
+  @media screen and (max-width: $media-query-tablet) {
+    border: 1px solid $text-color;
+    margin-bottom: 25px;
+  }
+
   input[type='file'] {
     display: none;
   }
 
   figure {
     position: relative;
-    width: 250px;
     height: 250px;
     background-color: transparent;
     border: 1px solid $text-color;

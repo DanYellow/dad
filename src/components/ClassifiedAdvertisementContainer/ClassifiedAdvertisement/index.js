@@ -113,7 +113,7 @@ class Toolbar extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    this.setState({ isActive: !this.props.request_ended });
+    // this.setState({ isActive: !this.props.request_ended });
   }
 
   _updateStatus() {
@@ -121,7 +121,7 @@ class Toolbar extends Component {
     this.setState({ isActive: !this.state.isActive, isDisabled: true });
     setTimeout(function() {
       this.setState({ isDisabled: false });
-    }, 1000);
+    }.bind(this), 1000);
   }
 
   render() {

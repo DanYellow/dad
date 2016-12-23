@@ -5,9 +5,19 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  
+  @media screen and (max-width: $media-query-tablet) {
+    flex-direction: column;
+  }
+
   
   .content {
     flex: 1;
     padding-left: 30px;
+
+    @media screen and (max-width: $media-query-tablet) {
+      padding-left: 0px;
+    }
   }
 }

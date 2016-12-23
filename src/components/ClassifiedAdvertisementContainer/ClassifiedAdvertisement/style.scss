@@ -119,11 +119,22 @@
   ul {
     flex: 1;
   }
+
+  button:hover {
+    h5 {
+      color: inherit;
+    }
+    color: $primary-red;
+  }
   
   li {
-    text-align: center;
+    justify-content: center;
+    display: flex;
     height: 100%;
     flex: 1;
+    text-align: center;
+    
+
     h5 {
       display: inline;
       font-size: 16px;
