@@ -7,7 +7,7 @@
 \deftab708
 \pard\pardeftab708\partightenfactor0
 
-\f0\fs28 \cf0 S\'92assurer que la requ\'eate est en ajax\
+\f0\fs28 \cf0 S\'92assurer que la requ\'eate est en ajax (?)\
 Syst\'e8me de token (jsonwebtoken)\
 En-t\'eate pour \'e9viter le chargement en iframes et le cross-domain\
 \
@@ -26,6 +26,10 @@ Tests d\'92acceptation :\
 \cf0 Affiche une liste de 10 annonces par page\
 Affiche une message indiquant l\'92absence de r\'e9sultats\
 Affiche une pagination si le nombre de r\'e9sultats est sup\'e9rieur ou \'e9gal \'e0 11\
+Affiche une pagination tronqu\'e9e (affiche deux \'e9l\'e9ments avant et apr\'e8s l'\'e9l\'e9ment courant, l'\'e9l\'e9ment courant, le premier et le dernier \'e9l\'e9ment)\
+Affiche en rouge le propri\'e9taire si c'est l'utilisateur courant\
+\pard\pardeftab708\li720\fi-720\partightenfactor0
+\cf0 \
 \pard\pardeftab708\partightenfactor0
 \cf0 \
 US 2 : 
@@ -73,8 +77,8 @@ US 4 :
 \b0 \ulnone  propri\'e9taire d\'92une annonce, 
 \b \ul je veux
 \b0 \ulnone  acc\'e9der \'e0 l\'92option de suppression 
-\b \ul dans le but d
-\b0 \ulnone e supprimer mon annonce\
+\b \ul dans le but de
+\b0 \ulnone  supprimer mon annonce\
 \
 Tests d\'92acceptation :\
 \pard\pardeftab708\li720\fi-360\partightenfactor0
@@ -176,8 +180,7 @@ Affiche un message en cas d'erreur\
 Est redirig\'e9 vers l'accueil du site apr\'e8s le succ\'e8s de sa connexion\
 \pard\pardeftab708\partightenfactor0
 \cf0 \
-\pard\pardeftab708\partightenfactor0
-\cf0 US 9 : 
+US 9 : 
 \b \ul En tant qu
 \b0 \ulnone 'utilisateur 
 \b \ul je veux 
