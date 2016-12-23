@@ -42,23 +42,23 @@ ReactDOM.render(
   <Provider store={store}>
   <Router history={hashHistory}>
     <Helmet
-        title="De Digitalien à Digitalien"
-        defaultTitle="De Digitalien à Digitalien"
-        titleTemplate="D-A-D | %s"
+        title='De Digitalien à Digitalien'
+        defaultTitle='De Digitalien à Digitalien'
+        titleTemplate='D-A-D | %s'
     />
     <Route path='/' component={AppContainer}>
       <Route path='/classified_advertisements'>
         <IndexRedirect to='1' />
       </Route>
       <IndexRedirect to='classified_advertisements/1' />
-      <Route path='classified_advertisements(/:page)(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
+      <Route path='classified_advertisements(/:page)' component={(props) => (<ClassifiedAdvertisementsContainer env='public' {...props} />)} />
       
       <Route path='admin' onEnter={requireAuth}>
         <Route path='classified_advertisements'>
           <IndexRedirect to='1' />
         </Route>
         <IndexRedirect to='classified_advertisements/1' />
-        <Route path='classified_advertisements(/:page)(/:query)(/:category)' component={(props) => (<ClassifiedAdvertisementsContainer env='back' {...props} />)} />
+        <Route path='classified_advertisements(/:page)' component={(props) => (<ClassifiedAdvertisementsContainer env='back' {...props} />)} />
         <Route path='classified_advertisement'>
           <Route path=':id' component={(props) => (<ClassifiedAdvertisementContainer {...props} />)}>
             <Route path='edit' component={ClassifiedAdvertisementFormContainer} />

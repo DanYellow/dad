@@ -87,24 +87,11 @@ export default class Utils {
   }
 
   /**
-   * Returns image
-   * @param  {String} linkImage URL image
-   * @return {[type]}           [description]
+   * Returns current environment 
+   * @param  {String} path [description]
+   * @return {String}      Current environment
    */
-  static getFileObject(linkImage) {
-    let request = new Request(linkImage, { mode: 'cors', cache: 'default' });
-    return;
-    return fetch(request, {method: 'GET'}).then(function(response) {
-      return response.blob();
-    }).then(function(data) {
-      console.log(data);
-      return { options: "hello"};
-    }).catch(function(data) {
-      return { options: [] };
-    });
-  }
-
-  static getCurrentEvent(path = window.location.hash) {
+  static getCurrentEnvironment(path = window.location.hash) {
     let env = 'public';
     if (path.includes('sign')) {
       env = 'login'
@@ -116,6 +103,20 @@ export default class Utils {
   }
 
   static isAdminEnv(path) {
-    return (Utils.getCurrentEvent(path) === 'back') ? 1 : 0;
+    return (Utils.getCurrentEnvironment(path) === 'back') ? 1 : 0;
+  }
+
+  static currentUserInfos() {
+    return {
+      'pseudo': window.localStorage.getItem('user_pseudo'),
+      'password': window.localStorage.getItem('user_password'),
+    }
+  }
+
+  static clearUserDatas() {
+    window.localStorage.setItem('token', null);
+    window.localStorage.setItem('token_expire_date', null);
+    window.localStorage.setItem('user_pseudo', null);
+    window.localStorage.setItem('user_password', null);
   }
 }

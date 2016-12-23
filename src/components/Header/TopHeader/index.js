@@ -11,14 +11,14 @@ class TopHeader extends Component {
       <ul>
           <li className='home'><Link onlyActiveOnIndex={false} to={ 'classified_advertisements' } activeClassName='active'>Accueil</Link></li>
 
-          { Utils.isTokenValid() && <li><Link to={ 'admin/classified_advertisements/' } activeClassName='active'>Mes annonces</Link></li> }
+          { Utils.isTokenValid() && <li><Link to={ 'admin/classified_advertisements/1' } activeClassName='active'>Mes annonces</Link></li> }
 
-          <li><Link to={ '/classified_advertisement/create' } activeClassName='active'>Publier une annonce</Link></li>
+          <li><Link to={ 'classified_advertisement/create' } activeClassName='active'>Publier une annonce</Link></li>
 
-          { !Utils.isTokenValid() && <li><Link to={ '/signin' } activeClassName='active'>Se connecter</Link></li> }
-          { !Utils.isTokenValid() && <li><Link to={ '/signup' } activeClassName='active'>S'inscrire</Link></li> }
+          { !Utils.isTokenValid() && <li><Link to={ 'signin' } activeClassName='active'>Se connecter</Link></li> }
+          { !Utils.isTokenValid() && <li><Link to={ 'signup' } activeClassName='active'>S'inscrire</Link></li> }
 
-          { Utils.isTokenValid() && <li><Link className='logout' to={{ pathname: '/classified_advertisements', state: { logged_out: true } }}>Se déconnecter</Link></li> }
+          { Utils.isTokenValid() && <li><Link className='logout' to={{ pathname: 'classified_advertisements', state: { logged_out: true } }}>Se déconnecter</Link></li> }
       </ul>
     )
   }

@@ -11,10 +11,11 @@ import './style.scss';
 
 export default class ClassifiedAdvertisementListItem extends Component {
   render() {
-    const { id, title, price, created_at, category, image, env } = this.props;
+    const { id, title, price, created_at, category, image, env, is_mine } = this.props;
     const { location, pseudo } = this.props.seller;
     const createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
     const altImg = 'Illustration annonce ' + title;
+    const suffix = (Utils.currentUserInfos().pseudo && is_mine) ? " (C'est vous)" : '';
 
     let url = '/classified_advertisement/' + id;
     if (env === 'back') {
@@ -32,7 +33,7 @@ export default class ClassifiedAdvertisementListItem extends Component {
             <h3>{ title }</h3>
             { category && <Category {...category} /> }
             <p>{ location }</p>
-            <p className='date' dangerouslySetInnerHTML={{ __html: 'Posté le ' + createdAt + ' par <b>' + pseudo + '</b>' }} />
+            <p className='date' dangerouslySetInnerHTML={{ __html: 'Posté le ' + createdAt + ' par <b>' + pseudo + '</b>' + suffix }} />
           </article>
           { price > 0 && <h3 className='price'>{ Utils.formatCurrency(price) }</h3>}
           { price === 0 && <h3 className='price'>{ 'Gratuit' }</h3>}

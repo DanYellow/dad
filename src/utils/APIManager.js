@@ -309,7 +309,7 @@ export default class APIManager {
   }
 }
 
-APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'http://dad.danyellow.net/api';
+APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:8000/api' : 'https://dad.danyellow.net/api';
 
 APIManager.header = new Headers();
 

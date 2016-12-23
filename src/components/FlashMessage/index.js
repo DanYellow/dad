@@ -42,14 +42,16 @@ export default class FlashMessage extends Component {
   }
 
   _scrollTo() {
+    if (!this.id) { return; }
     let DOMElement = document.getElementById(this.id);
+
     if (!DOMElement) { return; }
 
     setTimeout(() => {
       if (Utils.aPopinIsOpened()) {
         DOMElement.parentNode.scrollTop = DOMElement.offsetTop;
       } else {
-        document.getElementById(this.id).scrollIntoView();
+        DOMElement.scrollIntoView();
       }
     }, 1000);
   }

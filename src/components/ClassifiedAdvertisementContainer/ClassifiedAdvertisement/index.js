@@ -65,7 +65,7 @@ class ClassifiedAdvertisement extends Component {
     const createdAt    = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
     const altImg       = title + ' image';
     
-    const env          = Utils.getCurrentEvent(this.props.location.pathname);
+    const env          = Utils.getCurrentEnvironment(this.props.location.pathname);
 
     return (
       <div className="ClassifiedAdvertisement">

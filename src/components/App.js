@@ -14,7 +14,7 @@ class App extends Component {
       document.getElementsByTagName('body')[0].classList.remove('show-popin');
     }
     
-    const env = Utils.getCurrentEvent(this.props.location.pathname);
+    const env = Utils.getCurrentEnvironment(this.props.location.pathname);
 
     return (
       <div>

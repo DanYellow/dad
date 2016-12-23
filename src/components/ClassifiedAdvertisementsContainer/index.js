@@ -27,12 +27,11 @@ class ClassifiedAdvertisementsContainer extends Component {
 
   componentDidMount() {
     if (this.props.location.state && this.props.location.state.logged_out === true) {
-      window.localStorage.setItem('token', null);
-      window.localStorage.setItem('token_expire_date', null);
+      Utils.clearUserDatas();
     }
 
     let extraParams = {}
-    if (this.props.env === 'back') {
+    if (this.props.env === 'back' || Boolean(Utils.isAdminEnv())) {
       extraParams = {mine: 1};
     }
 
@@ -52,7 +51,13 @@ class ClassifiedAdvertisementsContainer extends Component {
     
     if (currentId !== oldId || currentQuery !== oldQuery) {
       this.setState({ isLoading: true });
-      const paramsURL = {p: currentId, q: this.props.location.query.q, c: this.props.location.query.c}
+
+      let extraParams = {}
+      if (this.props.env === 'back' || Boolean(Utils.isAdminEnv())) {
+        extraParams = {mine: 1};
+      }
+
+      const paramsURL = {p: currentId, q: this.props.location.query.q, c: this.props.location.query.c, ...extraParams}
       this._getClassifiedAdvertisements(paramsURL);
     };
   }
@@ -127,7 +132,7 @@ class ClassifiedAdvertisementsContainer extends Component {
     }
 
     return (
-      <div className="App">
+      <div className='App'>
         { this.props.children }
         { this.state.failAPIQuery && <FlashMessage message='Une erreur est survenue' type='error' autodelete={true} /> }
         

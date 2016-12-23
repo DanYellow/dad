@@ -34,7 +34,7 @@ class ClassifiedAdvertisementContainer extends Component {
       this._getAdvertisementSuccess(this.props.updatedCADatas)
     }
 
-    let oldId = prevProps.params.id;
+    let oldId     = prevProps.params.id;
     let currentId = this.props.params.id;
     if (currentId !== oldId && !this.props.isCAUpdated) {
       this.setState({ isLoading: true });
@@ -54,12 +54,11 @@ class ClassifiedAdvertisementContainer extends Component {
     if (Object.keys(this.state.APIDatas).length === 0 || !this.state.APIDatas.data.resource) {
       return <NoResults message={'Cette annonce n\'existe pas'} />;
     }
-
+    
     return this._renderClassifiedAdvertisement();
   }
 
   _renderClassifiedAdvertisement() {
-    console.log(this.props)
     return <ClassifiedAdvertisement {...{resource: this.state.APIDatas.data.resource, siblings: this.state.APIDatas.siblings || {} }} />
   }
 

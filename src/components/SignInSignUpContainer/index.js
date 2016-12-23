@@ -48,6 +48,9 @@ class SignInSignUpContainer extends Component {
 
     window.localStorage.setItem('token', response.data.resource.token);
     window.localStorage.setItem('token_expire_date', response.data.resource.expire);
+
+    window.localStorage.setItem('user_pseudo', response.data.resource.pseudo);
+    window.localStorage.setItem('user_password', response.data.resource.password);
   }
 
   _signUpSuccess(response) {

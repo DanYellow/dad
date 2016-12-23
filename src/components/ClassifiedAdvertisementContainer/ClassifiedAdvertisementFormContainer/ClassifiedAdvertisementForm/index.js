@@ -82,7 +82,7 @@ class ClassifiedAdvertisementForm extends Component {
             <div className='content'>
               <Field name='title' type='text' component={InputLitteral} label='Titre' value={  initialValues.title || '' } />
               <Field name='description' component={TextArea} label='Description' type='text' placeholder='' value={ initialValues.description || '' } />
-              <Field name='price' type='text' component={InputLitteral} label='Prix (Ne pas préciser la devise)' placeholder='Prix' value={ initialValues.price || '' } />
+              <Field name='price' type='text' component={InputLitteral} label="Prix (Ne pas préciser la devise - Laisser vide si c'est gratuit)" placeholder='Prix' value={ initialValues.price || '' } />
               <Field name='category' component={props =>
                 <Select {...props} />
               } label='Catégorie'/>
