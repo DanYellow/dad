@@ -26,8 +26,10 @@ class ClassifiedAdvertisementsContainer extends Component {
   }
 
   componentDidMount() {
-    if (this.props.location.state && this.props.location.state.logged_out === true) {
-      Utils.clearUserDatas();
+    if (this.props.location.state) {
+      if (this.props.location.state.logged_out === true) {
+        Utils.clearUserDatas();
+      }
     }
 
     let extraParams = {}
@@ -57,7 +59,8 @@ class ClassifiedAdvertisementsContainer extends Component {
         extraParams = {mine: 1};
       }
 
-      const paramsURL = {p: currentId, q: this.props.location.query.q, c: this.props.location.query.c, ...extraParams}
+      const paramsURL = { p: currentId, q: this.props.location.query.q,
+                          c: this.props.location.query.c, ...extraParams }
       this._getClassifiedAdvertisements(paramsURL);
     };
   }
@@ -124,6 +127,35 @@ class ClassifiedAdvertisementsContainer extends Component {
     );
   }
 
+  _renderFlashMessages () {
+    let isSessionExpire = false;
+    let elementDeleted = false;
+    let userLoggedOut = false;
+
+    if (this.props.location.state) {
+      let { tokenIsInvalid, element_deleted, logged_out } = this.props.location.state
+      if (logged_out) {
+        userLoggedOut = true;
+      }
+      if (tokenIsInvalid) {
+        isSessionExpire = true;
+      }
+      if (element_deleted) {
+        elementDeleted = true;
+      }
+    }
+    
+    return (
+      <div>
+      { this.state.failAPIQuery && <FlashMessage message='Une erreur est survenue' type='error' autodelete={true} /> }
+      { isSessionExpire && <FlashMessage message='Votre session a expiré' type='error' autodelete={true} /> }
+
+      { elementDeleted && <FlashMessage message='Votre annonce a été supprimée' type='success' autodelete={true} /> }
+      { userLoggedOut && <FlashMessage message='Vous avez été déconnecté(e)' type='success' autodelete={true} /> }
+      </div>
+    )
+  }
+
   render() {
     let isSessionExpire = false;
 
@@ -134,11 +166,7 @@ class ClassifiedAdvertisementsContainer extends Component {
     return (
       <div className='App'>
         { this.props.children }
-        { this.state.failAPIQuery && <FlashMessage message='Une erreur est survenue' type='error' autodelete={true} /> }
-        
-        { isSessionExpire && <FlashMessage message='Votre session a expiré' type='error' autodelete={true} /> }
-        { (this.props.location.state && this.props.location.state.logged_out === true) && <FlashMessage message='Vous avez été deconnectée' type='success' autodelete={true} /> }
-        
+        { this._renderFlashMessages() }
         { (Object.keys(this.state.APIDatas).length > 0 && !this.state.isLoading) && this._renderResults() }
         { (Object.keys(this.state.APIDatas).length === 0 || this.state.isLoading) && <Loader /> }
       </div>

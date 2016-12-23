@@ -15,7 +15,7 @@ export default class ClassifiedAdvertisementListItem extends Component {
     const { location, pseudo } = this.props.seller;
     const createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
     const altImg = 'Illustration annonce ' + title;
-    const suffix = (Utils.currentUserInfos().pseudo && is_mine) ? " (C'est vous)" : '';
+    const suffix = (is_mine) ? " (C'est vous)" : '';
 
     let url = '/classified_advertisement/' + id;
     if (env === 'back') {

@@ -42,7 +42,6 @@ export default class FlashMessage extends Component {
   }
 
   _scrollTo() {
-    if (!this.id) { return; }
     let DOMElement = document.getElementById(this.id);
 
     if (!DOMElement) { return; }
@@ -69,8 +68,7 @@ export default class FlashMessage extends Component {
       <div id={this.id} className={ classNames('flash-message',
                                   type,
                                   { 'closed': this.state.closed, 
-                                    'must-be-removed': this.state.mustBeRemoved }) }
-           ref={(ref) => this.flashmessage = ref}>
+                                    'must-be-removed': this.state.mustBeRemoved }) }>
         <p>{ message || 'Pas de message ?!' }</p>
         <button title='Fermer message' className='reset icon-close' onClick={ (e) => this._remove(e) }></button>
       </div>
