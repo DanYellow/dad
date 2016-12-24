@@ -47,6 +47,7 @@ class InputFile extends Component {
   render() {
     let { input } = this.props;
     let imgAlt = null;
+    const btnImgText = (this.state.imagePreview) ? 'Remplacer l\'image' : 'Ajouter une image';
     
     return (
       <div className='InputFile'>
@@ -79,7 +80,7 @@ class InputFile extends Component {
             </div> }
           </figure>
         <div className='buttons-container fieldset column-layout'>
-          <FormButton design='validation' text='Ajouter une image' type='button' onClick={ this._openFM } />
+          <FormButton design='validation' text={ btnImgText } type='button' onClick={ this._openFM } />
           { this.state.imagePreview && <FormButton design='cancel' text='Supprimer' type='button' onClick={ this._removeImage } /> }
         </div>
         

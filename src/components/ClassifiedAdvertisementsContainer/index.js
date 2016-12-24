@@ -26,11 +26,7 @@ class ClassifiedAdvertisementsContainer extends Component {
   }
 
   componentDidMount() {
-    if (this.props.location.state) {
-      if (this.props.location.state.logged_out === true) {
-        Utils.clearUserDatas();
-      }
-    }
+    this._manageUserDisconnect();
 
     let extraParams = {}
     if (this.props.env === 'back' || Boolean(Utils.isAdminEnv())) {
@@ -50,6 +46,8 @@ class ClassifiedAdvertisementsContainer extends Component {
     let currentQuery    = this.props.location.search;
 
     window.localStorage.setItem('session_expire', false);
+
+    this._manageUserDisconnect();
     
     if (currentId !== oldId || currentQuery !== oldQuery) {
       this.setState({ isLoading: true });
@@ -63,6 +61,14 @@ class ClassifiedAdvertisementsContainer extends Component {
                           c: this.props.location.query.c, ...extraParams }
       this._getClassifiedAdvertisements(paramsURL);
     };
+  }
+
+  _manageUserDisconnect() {
+    if (this.props.location.state) {
+      if (this.props.location.state.logged_out === true) {
+        Utils.clearUserDatas();
+      }
+    }
   }
 
   _getClassifiedAdvertisements(paramsURL) {
