@@ -5,7 +5,7 @@
   position: relative;
 
   @media screen and (max-width: $media-query-tablet) {
-    border: 1px solid $text-color;
+    border-bottom: 1px solid $text-color;
     margin-bottom: 25px;
   }
 
