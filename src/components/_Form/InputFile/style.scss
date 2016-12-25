@@ -17,6 +17,9 @@
     position: relative;
     height: 250px;
     width: 250px;
+    @media screen and (max-width: $media-query-tablet) {
+      width: auto;
+    }
     background-color: transparent;
     border: 1px solid $text-color;
     overflow: hidden;
