@@ -41,6 +41,10 @@ export default class FlashMessage extends Component {
     }, delay);
   }
 
+  /**
+   * Force current container to scroll to him on its apparition
+   * @return null
+   */
   _scrollTo() {
     let DOMElement = document.getElementById(this.id);
 

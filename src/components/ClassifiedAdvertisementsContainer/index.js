@@ -26,7 +26,7 @@ class ClassifiedAdvertisementsContainer extends Component {
   }
 
   componentDidMount() {
-    this._manageUserDisconnect();
+    this._manageUserLoggedOut();
 
     let extraParams = {}
     if (this.props.env === 'back' || Boolean(Utils.isAdminEnv())) {
@@ -47,7 +47,7 @@ class ClassifiedAdvertisementsContainer extends Component {
 
     window.localStorage.setItem('session_expire', false);
 
-    this._manageUserDisconnect();
+    this._manageUserLoggedOut();
     
     if (currentId !== oldId || currentQuery !== oldQuery) {
       this.setState({ isLoading: true });
@@ -63,7 +63,11 @@ class ClassifiedAdvertisementsContainer extends Component {
     };
   }
 
-  _manageUserDisconnect() {
+  /**
+   * Checks if user action was to logged out himself
+   * @return return
+   */
+  _manageUserLoggedOut() {
     if (this.props.location.state) {
       if (this.props.location.state.logged_out === true) {
         Utils.clearUserDatas();
@@ -93,12 +97,6 @@ class ClassifiedAdvertisementsContainer extends Component {
 
   _getAdvertisementsFail(error) {
     this.setState({ failAPIQuery: true, isLoading: false });
-  }
-
-  _scrollToId(id) {
-    let DOMElement = document.getElementById(id);
-    if (!DOMElement) { return; }
-    DOMElement.scrollIntoView();
   }
 
   _renderResults() {
