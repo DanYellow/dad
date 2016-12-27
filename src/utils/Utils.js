@@ -106,6 +106,10 @@ export default class Utils {
     return (Utils.getCurrentEnvironment(path) === 'back') ? 1 : 0;
   }
 
+  /**
+   * Returns current user datas
+   * @return null
+   */
   static currentUserInfos() {
     return {
       'pseudo': window.localStorage.getItem('user_pseudo'),
@@ -113,6 +117,10 @@ export default class Utils {
     }
   }
 
+  /**
+   * Ensure that every user datas are cleared after used logged out
+   * @return null
+   */
   static clearUserDatas() {
     window.localStorage.setItem('token', null);
     window.localStorage.setItem('token_expire_date', null);
