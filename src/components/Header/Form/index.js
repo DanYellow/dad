@@ -91,7 +91,6 @@ class Form extends Component {
 
   _onSelectChange(value) {
     this.setState({selectedCategory: value});
-    // this._onSubmit(this.form)
     this.form.submit();
   }
 

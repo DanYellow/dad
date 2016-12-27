@@ -1,7 +1,61 @@
 @import '../../styles/variables';
 
-.page {
-  border: 1px solid $primary-red;
-  padding: 0 46px;
-  background-color: $light-gray;
+.NotFoundPage {
+  .bordered-title {
+    padding-left: 12px;
+    border-left: 5px solid $primary-red;
+
+    font-family: $opensans-semibold;
+    color: $text-color;
+    h2 {
+      font-size: 90px;
+    }
+    p {
+      font-family: $opensans-regular;
+      font-size: 14px;
+    }
+    margin-bottom: 40px;
+  }
+
+  .tweet {
+    blockquote {
+      font-family: $georgia;
+      font-size: 65px;
+      color: $text-color;
+      // padding-right: 150px;
+      padding-left: 15px;
+      width: 85%;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      font-style: italic;
+      white-space: pre-wrap;
+
+      &:before, &:after {
+        font-family: $impact;
+        color: $twitter;
+        z-index: -1;
+        position: absolute;
+        font-size: 165px;
+        font-style: normal;
+      }
+
+      &:before {
+        content: '“';
+        top: -38px;
+      }
+
+      &:after {
+        content: '”';
+        // bottom: -80px;
+        // right: 0;
+
+        bottom: -111px;
+        right: 45px;
+        position: relative;
+      }
+    }
+  }
+
 }
+

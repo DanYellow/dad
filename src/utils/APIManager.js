@@ -307,6 +307,23 @@ export default class APIManager {
   }
 
 
+  static getRandomTweet(successCallback, errorCallback) {
+    let request = new Request(`${APIManager.baseURL}/random_tweet`);
+
+    fetch(request, { method: 'GET' }).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      successCallback(data);
+    }).catch(function(data) {
+      // errorCallback(data);
+    });
+  }
+
+
+  /**
+   * Updates Requests config to add at each requests the current user token
+   * @return Object
+   */
   static getConfig () {
     APIManager.fetchConfigInit.headers.append('X-TOKEN', window.localStorage.getItem('token'))
     return APIManager.fetchConfigInit;
