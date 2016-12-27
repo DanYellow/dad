@@ -1,0 +1,80 @@
+@import '../style';
+
+.InputRadiosCheckboxes {
+  margin-bottom: 36px;
+  p {
+    font-family: $opensans-semibold;
+    color: $text-color;
+    font-size: 16px;
+  }
+}
+
+.container {
+  margin-top: 15px;
+  display: flex;
+}
+
+.Radio {
+  .indicator {
+    border-radius: 20px;
+  }
+}
+
+.Radio, .Checkbox {
+  display: block;
+  margin-right: 27px;
+  
+  label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  span.label {
+    padding-left: 10px;
+  }
+
+  .indicator {
+    width: 20px;
+    height: 20px;
+    border: 2px solid $primary-red;
+    display: block;
+    position: relative;
+  }
+
+  input[type='radio'], input[type='checkbox'] {
+    display: none;
+  }
+
+  input[type='radio'] + label, input[type='checkbox'] + label {
+    padding: 12px 32px 12px 10px;
+    color: $primary-red;
+    font-size: 16px;
+    font-family: $opensans-semibold;
+    border: 2px solid $primary-red;
+    border-radius: 3px;
+  }
+
+  input[type='radio']:checked + label,
+  input[type='checkbox']:checked + label {
+    background-color: $primary-red;
+    color: white;
+
+    .indicator {
+      border-color: $white;
+
+      &:before {
+        content: '';
+        width: 11px;
+        height: 11px;
+        border-radius: 11px;
+        display: block;
+        border: 6px solid $white;
+        position: absolute;
+        top: -1px;
+        left: -1px;
+      }
+    }
+  }
+}

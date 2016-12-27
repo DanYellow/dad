@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import _ from 'lodash';
 
 import CustomSelect from '../../_Form/CustomSelect'
+import { Radio } from '../../_Form/InputRadioCheckbox'
 import APIManager from '../../../utils/APIManager'
 
 import './style.scss';
@@ -66,7 +67,9 @@ class Form extends Component {
   _renderFilters() {
     return (
       <div className='filters'>
-        <CustomSelect defaultValue={ this.state.selectedCategory } items={this.state.categoriesList} onItemSelected={ (e) => this._onSelectChange(e) }/>
+        <CustomSelect mainLabel='Catégorie' defaultValue={ this.state.selectedCategory } items={this.state.categoriesList} onItemSelected={ (e) => this._onSelectChange(e) }/>
+        <Radio name='status' mainLabel='Statut' 
+          radios={[{label: 'Tous', value: 0, checked: true}, {label: 'En vente', value: 1}, {label: 'Vendu', value: 2}]} />
       </div>
     )
   }
