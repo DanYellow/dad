@@ -10,13 +10,60 @@
 }
 
 .container {
-  margin-top: 15px;
+  margin-top: 7px;
   display: flex;
 }
 
 .Radio {
   .indicator {
     border-radius: 20px;
+  }
+
+  input[type='radio']:checked + label {
+    background-color: $primary-red;
+    color: white;
+
+    .indicator {
+      border-color: $white;
+
+      &:before {
+        content: '';
+        width: 11px;
+        height: 11px;
+        border-radius: 11px;
+        display: block;
+        border: 6px solid $white;
+        position: absolute;
+        top: -1px;
+        left: -1px;
+      }
+    }
+  }
+}
+
+.Checkbox {
+  .indicator {
+    border-radius: 3px;
+  }
+
+  input[type='checkbox']:checked + label {
+    background-color: $primary-red;
+    color: white;
+
+    .indicator {
+      border-color: $white;
+
+      &:before {
+        content: '';
+        width: 11px;
+        height: 11px;
+        display: block;
+        border: 5px solid $white;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+    }
   }
 }
 
@@ -54,27 +101,5 @@
     font-family: $opensans-semibold;
     border: 2px solid $primary-red;
     border-radius: 3px;
-  }
-
-  input[type='radio']:checked + label,
-  input[type='checkbox']:checked + label {
-    background-color: $primary-red;
-    color: white;
-
-    .indicator {
-      border-color: $white;
-
-      &:before {
-        content: '';
-        width: 11px;
-        height: 11px;
-        border-radius: 11px;
-        display: block;
-        border: 6px solid $white;
-        position: absolute;
-        top: -1px;
-        left: -1px;
-      }
-    }
   }
 }

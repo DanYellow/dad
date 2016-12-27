@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import _ from 'lodash';
 
 import CustomSelect from '../../_Form/CustomSelect'
-import { Radio } from '../../_Form/InputRadioCheckbox'
+import { Radio, Checkbox } from '../../_Form/InputRadioCheckbox'
 import APIManager from '../../../utils/APIManager'
 
 import './style.scss';
@@ -16,7 +16,8 @@ class Form extends Component {
       inputValue: this.props.location.query.q,
       showFilters: false,
       categoriesList: [],
-      selectedCategory: ''
+      selectedCategory: '',
+      selectedStatus: 2
     }
 
     this.categoriesPromise = APIManager.getCategories(true);
@@ -65,19 +66,29 @@ class Form extends Component {
   }
 
   _renderFilters() {
+    const rawDatas = [{label: 'Tous', value: 2}, {label: 'En vente', value: 1}, {label: 'Vendu', value: 0}];
+    let datas = rawDatas.map((item) => {
+      item.checked = (this.state.selectedStatus === item.value) ? true : false;
+      return item;
+    });
+
     return (
       <div className='filters'>
         <CustomSelect mainLabel='Catégorie' defaultValue={ this.state.selectedCategory } items={this.state.categoriesList} onItemSelected={ (e) => this._onSelectChange(e) }/>
-        <Radio name='status' mainLabel='Statut' 
-          radios={[{label: 'Tous', value: 0, checked: true}, {label: 'En vente', value: 1}, {label: 'Vendu', value: 2}]} />
+        <Radio name='status' mainLabel='Statut'
+          onItemSelected={ (e) => this._onRadioChange(e) }
+          datas={datas} />
       </div>
     )
+  }
+
+  _onRadioChange(value) {
+    this.setState({selectedStatus: Number(value)});
   }
 
   _onSelectChange(value) {
     this.setState({selectedCategory: value});
   }
-
 
   render() {
     return (

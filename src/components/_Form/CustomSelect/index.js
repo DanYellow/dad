@@ -4,7 +4,7 @@ import uuid from 'node-uuid';
 import './style.scss';
 
 // 
-const CustomSelect = function ({items, onItemSelected, defaultValue = ''}) {
+const CustomSelect = function ({items, onItemSelected, defaultValue = '', mainLabel}) {
   let options = [];
 
   items.forEach(function(item) {
@@ -16,12 +16,15 @@ const CustomSelect = function ({items, onItemSelected, defaultValue = ''}) {
   }
 
   return (
-    <div className='CustomSelect'>
-      <select 
-        value={ defaultValue }
-        onChange={ itemSelected }>
-          { options }
-      </select>
+    <div className='CustomSelectContainer'>
+      { mainLabel && <p>{mainLabel}</p> }
+      <div className='CustomSelect'>
+        <select 
+          value={ defaultValue }
+          onChange={ itemSelected }>
+            { options }
+        </select>
+      </div>
     </div>
   );
 };
