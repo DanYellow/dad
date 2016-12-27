@@ -38,6 +38,7 @@ function requireAuth(nextState, replace) {
   }
 }
 
+
 ReactDOM.render(
   <Provider store={store}>
   <Router history={hashHistory}>

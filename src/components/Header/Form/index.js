@@ -3,7 +3,7 @@ import { withRouter } from 'react-router';
 import _ from 'lodash';
 
 import CustomSelect from '../../_Form/CustomSelect'
-import { Radio, Checkbox } from '../../_Form/InputRadioCheckbox'
+import { Radio } from '../../_Form/InputRadioCheckbox'
 import APIManager from '../../../utils/APIManager'
 
 import './style.scss';
@@ -46,9 +46,10 @@ class Form extends Component {
 
     // We remove filters if they are hidden
     const selectedCategory = (this.state.showFilters) ? this.state.selectedCategory : null;
+    const selectedStatus = (this.state.showFilters) ? this.state.selectedStatus : null;
 
     // Remove null/empty keys
-    let query = _.pickBy({c: selectedCategory, q: inputValue}) 
+    let query = _.pickBy({c: selectedCategory, q: inputValue, s: selectedStatus}) 
     
     router.push({
       pathname: url,
@@ -75,9 +76,11 @@ class Form extends Component {
     return (
       <div className='filters'>
         <CustomSelect mainLabel='Catégorie' defaultValue={ this.state.selectedCategory } items={this.state.categoriesList} onItemSelected={ (e) => this._onSelectChange(e) }/>
-        <Radio name='status' mainLabel='Statut'
-          onItemSelected={ (e) => this._onRadioChange(e) }
-          datas={datas} />
+        { this.props.location.pathname.indexOf('admin') > 0 && 
+          <Radio name='status' mainLabel='Statut'
+            onItemSelected={ (e) => this._onRadioChange(e) }
+            datas={datas} /> 
+        }
       </div>
     )
   }
