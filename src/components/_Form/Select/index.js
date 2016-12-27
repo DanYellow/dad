@@ -39,11 +39,11 @@ const CustomSelect = (props) => {
         placeholder={'Sélectionnez...'}
         noResultsText={ 'Aucun résultat trouvé' }
         id={ id }
-        {...Object.assign(input, selectValue)}
-        onBlurResetsInput={false}
-        onBlur={null}
-        onCloseResetsInput={false}
-        onChange={handleInputChange}
+        { ...Object.assign(input, selectValue) }
+        onBlurResetsInput={ false }
+        onBlur={ null }
+        onCloseResetsInput={ false }
+        onChange={ handleInputChange }
       />
     </div>
   )

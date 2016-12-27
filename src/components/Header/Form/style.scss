@@ -2,6 +2,9 @@
 
 
 .form {
+  display: flex;
+  flex-direction: column;
+
   input[type='text'], input[type='search'] {
     border: none;
     border-bottom: 2px solid $primary-red;
@@ -54,6 +57,17 @@
         border-color: silver;
       }
     }
+  }
 
+  .toggle-filters {
+    margin-bottom: 25px;
+    justify-self: center;
+    font-size: 18px;
+    font-family: $opensans-semibold;
+    color: $text-color;
+  }
+
+  .filters {
+    margin-bottom: 25px;
   }
 }

@@ -271,15 +271,19 @@ export default class APIManager {
   
   /**
    * Gets all categories for classified advertisements
+   * @param  {Boolean} cleaned Indicate if we want cleaned values. Useful for react-select
    * @return {Promise - Object} Results from API
    */
-  static getCategories() {
+  static getCategories(cleaned = false) {
     let request = new Request(`${APIManager.baseURL}/categories`, APIManager.getConfig());
 
     return fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();
     }).then(function(data) {
-      return { options: Utils.mapCategoriesToSelectOptions(data.data.list) };
+      if (!cleaned) {
+        return { options: Utils.mapCategoriesToSelectOptions(data.data.list) };
+      }
+      return { options: data.data.list };
     }).catch(function(data) {
       return { options: [] };
     });

@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { withRouter } from 'react-router';
 
+
 import APIManager from '../../utils/APIManager';
 
 import Pagination from '../Pagination';
@@ -39,8 +40,8 @@ class ClassifiedAdvertisementsContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    let oldId           = prevProps.params.page;
-    let currentId       = this.props.params.page;
+    let oldPage           = prevProps.params.page;
+    let currentPage       = this.props.params.page;
     
     let oldQuery        = prevProps.location.search;
     let currentQuery    = this.props.location.search;
@@ -48,8 +49,7 @@ class ClassifiedAdvertisementsContainer extends Component {
     window.localStorage.setItem('session_expire', false);
 
     this._manageUserLoggedOut();
-    
-    if (currentId !== oldId || currentQuery !== oldQuery) {
+    if (currentPage !== oldPage || currentQuery !== oldQuery) {
       this.setState({ isLoading: true });
 
       let extraParams = {}
@@ -57,7 +57,7 @@ class ClassifiedAdvertisementsContainer extends Component {
         extraParams = {mine: 1};
       }
 
-      const paramsURL = { p: currentId, q: this.props.location.query.q,
+      const paramsURL = { p: currentPage, q: this.props.location.query.q,
                           c: this.props.location.query.c, ...extraParams }
       this._getClassifiedAdvertisements(paramsURL);
     };
@@ -65,7 +65,7 @@ class ClassifiedAdvertisementsContainer extends Component {
 
   /**
    * Checks if user action was to logged out himself
-   * @return return
+   * @return null
    */
   _manageUserLoggedOut() {
     if (this.props.location.state) {
@@ -112,13 +112,14 @@ class ClassifiedAdvertisementsContainer extends Component {
   }
 
   _renderClassifiedAdvertisements() {
-    let { pagination } = this.state.APIDatas;
-    let { list } = this.state.APIDatas.data;
-
+    const { pagination } = this.state.APIDatas;
+    const { list } = this.state.APIDatas.data;
+    const resultsText = (pagination.total_items > 1) ? 'résultats' : 'résultat';
+    
     return (
       <div>
-        { (this.props.env === 'public' && !this.props.params.query) && <h2 id='title' className='bordered-title'>Les dernières annonces</h2> }
-        { (this.props.env === 'public' && this.props.params.query) && <h2 id='title' className='bordered-title'>{ pagination.total_items } résultat(s)</h2> }
+        { (this.props.env === 'public' && !this.props.location.search) && <h2 id='title' className='bordered-title'>Les dernières annonces</h2> }
+        { (this.props.env === 'public' && this.props.location.search) && <h2 id='title' className='bordered-title'>{ pagination.total_items + ' ' + resultsText } </h2> }
 
         { this.props.env === 'back' && <h2 id='title' className='bordered-title'>Mes annonces</h2> }
 
