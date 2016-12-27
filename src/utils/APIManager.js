@@ -315,7 +315,7 @@ export default class APIManager {
     }).then(function(data) {
       successCallback(data);
     }).catch(function(data) {
-      // errorCallback(data);
+      errorCallback(data);
     });
   }
 

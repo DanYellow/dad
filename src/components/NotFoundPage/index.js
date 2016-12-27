@@ -17,7 +17,7 @@ export default class NotFoundPage extends Component {
 
     this.baseTweetURL = 'https://twitter.com/digitwitas/status/'
 
-    APIManager.getRandomTweet(this._successGetTweets.bind(this), null)
+    APIManager.getRandomTweet(this._successGetTweets.bind(this), this._failedGetTweets.bind(this))
   }
 
   /**
@@ -35,6 +35,10 @@ export default class NotFoundPage extends Component {
     this.tweets = this._clearTweets(datas)
 
     this._getRandomTweet()
+  }
+
+  _failedGetTweets(datas) {
+    this.setState({ tweet: {text: 'Woops, pas de tweet sous la main'} })
   }
 
   /**
@@ -58,6 +62,12 @@ export default class NotFoundPage extends Component {
           <blockquote cite={ this.state.tweet.cite } onClick={() => this._getRandomTweet()}>
             { this.state.tweet.text }
           </blockquote>
+          <footer>
+            <div className='border' />
+            <span>
+              Encore plus de tweets sur <a href={this.baseTweetURL}>@digitwitas</a>
+            </span>
+          </footer>
         </section>
 
       </div>
