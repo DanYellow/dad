@@ -27,6 +27,11 @@ export default class ClassifiedAdvertisementListItem extends Component {
       tplDate = 'Posté le ' + createdAt + ' par <b class="mine">' + pseudo + '</b>' + suffix
     }
 
+    let parMonthString = null;
+    if (category) {
+      parMonthString = (category.id === 5) ? ' / mois' : null;
+    }
+
     return (
       <li className='classified_advertisement'>
         <Link to={ url } title={ 'Consulter annonce : ' + title }>
@@ -40,7 +45,7 @@ export default class ClassifiedAdvertisementListItem extends Component {
             <p>{ location }</p>
             <p className='date' dangerouslySetInnerHTML={{ __html: tplDate }} />
           </article>
-          { price > 0 && <h3 className='price'>{ Utils.formatCurrency(price) }</h3>}
+          { price > 0 && <h3 className='price'>{ Utils.formatCurrency(price) }{ parMonthString }</h3>}
           { price === 0 && <h3 className='price'>{ 'Gratuit' }</h3>}
         </Link>
       </li>

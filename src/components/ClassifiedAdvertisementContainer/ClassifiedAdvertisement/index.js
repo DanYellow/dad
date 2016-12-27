@@ -61,7 +61,7 @@ class ClassifiedAdvertisement extends Component {
     const altImg       = title + ' image';
     
     const env          = Utils.getCurrentEnvironment(this.props.location.pathname);
-
+    console.log( {...productInfos, ...category} )
     return (
       <div className="ClassifiedAdvertisement">
         <Helmet title={ 'Annonce ' + title + ' par ' + seller.pseudo } />
@@ -81,7 +81,7 @@ class ClassifiedAdvertisement extends Component {
               <p>{ description && description }</p>
               <p>{ !description && 'Pas de description' }</p>
             </header>
-            { env !== 'back' && <ProductInfos {...productInfos}/> }
+            { env !== 'back' && <ProductInfos {...productInfos} {...{category: category}} /> }
             { (env === 'back' && is_mine) && <Toolbar {...toolbarDatas} /> }
           </article>
         </section>
@@ -166,13 +166,18 @@ const ProductInfos = function (props) {
   }
   let { seller } = props;
 
+  let parMonthString = null;
+  if (props.category) {
+    parMonthString = (props.category.id === 5) ? ' / mois' : null;
+  }
+  
   return (
    <div className='Insert'>
     <div className='wrapper'>
      <ul>
        <li>
          <h5>Prix</h5>
-         <p className='price'>{ price }</p>
+         <p className='price'>{ price }{ parMonthString }</p>
        </li>
        <li>
          <h5>Vendeur</h5>

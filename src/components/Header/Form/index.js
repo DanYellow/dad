@@ -91,11 +91,13 @@ class Form extends Component {
 
   _onSelectChange(value) {
     this.setState({selectedCategory: value});
+    // this._onSubmit(this.form)
+    this.form.submit();
   }
 
   render() {
     return (
-      <form onSubmit={ (e) => this._onSubmit(e) } className='form'>
+      <form onSubmit={ (e) => this._onSubmit(e) } className='form' ref={(ref) => this.form = ref} >
         <fieldset>
           <div className='main-input'>
             <input 
@@ -111,7 +113,10 @@ class Form extends Component {
           </div>
         </fieldset>
         <button className='reset toggle-filters' type='button' onClick={ () => this._toggleFilters() }>
+          { !this.state.showFilters && <span className='icon icon-bottomarrow' /> }
           { !this.state.showFilters && 'Plus de filtres' }
+
+          { this.state.showFilters && <span className='icon icon-uparrow' /> }
           { this.state.showFilters && 'Moins de filtres (Désactive les filtres)' }
         </button>
         { this.state.showFilters && this._renderFilters() }
