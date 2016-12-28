@@ -3,7 +3,6 @@ import uuid from 'node-uuid';
 
 import './style.scss';
 
-// 
 const CustomSelect = function ({items, onItemSelected, defaultValue = '', mainLabel}) {
   let options = [];
 
@@ -19,6 +18,7 @@ const CustomSelect = function ({items, onItemSelected, defaultValue = '', mainLa
     <div className='CustomSelectContainer'>
       { mainLabel && <p>{mainLabel}</p> }
       <div className='CustomSelect'>
+        <span className='icon icon-bottomarrow' />
         <select 
           value={ defaultValue }
           onChange={ itemSelected }>

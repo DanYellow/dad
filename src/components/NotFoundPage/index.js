@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import Helmet from 'react-helmet';
 
 import './style.scss';
 
@@ -17,7 +18,7 @@ export default class NotFoundPage extends Component {
 
     this.baseTweetURL = 'https://twitter.com/digitwitas/status/'
 
-    APIManager.getRandomTweet(this._successGetTweets.bind(this), this._failedGetTweets.bind(this))
+    APIManager.getRandomTweet(this._successGetTweets.bind(this), this._failedGetTweets.bind(this) )
   }
 
   /**
@@ -46,12 +47,15 @@ export default class NotFoundPage extends Component {
    * @return null
    */
   _getRandomTweet() {
+    // Tweets are not loaded
+    if (!this.tweets.length) { return }
     this.setState({ tweet: _.sample(this.tweets) })
   }
 
   render() {
     return (
       <div className='App NotFoundPage'>
+        <Helmet title={ '404 - Page non trouvée' } />
         <header className='bordered-title'>
           <h2 >404</h2> 
           <p>Page non trouvée</p>

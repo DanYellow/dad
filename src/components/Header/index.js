@@ -58,7 +58,7 @@ class Header extends Component {
         <div className='app'>
           <TopHeader />
           <Link to={'/'} title="Retourner à l'accueil">
-            <figure className='logo'><img src={logo} alt='logo site' /></figure>
+            <figure className='logo'><img src={logo} alt='logo site' width='90' /></figure>
           </Link>
           { this.props.env === 'public' && this._renderPublicView() }
           { this.props.env === 'login' && this._renderLoginView() }

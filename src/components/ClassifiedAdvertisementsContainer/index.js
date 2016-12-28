@@ -35,7 +35,8 @@ class ClassifiedAdvertisementsContainer extends Component {
     }
 
     const paramsURL = { p: this.props.params.page, q: this.props.location.query.q, 
-                        c: this.props.location.query.c, ...extraParams }
+                        c: this.props.location.query.c, s: this.props.location.query.s,
+                        ...extraParams }
     this._getClassifiedAdvertisements(paramsURL);
   }
 
@@ -58,7 +59,8 @@ class ClassifiedAdvertisementsContainer extends Component {
       }
 
       const paramsURL = { p: currentPage, q: this.props.location.query.q,
-                          c: this.props.location.query.c, ...extraParams }
+                          c: this.props.location.query.c, s: this.props.location.query.s,
+                        ...extraParams }
       this._getClassifiedAdvertisements(paramsURL);
     };
   }

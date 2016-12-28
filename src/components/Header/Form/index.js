@@ -20,18 +20,26 @@ class Form extends Component {
       selectedStatus: 2
     }
 
+    this.isAdminEnv = (this.props.location.pathname.includes('admin')) ? true : false;
+
     this.categoriesPromise = APIManager.getCategories(true);
 
     this.categoriesPromise.then((result) => {
       const options = [{label: 'Aucune catégorie', value: ''}, ...result.options.map((option) => {
         const suffix = (option.nb_items > 1) ? 'annonces' : 'annonce'; 
-        const label = `${option.name} (${option.nb_items} ${suffix})`
+        const suffixComplete = (!this.isAdminEnv) ? `(${option.nb_items} ${suffix})` : ''
+
+        const label = `${option.name} ${suffixComplete}`
 
         return {label: label, value: option.id }
       })];
 
       this.setState({ categoriesList: options });
     });
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    this.isAdminEnv = (this.props.location.pathname.includes('admin')) ? true : false;
   }
 
   _onSubmit(e) {
@@ -43,10 +51,13 @@ class Form extends Component {
     // We set 1 per default because or else 
     // we will asking to the API the n page for the query
     let url = '/classified_advertisements/1';
+    if (this.isAdminEnv) {
+      url = 'admin' + url;
+    }
 
     // We remove filters if they are hidden
     const selectedCategory = (this.state.showFilters) ? this.state.selectedCategory : null;
-    const selectedStatus = (this.state.showFilters) ? this.state.selectedStatus : null;
+    const selectedStatus = (this.state.showFilters && this.isAdminEnv) ? this.state.selectedStatus : null;
 
     // Remove null/empty keys
     let query = _.pickBy({c: selectedCategory, q: inputValue, s: selectedStatus}) 
@@ -67,7 +78,7 @@ class Form extends Component {
   }
 
   _renderFilters() {
-    const rawDatas = [{label: 'Tous', value: 2}, {label: 'En vente', value: 1}, {label: 'Vendu', value: 0}];
+    const rawDatas = [{label: 'Tous', value: 0}, {label: 'En vente', value: 2}, {label: 'Vendu', value: 1}];
     let datas = rawDatas.map((item) => {
       item.checked = (this.state.selectedStatus === item.value) ? true : false;
       return item;
@@ -76,7 +87,7 @@ class Form extends Component {
     return (
       <div className='filters'>
         <CustomSelect mainLabel='Catégorie' defaultValue={ this.state.selectedCategory } items={this.state.categoriesList} onItemSelected={ (e) => this._onSelectChange(e) }/>
-        { this.props.location.pathname.indexOf('admin') > 0 && 
+        { this.isAdminEnv && 
           <Radio name='status' mainLabel='Statut'
             onItemSelected={ (e) => this._onRadioChange(e) }
             datas={datas} /> 
@@ -90,8 +101,10 @@ class Form extends Component {
   }
 
   _onSelectChange(value) {
-    this.setState({selectedCategory: value});
-    this.form.submit();
+    this.setState({selectedCategory: value}, function() {
+      this.form.dispatchEvent(new Event('submit'));
+    });
+
   }
 
   render() {

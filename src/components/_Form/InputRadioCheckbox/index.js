@@ -5,7 +5,7 @@ import uuid from 'node-uuid';
 import './index.scss';
 
 
-const Radio = function ({ datas, name, mainLabel, onItemSelected }) {
+const Radio = function ({ datas, mainLabel, onItemSelected }) {
   let choices = [];
 
   datas.forEach(function(item) {
@@ -20,7 +20,7 @@ const Radio = function ({ datas, name, mainLabel, onItemSelected }) {
     const id = uuid.v1();
     return (
       <div className='Radio' key={ id }>
-        <input type='radio' id={ id } name={ name }
+        <input type='radio' id={ id }
                onChange={ itemSelected }
                value={value} defaultChecked={checked}/>
         <label htmlFor={ id }>
@@ -42,7 +42,7 @@ const Radio = function ({ datas, name, mainLabel, onItemSelected }) {
 export { Radio };
 
 
-const Checkbox = function ({ datas, name, mainLabel, onItemSelected }) {
+const Checkbox = function ({ datas, mainLabel, onItemSelected }) {
   let choices = [];
 
   datas.forEach(function(item) {
@@ -58,7 +58,7 @@ const Checkbox = function ({ datas, name, mainLabel, onItemSelected }) {
     return (
       <div className='Checkbox' key={ id }>
         <input type='checkbox' id={ id } 
-               name={ name } value={value} defaultChecked={checked} onChange={ itemSelected }/>
+               value={value} defaultChecked={checked} onChange={ itemSelected }/>
         <label htmlFor={ id }>
           <span className='indicator'/>
           <span className='label'>{ label }</span>

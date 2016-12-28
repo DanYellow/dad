@@ -23,7 +23,7 @@ class Pagination extends Component {
     for (var i = 1; i < datas.total_pages + 1; i++) {
       let element;
 
-      url = `classified_advertisements/${i}/${this.props.location.search}`;
+      url = `classified_advertisements/${i}${this.props.location.search}`;
       if (Utils.isAdminEnv()) {
         url = 'admin/' + url;
       }

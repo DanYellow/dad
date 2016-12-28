@@ -14,10 +14,19 @@
   border: $primary-red 2px solid;
   border-radius: 3px;
   overflow: hidden;
+  position: relative;
+
+  .icon {
+    position: absolute;
+    right: 10px;
+    font-size: 30px;
+    top: 20px;
+    z-index: -1;
+  }
 
   select {
     padding: 18px 8px;
-    width: 105%;
+    width: 100%;
     border: none;
     box-shadow: none;
     background-color: transparent;
