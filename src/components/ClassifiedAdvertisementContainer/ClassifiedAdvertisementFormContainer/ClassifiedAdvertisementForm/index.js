@@ -8,6 +8,8 @@ import TextArea from '../../../_Form/TextArea';
 import Select from '../../../_Form/Select';
 import InputFile from '../../../_Form/InputFile';
 
+import APIManager from '../../../../utils/APIManager';
+
 import ErrorMessages from '../../../_Form/validation.js';
 
 import './style.scss';
@@ -41,6 +43,14 @@ class HiddenField extends Component {
 
 
 class ClassifiedAdvertisementForm extends Component {
+  constructor(props) {
+    super(props);
+    this._loadCategories()
+
+    this.state = {
+      categories: []
+    }
+  }
   _renderUpdateHeader() {
     return (
       <legend className='legend'>
@@ -58,12 +68,19 @@ class ClassifiedAdvertisementForm extends Component {
     )
   }
 
+  _loadCategories() {
+    APIManager.getCategories().then((data) => {
+      this.setState({categories: data})
+    });
+  }
+
   _onImageUpdated() {
     this.refs.has_updated_image.getRenderedComponent().props.input.onChange(true)
   }
 
   render() {
     const { handleSubmit, initialValues, submitting } = this.props;
+    
     return (
       <div>
         { this.props.type === 'update' && this._renderUpdateHeader() }
@@ -84,7 +101,7 @@ class ClassifiedAdvertisementForm extends Component {
               <Field name='description' component={TextArea} label='Description' type='text' placeholder='' value={ initialValues.description || '' } />
               <Field name='price' type='text' component={InputLitteral} label="Prix (Ne pas préciser la devise - Laisser vide si c'est gratuit)" placeholder='Prix' value={ initialValues.price || '' } />
               <Field name='category' component={props =>
-                <Select {...props} />
+                <Select {...props} datas={this.state.categories} />
               } label='Catégorie'/>
 
               <div className='buttons-container fieldset'>

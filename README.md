@@ -34,3 +34,5 @@ It allows user to create classified advertisement.
 shouldComponentUpdate(nextProp, nextState) {
   return !(_.isEqual(nextProp, this.props) && _.isEqual(nextState, this.state));
 }
+
+http://stackoverflow.com/questions/39130227/set-active-class-with-react-router-link-that-has-an-optional-url-parameter

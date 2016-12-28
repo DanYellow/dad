@@ -325,7 +325,8 @@ export default class APIManager {
    * @return Object
    */
   static getConfig () {
-    APIManager.fetchConfigInit.headers.append('X-TOKEN', window.localStorage.getItem('token'))
+    APIManager.fetchConfigInit.headers.append('X-TOKEN', window.localStorage.getItem('token'));
+
     return APIManager.fetchConfigInit;
   }
 }

@@ -25,17 +25,13 @@ const CustomSelect = (props) => {
     selectValue = {value: props.input.value}; 
   }
 
-  const getOptions = (input) => {
-    return APIManager.getCategories();
-  }
-
   return (
     <div className='fieldset'>
       <label htmlFor={ id }>{ label }</label>
-      <Select.Async
+      <Select
         clearable={ false }
         searchable={ true }
-        loadOptions={ getOptions }
+        options={ props.datas.options }
         placeholder={'Sélectionnez...'}
         noResultsText={ 'Aucun résultat trouvé' }
         id={ id }
