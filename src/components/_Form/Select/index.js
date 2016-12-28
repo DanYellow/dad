@@ -2,14 +2,9 @@ import React from 'react';
 import Select from 'react-select';
 import uuid from 'node-uuid';
 
-import APIManager from '../../../utils/APIManager';
-
 import './style.scss';
 import 'react-select/dist/react-select.css';
 
-
-// https://github.com/JedWatson/react-select/issues/1129#issuecomment-241950075
-// https://github.com/erikras/redux-form/issues/1185
 
 const CustomSelect = (props) => {
   const { input, label } = props;
@@ -31,7 +26,7 @@ const CustomSelect = (props) => {
       <Select
         clearable={ false }
         searchable={ true }
-        options={ props.datas.options }
+        options={ props.options }
         placeholder={'Sélectionnez...'}
         noResultsText={ 'Aucun résultat trouvé' }
         id={ id }

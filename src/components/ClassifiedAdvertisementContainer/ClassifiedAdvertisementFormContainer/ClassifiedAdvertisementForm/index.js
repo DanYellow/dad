@@ -101,7 +101,7 @@ class ClassifiedAdvertisementForm extends Component {
               <Field name='description' component={TextArea} label='Description' type='text' placeholder='' value={ initialValues.description || '' } />
               <Field name='price' type='text' component={InputLitteral} label="Prix (Ne pas préciser la devise - Laisser vide si c'est gratuit)" placeholder='Prix' value={ initialValues.price || '' } />
               <Field name='category' component={props =>
-                <Select {...props} datas={this.state.categories} />
+                <Select {...props} {...this.state.categories} />
               } label='Catégorie'/>
 
               <div className='buttons-container fieldset'>
@@ -109,7 +109,7 @@ class ClassifiedAdvertisementForm extends Component {
                 { this.props.type === 'update' && <FormButton design='cancel' text='Annuler' type='button' onClick={ this.props.onClick } /> }
                 { this.props.type === 'create' && <FormButton design='validation' text='Créer' type='submit' /> }
               </div>
-              </div>
+            </div>
           </section>
         </form>
       </div>
