@@ -13,6 +13,13 @@ import PlaceholderImage from '../../StandAlones/PlaceholderImage';
 import './style.scss';
 
 class ClassifiedAdvertisement extends Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      isActive: null,
+    }
+  }
 
   _renderFooter() {
     return (
@@ -43,6 +50,12 @@ class ClassifiedAdvertisement extends Component {
   }
 
   _updateSuccess () {
+    let isActive = !this.props.resource.is_active
+    if (this.state.isActive !== null) {
+      isActive = !this.state.isActive;
+    }
+    this.setState({isActive: isActive})
+
     this.props.router.push({
       pathname: 'admin/classified_advertisement/' + this.props.resource.id,
       state: { updateStatus: true }
@@ -61,6 +74,11 @@ class ClassifiedAdvertisement extends Component {
     const altImg       = title + ' image';
     
     const env          = Utils.getCurrentEnvironment(this.props.location.pathname);
+
+    let isActive = is_active;
+    if (this.state.isActive !== null) {
+      isActive = this.state.isActive;
+    }
     
     return (
       <div className="ClassifiedAdvertisement">
@@ -68,7 +86,9 @@ class ClassifiedAdvertisement extends Component {
         <header>
           <h2>{ title }</h2>
           { category && <Category {...category} /> }
-          <p className='date'>{ 'Posté le ' + createdAt }</p>
+          <p className='date'>{ 'Posté le ' + createdAt }
+          { (Boolean(Utils.isAdminEnv()) && isActive) && <span className='online-indicator'>En vente</span> }
+          </p>
         </header>
         <section className='wrapper'>
           <figure>
