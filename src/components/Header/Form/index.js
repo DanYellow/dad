@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import _ from 'lodash';
 
-import CustomSelect from '../../_Form/CustomSelect'
+// import CustomSelect from '../../_Form/CustomSelect'
 import { Radio } from '../../_Form/InputRadioCheckbox'
 import APIManager from '../../../utils/APIManager'
 
@@ -60,13 +60,13 @@ class Form extends Component {
     const selectedStatus = (this.state.showFilters && this.isAdminEnv) ? this.state.selectedStatus : null;
 
     // Remove null/empty keys
-    let query = _.pickBy({c: selectedCategory, q: inputValue, s: selectedStatus}) 
+    let query = _.pickBy({c: selectedCategory, q: inputValue, s: selectedStatus});
     
     router.push({
       pathname: url,
       state: { from_query: true },
       query: query
-    })
+    });
   }
 
   _inputValueChange(e) {
@@ -84,9 +84,9 @@ class Form extends Component {
       return item;
     });
 
+        // <CustomSelect mainLabel='Catégorie' defaultValue={ this.state.selectedCategory } items={this.state.categoriesList} onItemSelected={ (e) => this._onSelectChange(e) }/>
     return (
       <div className='filters'>
-        <CustomSelect mainLabel='Catégorie' defaultValue={ this.state.selectedCategory } items={this.state.categoriesList} onItemSelected={ (e) => this._onSelectChange(e) }/>
         { this.isAdminEnv && 
           <Radio name='status' mainLabel='Statut'
             onItemSelected={ (e) => this._onRadioChange(e) }
@@ -125,11 +125,11 @@ class Form extends Component {
           </div>
         </fieldset>
         <button className='reset toggle-filters' type='button' onClick={ () => this._toggleFilters() }>
-          { !this.state.showFilters && <span className='icon icon-bottomarrow' /> }
+          {/* !this.state.showFilters && <span className='icon icon-bottomarrow' /> }
           { !this.state.showFilters && 'Plus de filtres' }
 
           { this.state.showFilters && <span className='icon icon-uparrow' /> }
-          { this.state.showFilters && 'Moins de filtres (Désactive les filtres)' }
+          { this.state.showFilters && 'Moins de filtres (Désactive les filtres)' */}
         </button>
         { this.state.showFilters && this._renderFilters() }
       </form>

@@ -61,7 +61,7 @@ class ClassifiedAdvertisement extends Component {
     const altImg       = title + ' image';
     
     const env          = Utils.getCurrentEnvironment(this.props.location.pathname);
-    console.log( {...productInfos, ...category} )
+    
     return (
       <div className="ClassifiedAdvertisement">
         <Helmet title={ 'Annonce ' + title + ' par ' + seller.pseudo } />

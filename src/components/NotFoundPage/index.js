@@ -16,7 +16,7 @@ export default class NotFoundPage extends Component {
 
     this.tweets = []
 
-    this.baseTweetURL = 'https://twitter.com/digitwitas/status/'
+    this.baseTweetURL = 'https://twitter.com/digitwitas/'
 
     APIManager.getRandomTweet(this._successGetTweets.bind(this), this._failedGetTweets.bind(this) )
   }
