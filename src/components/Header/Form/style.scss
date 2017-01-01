@@ -56,10 +56,6 @@
         outline: none;
         border-bottom: 2px solid $text-color;
       }
-
-      :placeholder-shown {
-        border-color: silver;
-      }
     }
   }
 
@@ -69,6 +65,9 @@
     font-size: 18px;
     font-family: $opensans-semibold;
     color: $text-color;
+    &:focus {
+      color: $primary-red;
+    }
   }
 
   .filters {
