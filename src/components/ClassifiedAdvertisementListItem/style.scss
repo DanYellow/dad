@@ -60,6 +60,12 @@
     }
   }
 
+  .online-indicator {
+    font-family: $opensans-semibold;
+    font-size: 12px;
+    color: $validation-color;
+  }
+
   .price {
     font-family: $opensans-bold;
     color: $primary-red;

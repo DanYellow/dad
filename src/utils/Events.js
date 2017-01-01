@@ -4,7 +4,9 @@ export default class Events {
   }
 
   bindEvents () {
+
     window.addEventListener('dragenter', function(e) {
+      if (!document.querySelector('.dropzone')) { return null; }
       document.querySelector('.dropzone').classList.add('show');
     });
   }

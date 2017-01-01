@@ -11,7 +11,7 @@ import './style.scss';
 
 export default class ClassifiedAdvertisementListItem extends Component {
   render() {
-    const { id, title, price, created_at, category, image, env, is_mine } = this.props;
+    const { id, title, price, created_at, category, image, env, is_mine, is_active } = this.props;
     const { location, pseudo } = this.props.seller;
     const createdAt = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
     const altImg = 'Illustration annonce ' + title;
@@ -42,6 +42,7 @@ export default class ClassifiedAdvertisementListItem extends Component {
           <article>
             <h3>{ title }</h3>
             { category && <Category {...category} /> }
+            { (Boolean(Utils.isAdminEnv()) && is_active) && <p className='online-indicator'>En vente</p> }
             <p>{ location }</p>
             <p className='date' dangerouslySetInnerHTML={{ __html: tplDate }} />
           </article>

@@ -55,7 +55,7 @@ class ClassifiedAdvertisement extends Component {
     const { resource, siblings } = this.props;
     const { title, price, created_at, category, description, is_mine, image, seller, id, is_active } = resource;
     const productInfos = { seller: seller, price }
-    const toolbarDatas = { id, forSale: is_active, location: this.props.location, _updateStatus: () => this._updateStatus() }
+    const toolbarDatas = { id, for_sale: is_active, location: this.props.location, _updateStatus: () => this._updateStatus() }
     
     const createdAt    = moment(created_at, 'YYYY-MM-DD HH:mm:s').format('DD/MM/YYYY à HH[h]mm');
     const altImg       = title + ' image';
@@ -85,7 +85,7 @@ class ClassifiedAdvertisement extends Component {
             { (env === 'back' && is_mine) && <Toolbar {...toolbarDatas} /> }
           </article>
         </section>
-        <section className="siblings">
+        <section className='siblings'>
           <ul>
             <li>{ siblings.prev && 
               <Link to={ this._getSiblingURL(siblings.prev, env) }><span className='icon-leftarrow'></span>Annonce précédente</Link>}</li>
@@ -105,9 +105,9 @@ class ClassifiedAdvertisement extends Component {
 class Toolbar extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
-      isActive: this.props.is_active,
+      isActive: this.props.for_sale,
       isDisabled: false
     }
   }
