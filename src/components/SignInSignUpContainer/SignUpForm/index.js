@@ -19,11 +19,11 @@ const validate = values => {
     errors.password = ErrorMessages.required;
   }
 
-  if (!values.password_confirmation && values.password) {
+  if (!values.password_confirmation && values.password || values.password !== values.password_confirmation) {
     errors.password_confirmation = ErrorMessages.password_confirmation;
   }
 
-  if (values.password !== values.password_confirmation && values.password) {
+  if (values.password !== values.password_confirmation && values.password && values.password_confirmation) {
     errors.password = ErrorMessages.password_confirmation;
   }
 

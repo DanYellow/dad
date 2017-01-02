@@ -114,7 +114,7 @@ class ClassifiedAdvertisementForm extends Component {
               <div className='buttons-container fieldset'>
                 { this.props.type === 'update' && <FormButton design='validation' text='Mettre à jour' type='submit' disabled={ submitting } /> }
                 { this.props.type === 'update' && <FormButton design='cancel' text='Annuler' type='button' onClick={ this.props.onClick } /> }
-                { this.props.type === 'create' && <FormButton design='validation' text='Créer' type='submit' /> }
+                { this.props.type === 'create' && <FormButton design='validation' text='Créer' type='submit' disabled={ submitting } /> }
               </div>
             </div>
           </section>

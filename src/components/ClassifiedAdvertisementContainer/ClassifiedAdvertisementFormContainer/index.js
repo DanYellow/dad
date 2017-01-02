@@ -30,6 +30,7 @@ class ClassifiedAdvertisementFormContainer extends Component {
   }
 
   _handleSubmit = (values) => {
+    this.setState({ isLoading: true });
     if (this.props.router.params.id && /^\d+$/.test(Number(this.props.router.params.id))) {
       if (this.props.location.pathname.includes('edit')) {
         const formData = Utils.createFormDataObject(values);

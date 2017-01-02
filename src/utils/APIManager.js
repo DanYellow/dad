@@ -46,7 +46,9 @@ export default class APIManager {
       case 1014:
         message = 'Un lien de récupération de mot de passe vient d\'être envoyé à votre adresse mail';
         break;
-        
+      case 1015:
+        message = 'Cet utilisateur existe déjà'
+        break;
       default:
         message = '';
         break;
