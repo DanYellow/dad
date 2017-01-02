@@ -72,9 +72,9 @@ export default class APIManager {
    * @return null
    */
   static getClassifiedAdvertisements(params={p: 1, q: null, c: null}, successCallback, errorCallback, currentUser = false) {
-    let url = `${APIManager.baseURL}/classified_advertisements/${params.p}${Utils.objectToQueryString(params)}`
+    let url = `${APIManager.baseURL}/c_as/${params.p}${Utils.objectToQueryString(params)}`
     if (currentUser) {
-      url = `${APIManager.baseURL}/me/classified_advertisements/${params.p}${Utils.objectToQueryString(params)}`
+      url = `${APIManager.baseURL}/me/c_as/${params.p}${Utils.objectToQueryString(params)}`
     }
 
     let request = new Request(url, APIManager.getConfig());
@@ -100,7 +100,7 @@ export default class APIManager {
    * @return null
    */
   static getClassifiedAdvertisement(params, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${params.id}?is_admin_part=${params.is_admin_part}`, APIManager.getConfig());
+    let request = new Request(`${APIManager.baseURL}/c_a/${params.id}?is_admin_part=${params.is_admin_part}`, APIManager.getConfig());
 
     fetch(request, {method: 'GET'}).then(function(response) {
       return response.json();
@@ -123,7 +123,7 @@ export default class APIManager {
    * @return null
    */
   static createClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement`, APIManager.getConfig());
+    let request = new Request(`${APIManager.baseURL}/c_a`, APIManager.getConfig());
 
     // let imageFormData = new FormData();
 
@@ -150,7 +150,7 @@ export default class APIManager {
    * @return {[type]}                 [description]
    */
   static updateClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${bodyParams.get('id')}`, APIManager.getConfig());
+    let request = new Request(`${APIManager.baseURL}/c_a/${bodyParams.get('id')}`, APIManager.getConfig());
 
     fetch(request, { method: 'POST', body: bodyParams }).then(function(response) {
       return response.json();
@@ -173,7 +173,7 @@ export default class APIManager {
    * @return null
    */
   static deleteClassifiedAdvertisement(id, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement/${id}`, APIManager.getConfig());
+    let request = new Request(`${APIManager.baseURL}/c_a/${id}`, APIManager.getConfig());
 
     fetch(request, { method: 'DELETE' }).then(function(response) {
       return response.json();
@@ -189,7 +189,7 @@ export default class APIManager {
   }
 
   static updateStatusClassifiedAdvertisement(id, successCallback, errorCallback) {
-    let request = new Request(`${APIManager.baseURL}/classified_advertisement/activate/${id}`, APIManager.getConfig());
+    let request = new Request(`${APIManager.baseURL}/c_a/activate/${id}`, APIManager.getConfig());
 
     fetch(request, {method: 'POST'}).then(function(response) {
       return response.json();
