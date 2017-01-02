@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 // import CustomSelect from '../../_Form/CustomSelect'
 import { Radio } from '../../_Form/InputRadioCheckbox'
-import APIManager from '../../../utils/APIManager'
+// import APIManager from '../../../utils/APIManager'
 
 import './style.scss';
 
@@ -22,20 +22,19 @@ class Form extends Component {
 
     this.isAdminEnv = (this.props.location.pathname.includes('admin')) ? true : false;
 
-    this.categoriesPromise = APIManager.getCategories(true);
+    // this.categoriesPromise = APIManager.getCategories(true);
+    // this.categoriesPromise.then((result) => {
+    //   const options = [{label: 'Aucune catégorie', value: ''}, ...result.options.map((option) => {
+    //     const suffix = (option.nb_items > 1) ? 'annonces' : 'annonce'; 
+    //     const suffixComplete = (!this.isAdminEnv) ? `(${option.nb_items} ${suffix})` : ''
 
-    this.categoriesPromise.then((result) => {
-      const options = [{label: 'Aucune catégorie', value: ''}, ...result.options.map((option) => {
-        const suffix = (option.nb_items > 1) ? 'annonces' : 'annonce'; 
-        const suffixComplete = (!this.isAdminEnv) ? `(${option.nb_items} ${suffix})` : ''
+    //     const label = `${option.name} ${suffixComplete}`
 
-        const label = `${option.name} ${suffixComplete}`
+    //     return {label: label, value: option.id }
+    //   })];
 
-        return {label: label, value: option.id }
-      })];
-
-      this.setState({ categoriesList: options });
-    });
+    //   this.setState({ categoriesList: options });
+    // });
   }
 
   componentWillUpdate(nextProps, nextState) {

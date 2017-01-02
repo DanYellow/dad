@@ -41,12 +41,17 @@ class SignUpForm extends Component {
     return (
       <div className='SignIn'>
         <Helmet title={ 'Inscription' } />
-        <h2 className='bordered-title'>S'inscrire</h2>
+        <legend className='legend'>
+          <h2 className='bordered-title'>
+            S'inscrire
+            <p>* Champ obligatoire</p>
+          </h2>
+        </legend>
         <form onSubmit={ handleSubmit } className='form' noValidate>
-          <Field name='username' type='text' component={ InputLitteral } label='Pseudonyme' />
-          <Field name='email' type='text' component={ InputLitteral } label='Adresse mail'/>
-          <Field name='password' type='password' component={ InputLitteral } label='Mot de passe'/>
-          <Field name='password_confirmation' type='password' component={ InputLitteral } label='Confirmer mot de passe'/>
+          <Field name='username' type='text' component={ InputLitteral } label='Pseudonyme *' placeholder='Pseudonyme' />
+          <Field name='email' type='text' component={ InputLitteral } label='Adresse mail *' placeholder='Adresse mail' />
+          <Field name='password' type='password' component={ InputLitteral } label='Mot de passe *' placeholder='Mot de passe' />
+          <Field name='password_confirmation' type='password' component={ InputLitteral } label='Confirmer mot de passe *' placeholder='Confirmer mot de passe' />
 
           <div className='buttons-container fieldset'>
             <FormButton design='validation' text={ "S'inscrire" } type='submit' disabled={ submitting } />

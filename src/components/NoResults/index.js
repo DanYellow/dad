@@ -16,7 +16,7 @@ var NoResults = function ({message, query}) {
   return (
     <div className='no-results'>
       <h1>{ asciiShurgs }</h1>
-      <p>{ message || 'Aucun résultat n\'a été trouvé' }</p>
+      <p>{ message || 'Aucune annonce n\'a été trouvée' }</p>
       <div className='buttons-container fieldset'>
         <Button design='validation' text='Publier une annonce' link='/classified_advertisement/create' />
       </div>

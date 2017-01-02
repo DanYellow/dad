@@ -108,6 +108,7 @@ export default class APIManager {
       if (data.status_code > 210 || !data.success) {
         errorCallback(data);
       } else {
+
         successCallback(data);
       }
     }).catch(function(data) {

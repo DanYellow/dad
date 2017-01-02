@@ -36,7 +36,7 @@ class SignInForm extends Component {
 
           <div className='buttons-container fieldset'>
             <FormButton design='validation' text='Se connecter' type='submit' disabled={ submitting } />
-            <Button design='infos' text={ "J'ai perdu mon mot de passe" } link='/forgot_password' />
+            {/*<Button design='infos' text={ "J'ai perdu mon mot de passe" } link='/forgot_password' /> */}
           </div>
         </form>
       </div>

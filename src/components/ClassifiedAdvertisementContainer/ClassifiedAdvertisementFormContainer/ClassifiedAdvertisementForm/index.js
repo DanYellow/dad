@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 import FormButton from '../../../_Form/FormButton';
 import InputLitteral from '../../../_Form/InputLitteral';
 import TextArea from '../../../_Form/TextArea';
-import Select from '../../../_Form/Select';
+// import Select from '../../../_Form/Select';
 import InputFile from '../../../_Form/InputFile';
 
 import APIManager from '../../../../utils/APIManager';
@@ -54,7 +54,10 @@ class ClassifiedAdvertisementForm extends Component {
   _renderUpdateHeader() {
     return (
       <legend className='legend'>
-        <h2 className='bordered-title'>Mettre à jour l'annonce</h2>
+        <h2 className='bordered-title'>
+          Mettre à jour l'annonce
+          <p>* Champ obligatoire</p>
+        </h2>
         <button title='Fermer popin' className='reset icon-close' onClick={ this.props.onClick }></button>
       </legend>
     )
@@ -63,7 +66,11 @@ class ClassifiedAdvertisementForm extends Component {
   _renderCreateHeader() {
     return (
       <legend className='legend'>
-        <h2 className='bordered-title'>Créer une annonce</h2>
+        <h2 className='bordered-title'>
+          Créer une annonce
+          <p>* Champ obligatoire</p>
+        </h2>
+        
       </legend>
     )
   }
@@ -95,14 +102,14 @@ class ClassifiedAdvertisementForm extends Component {
           <Field name='has_updated_image' withRef={true} ref='has_updated_image' component={HiddenField}/>
           
           <section className='wrapper'>
-            { <Field name='image' type='text' component={InputFile} label='Titre' value={ initialValues.image } onImageUpdated={ () => this._onImageUpdated() } /> }
+            { <Field name='image' component={InputFile} label='' value={ initialValues.image } onImageUpdated={ () => this._onImageUpdated() } /> }
             <div className='content'>
-              <Field name='title' type='text' component={InputLitteral} label='Titre' value={  initialValues.title || '' } />
+              <Field name='title' type='text' component={InputLitteral} label='Titre *' placeholder="Titre de l'annonce" value={  initialValues.title || '' } />
               <Field name='description' component={TextArea} label='Description' type='text' placeholder='' value={ initialValues.description || '' } />
               <Field name='price' type='text' component={InputLitteral} label="Prix (Ne pas préciser la devise - Laisser vide si c'est gratuit)" placeholder='Prix' value={ initialValues.price || '' } />
-              <Field name='category' component={props =>
+              {/*<Field name='category' component={props =>
                 <Select {...props} {...this.state.categories} />
-              } label='Catégorie'/>
+              } label='Catégorie'/>*/}
 
               <div className='buttons-container fieldset'>
                 { this.props.type === 'update' && <FormButton design='validation' text='Mettre à jour' type='submit' disabled={ submitting } /> }
@@ -120,8 +127,7 @@ class ClassifiedAdvertisementForm extends Component {
 ClassifiedAdvertisementForm = reduxForm({
   form: 'update_classifiedadvertisement',
   validate
-}
-)(ClassifiedAdvertisementForm);
+})(ClassifiedAdvertisementForm);
 
 
 

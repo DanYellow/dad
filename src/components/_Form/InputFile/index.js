@@ -45,9 +45,7 @@ class InputFile extends Component {
     this.props.input.onChange(image)
   }
 
-  _onDropRejected = () => {
-    alert('greger')
-  }
+  _onDropRejected = () => {}
 
   render() {
     let { input } = this.props;
