@@ -33,6 +33,11 @@ class InputFile extends Component {
 
   _onDropAccepted = ( filesToUpload, e ) => {
     let image = filesToUpload[0];
+
+    if (!['image/jpeg', 'image/png', 'image/gif', 'image/'].includes(filesToUpload[0].type)) {
+      return;
+    }
+
     this.setState({ imagePreview: image.preview });
 
     this.props.onImageUpdated(true)
@@ -41,7 +46,7 @@ class InputFile extends Component {
   }
 
   _onDropRejected = () => {
-
+    alert('greger')
   }
 
   render() {
@@ -68,22 +73,18 @@ class InputFile extends Component {
             <p>{ this.imagerequirements }</p>
           </div>
         </Dropzone>
-
-          
-
-          <figure onClick={ this._openFM }>
-            <img id='uploadImage' src={ this.state.imagePreview } width='250' alt={ imgAlt } />
-            { !this.state.imagePreview && <div className="drop-placeholder">
-              <p className="icon-download"></p>
-              <h2>Glissez votre image</h2>
-              <p>{ this.imagerequirements }</p>
-            </div> }
-          </figure>
+        <figure onClick={ this._openFM }>
+          <img id='uploadImage' src={ this.state.imagePreview } width='250' alt={ imgAlt } />
+          { !this.state.imagePreview && <div className="drop-placeholder">
+            <p className="icon-download"></p>
+            <h2>Glissez votre image</h2>
+            <p>{ this.imagerequirements }</p>
+          </div> }
+        </figure>
         <div className='buttons-container fieldset column-layout'>
           <FormButton design='validation' text={ btnImgText } type='button' onClick={ this._openFM } />
           { this.state.imagePreview && <FormButton design='cancel' text='Supprimer' type='button' onClick={ this._removeImage } /> }
         </div>
-        
       </div>
     );
   }
