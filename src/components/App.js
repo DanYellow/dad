@@ -20,6 +20,7 @@ class App extends Component {
       <div>
         <Header env={env} />
         { this.props.children }
+        <footer className='footer'>Projet D-A-D, un site de petites annonces</footer>
       </div>
     );
   }
