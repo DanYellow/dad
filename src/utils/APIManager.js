@@ -128,11 +128,7 @@ export default class APIManager {
   static createClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
     let request = new Request(`${APIManager.baseURL}/c_a`, APIManager.getConfig());
 
-    // let imageFormData = new FormData();
-
-    // imageFormData.append('image', window.foo)
-    // JSON.stringify(bodyParams)
-    fetch(request, { method: 'POST', body: bodyParams }).then(function(response) {
+    fetch(request, {method: 'POST', body: bodyParams}).then(function(response) {
       return response.json();
     }).then(function(data) {
       if (data.status_code > 210 || !data.success) {
@@ -155,7 +151,7 @@ export default class APIManager {
   static updateClassifiedAdvertisement(bodyParams, successCallback, errorCallback) {
     let request = new Request(`${APIManager.baseURL}/c_a/${bodyParams.get('id')}`, APIManager.getConfig());
 
-    fetch(request, { method: 'POST', body: bodyParams }).then(function(response) {
+    fetch(request, {method: 'POST', body: bodyParams}).then(function(response) {
       return response.json();
     }).then(function(data) {
       if (data.status_code > 210 || !data.success) {
@@ -178,7 +174,7 @@ export default class APIManager {
   static deleteClassifiedAdvertisement(id, successCallback, errorCallback) {
     let request = new Request(`${APIManager.baseURL}/c_a/${id}`, APIManager.getConfig());
 
-    fetch(request, { method: 'DELETE' }).then(function(response) {
+    fetch(request, {method: 'DELETE'}).then(function(response) {
       return response.json();
     }).then(function(data) {
       if (data.status_code > 210 || !data.success) {
@@ -328,7 +324,9 @@ export default class APIManager {
    * @return Object
    */
   static getConfig () {
-    APIManager.fetchConfigInit.headers.append('X-TOKEN', window.localStorage.getItem('token'));
+    var headers = new Headers();
+    headers.append('X-TOKEN', window.localStorage.getItem('token'));
+    APIManager.fetchConfigInit['headers'] = headers;
 
     return APIManager.fetchConfigInit;
   }
@@ -338,8 +336,7 @@ APIManager.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:
 
 APIManager.header = new Headers();
 
-APIManager.fetchConfigInit = { 
-  headers: APIManager.header,
+APIManager.fetchConfigInit = {
   mode: 'cors',
   cache: 'default'
 };
