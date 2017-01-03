@@ -1,9 +1,11 @@
 import React from 'react';
 import v from 'voca';
 
+import Utils from '../../utils/Utils';
 import { Button } from '../_Form/FormButton';
 
 import './style.scss';
+
 
 
 var NoResults = function ({message, query}) {
@@ -17,9 +19,9 @@ var NoResults = function ({message, query}) {
     <div className='no-results'>
       <h1>{ asciiShurgs }</h1>
       <p>{ message || 'Aucune annonce n\'a été trouvée' }</p>
-      <div className='buttons-container fieldset'>
+      { Utils.isTokenValid() && <div className='buttons-container fieldset'>
         <Button design='validation' text='Publier une annonce' link='/classified_advertisement/create' />
-      </div>
+      </div> }
     { userAskedForRoids && <p className='small'>{ stedsMessage }</p> }
     </div>
   );

@@ -127,9 +127,10 @@ class ClassifiedAdvertisementsContainer extends Component {
 
         <ClassifiedAdvertisementsList list={ list } env={ this.props.env } />
         { (pagination.prev || pagination.next) && <Pagination pagination={ pagination } /> }
-        <div className='buttons-container fieldset'>
+        
+        { Utils.isTokenValid() && <div className='buttons-container fieldset'>
           <Button design='validation' text='Publier une annonce' link='/classified_advertisement/create' />
-        </div>
+        </div> }
       </div>
     );
   }

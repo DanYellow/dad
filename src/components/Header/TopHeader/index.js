@@ -13,7 +13,7 @@ class TopHeader extends Component {
 
           { Utils.isTokenValid() && <li><Link onlyActiveOnIndex={false} to={ 'admin/classified_advertisements/1' } activeClassName='active'>Mes annonces</Link></li> }
 
-          <li><Link to={ 'classified_advertisement/create' } activeClassName='active'>Publier une annonce</Link></li>
+          { Utils.isTokenValid() && <li><Link to={ 'classified_advertisement/create' } activeClassName='active'>Publier une annonce</Link></li> }
 
           { !Utils.isTokenValid() && <li><Link to={ 'signin' } activeClassName='active'>Se connecter</Link></li> }
           { !Utils.isTokenValid() && <li><Link to={ 'signup' } activeClassName='active'>S'inscrire</Link></li> }
