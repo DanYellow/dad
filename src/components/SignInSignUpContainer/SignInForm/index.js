@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Helmet from 'react-helmet';
 
-import FormButton, { Button } from '../../_Form/FormButton';
+import FormButton from '../../_Form/FormButton'; //, { Button }
 import InputLitteral from '../../_Form/InputLitteral';
 import ErrorMessages from '../../_Form/validation.js';
 

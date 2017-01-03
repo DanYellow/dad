@@ -147,15 +147,16 @@
     flex: 1;
     text-align: center;
     
-
     h5 {
       display: inline;
       font-size: 16px;
     }
+    
     & > * {
       display: flex;
       flex-direction: column;
       height: 100%;
+      align-items: center;
       & > *:last-child {
         margin-top: auto;
       }
@@ -167,7 +168,6 @@
   margin-top: 15px;
   .wrapper {
     display: inline-block;
-    
     padding: 16px 50px 16px 16px;
     background-color: $dark-white;
     border: 1px solid $primary-red;
@@ -185,7 +185,6 @@
     vertical-align: top;
     height: 100%;
     
-
     a {
       color: $text-color;
       h5 {
